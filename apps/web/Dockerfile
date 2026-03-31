@@ -5,6 +5,8 @@ WORKDIR /app
 # Copy config and workspaces
 COPY package.json bun.lock tsconfig.json turbo.json /app/
 COPY apps/web/package.json /app/apps/web/
+COPY apps/api/package.json /app/apps/api/
+COPY apps/game-server/package.json /app/apps/game-server/
 COPY packages/shared/package.json /app/packages/shared/
 
 RUN bun install --frozen-lockfile
