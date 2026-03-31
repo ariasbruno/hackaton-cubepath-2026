@@ -8,7 +8,7 @@
 
 ## 🎮 ¿De qué trata?
 
-Inspirado en clásicos de deducción social, el objetivo principal es **no ser descubierto** o **identificar al infiltrado** mediante pistas sutiles.
+Inspirado en el popular juego "El Impostor" donde el objetivo principal es **no ser descubierto** o **identificar al infiltrado** mediante pistas sutiles.
 
 ### Modos de Juego
 - **🕵️ Tradicional (Local/Online):** 1 Impostor (sin palabra) vs N-1 Agentes (misma palabra). El impostor debe deducir la palabra escuchando a los demás.
