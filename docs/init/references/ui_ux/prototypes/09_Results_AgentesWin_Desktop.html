@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Victoria de los Agentes! (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.3)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.3)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.2)',
+                        'hard-lg': '12px 12px 0px rgba(43, 45, 66, 0.4)',
+                    },
+                    borderRadius: {
+                        'card': '32px',
+                        'btn': '24px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-checkers {
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08) 50px, transparent 50px, transparent 100px, rgba(255, 255, 255, 0.08) 100px, rgba(255, 255, 255, 0.08) 150px, transparent 150px, transparent 200px);
+            background-size: 400px 400px;
+        }
+        .paper-tear {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 98% 100%, 94% 96%, 90% 100%, 86% 96%, 82% 100%, 78% 96%, 74% 100%, 70% 96%, 66% 100%, 62% 96%, 58% 100%, 54% 96%, 50% 100%, 46% 96%, 42% 100%, 38% 96%, 34% 100%, 30% 96%, 26% 100%, 22% 96%, 18% 100%, 14% 96%, 10% 100%, 6% 96%, 2% 100%, 0% 95%);
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        
+        .confetti-slow {
+            position: absolute;
+            animation: confetti-fall 6s linear infinite;
+            z-index: 0;
+            border-radius: 4px;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        .victory-glow {
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 75%);
+        }
+    </style>
+</head>
+<body class="bg-accent text-white font-body min-h-screen flex flex-col items-center justify-center pattern-checkers overflow-hidden relative">
+
+    <div class="absolute inset-0 victory-glow z-0"></div>
+
+    <!-- Confetti Effects (Scaled up for Desktop) -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="confetti-slow" style="left: 5%; background: white; width: 20px; height: 20px; animation-delay: 0s;"></div>
+        <div class="confetti-slow" style="left: 15%; background: #FFD166; width: 15px; height: 15px; animation-delay: 2s;"></div>
+        <div class="confetti-slow" style="left: 35%; background: #FF8C42; width: 25px; height: 25px; animation-delay: 0.5s;"></div>
+        <div class="confetti-slow" style="left: 55%; background: white; width: 18px; height: 18px; animation-delay: 3.5s;"></div>
+        <div class="confetti-slow" style="left: 75%; background: #FFD166; width: 22px; height: 22px; animation-delay: 1.2s;"></div>
+        <div class="confetti-slow" style="left: 95%; background: white; width: 14px; height: 14px; animation-delay: 4.8s;"></div>
+    </div>
+
+    <main class="w-full max-w-6xl flex flex-col items-center justify-center space-y-20 relative z-10 py-20">
+        
+        <div class="text-center space-y-8 relative">
+            <div class="absolute inset-0 bg-white/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
+            <h1 class="font-display text-8xl md:text-9xl drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)] leading-none uppercase tracking-tighter text-white rotate-[-3deg] italic">
+                ¡VICTORIA<br/><span class="text-white/90">LOGRADA!</span>
+            </h1>
+            <p class="text-white font-black uppercase tracking-[1em] text-xl">Misión cumplida: El impostor fue expuesto</p>
+        </div>
+
+        <!-- Victory Card (XL) -->
+        <div class="w-full max-w-4xl relative">
+            <div class="bg-white text-ink w-full paper-tear shadow-hard-lg p-16 pb-24 relative transform hover:scale-[1.02] transition-transform duration-500">
+                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-accent text-white px-16 py-4 rounded-full font-display text-4xl shadow-hard-lg border-4 border-white uppercase rotate-[-2deg] z-20">
+                    MISIÓN ÉXITO
+                </div>
+                
+                <div class="flex flex-col items-center mt-12">
+                    <!-- Victory Trophy (XL) -->
+                    <div class="w-64 h-64 bg-accent/10 rounded-full border-8 border-ink shadow-hard-lg flex items-center justify-center mb-16 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-accent/20 animate-pulse"></div>
+                        <span class="material-symbols-outlined text-[160px] text-accent drop-shadow-md group-hover:scale-110 transition-transform duration-500">emoji_events</span>
+                    </div>
+
+                    <div class="text-center mb-16">
+                        <h2 class="font-display text-7xl mb-4 uppercase tracking-tighter text-ink leading-none italic">¡BUEN TRABAJO!</h2>
+                        <div class="h-1.5 w-48 bg-accent/20 mx-auto rounded-full"></div>
+                        <p class="text-ink/30 text-xl font-black uppercase tracking-[0.4em] mt-6">El Infiltrado ha sido descubierto</p>
+                    </div>
+                    
+                    <div class="w-full grid grid-cols-2 gap-8">
+                        <div class="flex justify-between items-center bg-accent-muted p-10 rounded-card border-4 border-accent shadow-hard-lg transform hover:-rotate-1 transition-transform">
+                            <div class="flex flex-col">
+                                <span class="text-accent font-black uppercase tracking-[0.3em] text-sm">Base Victoria</span>
+                                <span class="text-ink font-display text-2xl uppercase">Agentes</span>
+                            </div>
+                            <span class="text-accent font-display text-7xl tracking-tighter">+300</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center bg-accent-muted p-10 rounded-card border-4 border-accent shadow-hard-lg transform hover:rotate-1 transition-transform">
+                            <div class="flex flex-col">
+                                <span class="text-accent font-black uppercase tracking-[0.3em] text-sm">Bonificación</span>
+                                <span class="text-ink font-display text-2xl uppercase">Trabajo Equipo</span>
+                            </div>
+                            <span class="text-accent font-display text-7xl tracking-tighter">+150</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decorative elements -->
+                <div class="absolute top-10 right-10 opacity-10">
+                    <span class="material-symbols-outlined text-[120px]">verified</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex gap-10 w-full max-w-4xl">
+            <a href="04_Lobby_Tradicional_Desktop.html" class="flex-1 bg-ink text-white font-display text-3xl py-10 rounded-btn shadow-hard-lg hover:translate-y-[-4px] active:translate-y-4 active:shadow-none transition-all uppercase tracking-[0.2em] text-center border-4 border-ink">
+                Volver Lobby
+            </a>
+            <a href="09_Results_Points_Desktop.html" class="flex-[1.5] bg-white text-accent font-display text-5xl py-10 rounded-btn shadow-hard-lg hover:scale-[1.02] active:translate-y-4 active:shadow-hard transition-all uppercase tracking-[0.2em] text-center border-4 border-ink flex items-center justify-center gap-8">
+                Puntuaciones
+                <span class="material-symbols-outlined text-5xl">leaderboard</span>
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

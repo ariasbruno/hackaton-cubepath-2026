@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votación (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "danger-muted": "#FFF0F1",
+                        "purple": "#9D4EDD",
+                        "ink": "#2B2D42",
+                        "ink-muted": "#8D8FA1",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.2)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.2)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '8px 8px 0px rgba(43, 45, 66, 0.25)',
+                        'inner-hard': 'inset 4px 4px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '28px',
+                        'btn': '20px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes countdown {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-countdown {
+            animation: countdown 30s linear forwards;
+        }
+        .paper-card { transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .paper-card:hover { transform: translateY(-4px); box-shadow: 12px 12px 0px rgba(43, 45, 66, 0.15); }
+        .paper-card:active { transform: translate(4px, 4px); box-shadow: 4px 4px 0px rgba(43, 45, 66, 0.15); }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex flex-col items-center pattern-dots overflow-hidden">
+
+    <!-- Header (Wide, Centered) -->
+    <header class="w-full max-w-6xl mt-8 px-8 py-6 bg-white border-4 border-ink rounded-card shadow-hard-lg flex items-center justify-between z-30">
+        <div class="flex items-center gap-6">
+            <div class="w-16 h-16 bg-danger/10 text-danger rounded-2xl border-2 border-ink shadow-hard-sm flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl">how_to_vote</span>
+            </div>
+            <div class="flex flex-col">
+                <h1 class="font-display text-5xl text-danger uppercase tracking-tight leading-none">¿Quién miente?</h1>
+                <p class="text-xs font-black uppercase opacity-40 tracking-[0.4em] mt-2">Fase de Votación</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-10">
+            <!-- Phase Progress -->
+            <div class="hidden lg:flex flex-col items-end">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-ink/40 mb-2">Tiempo de Decisión</span>
+                <div class="w-64 h-4 bg-ink/5 rounded-full overflow-hidden border-2 border-ink shadow-inner-hard">
+                    <div class="h-full bg-danger animate-countdown"></div>
+                </div>
+            </div>
+
+            <!-- Timer -->
+            <div class="bg-danger-muted px-8 py-4 rounded-3xl border-4 border-danger flex items-center gap-4 shadow-hard">
+                <span class="material-symbols-outlined text-danger text-3xl">timer</span>
+                <div class="flex flex-col">
+                    <span class="font-mono font-black text-danger text-3xl leading-none uppercase">00:25</span>
+                    <span class="text-[9px] font-bold text-danger/60 uppercase tracking-widest text-center">Restante</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: Centered Grid -->
+    <main class="w-full max-w-6xl flex-1 px-8 py-12 flex flex-col items-center justify-center overflow-y-auto no-scrollbar">
+        <p class="text-sm font-black uppercase tracking-[0.4em] text-ink/30 mb-12">Selecciona al sospechoso con un clic</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full max-h-[60vh]">
+            <!-- Player Card 1 (Selected) -->
+            <label class="block relative cursor-pointer group">
+                <input type="radio" name="vote" class="peer hidden" checked>
+                <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-danger peer-checked:bg-danger-muted transition-all paper-card flex flex-col items-center gap-6">
+                    <div class="w-32 h-32 bg-primary rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                        🐱
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-display text-3xl uppercase tracking-tight leading-none text-ink">Bruno</h3>
+                        <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Host</p>
+                    </div>
+                </div>
+                <!-- Selection Badge -->
+                <div class="absolute -top-4 -right-4 w-12 h-12 bg-danger text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10">
+                    <span class="material-symbols-outlined text-2xl font-black">check</span>
+                </div>
+            </label>
+
+            <!-- Player Card 2 -->
+            <label class="block relative cursor-pointer group">
+                <input type="radio" name="vote" class="peer hidden">
+                <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-danger peer-checked:bg-danger-muted transition-all paper-card flex flex-col items-center gap-6">
+                    <div class="w-32 h-32 bg-secondary rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                        🦊
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-display text-3xl uppercase tracking-tight leading-none text-ink">Ana</h3>
+                        <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Invitado</p>
+                    </div>
+                </div>
+                <div class="absolute -top-4 -right-4 w-12 h-12 bg-danger text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10">
+                    <span class="material-symbols-outlined text-2xl font-black">check</span>
+                </div>
+            </label>
+
+            <!-- Player Card 3 -->
+            <label class="block relative cursor-pointer group">
+                <input type="radio" name="vote" class="peer hidden">
+                <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-danger peer-checked:bg-danger-muted transition-all paper-card flex flex-col items-center gap-6">
+                    <div class="w-32 h-32 bg-accent rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                        🤖
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-display text-3xl uppercase tracking-tight leading-none text-ink">Luis</h3>
+                        <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Invitado</p>
+                    </div>
+                </div>
+                <div class="absolute -top-4 -right-4 w-12 h-12 bg-danger text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10">
+                    <span class="material-symbols-outlined text-2xl font-black">check</span>
+                </div>
+            </label>
+
+            <!-- Eliminated Player -->
+            <div class="opacity-30 grayscale p-10 flex flex-col items-center gap-6 cursor-not-allowed">
+                <div class="w-32 h-32 bg-gray-200 rounded-full border-4 border-ink flex items-center justify-center text-6xl grayscale">
+                    💀
+                </div>
+                <div class="text-center">
+                    <h3 class="font-display text-3xl uppercase tracking-tight leading-none">Charlie</h3>
+                    <p class="text-xs font-black uppercase opacity-100 mt-3 tracking-widest">Fuera</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Action Footer (Wide, Centered) -->
+    <footer class="w-full max-w-6xl px-8 pb-10 mt-8 z-30">
+        <div class="bg-white border-4 border-ink rounded-card p-8 shadow-hard-lg flex items-center justify-between gap-12">
+            
+            <a href="08_Vote_Desktop.html" class="flex-1 max-w-xs bg-white border-4 border-ink text-ink/40 font-display text-2xl py-6 rounded-btn shadow-hard hover:bg-bg-paper active:translate-y-2 active:shadow-none transition-all uppercase tracking-widest text-center flex items-center justify-center gap-4">
+                Saltar Voto
+                <span class="text-xs font-black bg-accent-muted text-accent px-4 py-2 rounded-full border-2 border-accent/20 shadow-hard-sm">+5 PTS</span>
+            </a>
+
+            <div class="flex-1 flex flex-col items-center">
+                <div class="w-full h-1 bg-ink/10 rounded-full mb-4"></div>
+                <p class="font-bold text-sm text-ink/40 uppercase tracking-widest text-center">Confirma tu elección para proceder</p>
+            </div>
+
+            <a href="08_Elimination_Suspense_Desktop.html" class="flex-1 max-w-md bg-danger text-white font-display text-4xl py-8 rounded-btn shadow-hard-lg hover:scale-[1.05] active:translate-y-2 active:shadow-hard transition-all uppercase tracking-[0.2em] text-center border-2 border-ink flex items-center justify-center gap-6">
+                Votar
+                <span class="material-symbols-outlined text-4xl">fingerprint</span>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

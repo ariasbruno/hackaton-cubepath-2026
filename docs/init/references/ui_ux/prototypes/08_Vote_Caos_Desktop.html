@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolución Caos (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "danger": "#E63946",
+                        "danger-muted": "#FFF0F1",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.2)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.2)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '8px 8px 0px rgba(43, 45, 66, 0.25)',
+                    },
+                    borderRadius: {
+                        'card': '28px',
+                        'btn': '20px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-checkers {
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25px, transparent 25px, transparent 50px, rgba(255, 255, 255, 0.05) 50px, rgba(255, 255, 255, 0.05) 75px, transparent 75px, transparent 100px);
+            background-size: 200px 200px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .paper-card { transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .paper-card:hover { transform: translateY(-4px); box-shadow: 12px 12px 0px rgba(43, 45, 66, 0.15); }
+        .paper-card:active { transform: translate(4px, 4px); box-shadow: 4px 4px 0px rgba(43, 45, 66, 0.15); }
+
+        @keyframes countdown {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-countdown {
+            animation: countdown 45s linear forwards;
+        }
+
+        .mode-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .mode-btn.active { 
+            transform: scale(1.05);
+            background-color: white;
+            border-width: 6px;
+            box-shadow: 12px 12px 0px rgba(43, 45, 66, 0.2);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-purple text-white font-body min-h-screen flex flex-col items-center pattern-checkers overflow-hidden">
+
+    <!-- Header (Wide, Centered) -->
+    <header class="w-full max-w-6xl mt-8 px-8 py-6 bg-white border-4 border-ink rounded-card shadow-hard-lg flex items-center justify-between z-30">
+        <div class="flex items-center gap-6">
+            <div class="w-16 h-16 bg-purple-muted text-purple rounded-2xl border-2 border-ink shadow-hard-sm flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl">bolt</span>
+            </div>
+            <div class="flex flex-col text-ink">
+                <h1 class="font-display text-5xl text-purple uppercase tracking-tight leading-none">Resolución</h1>
+                <p class="text-xs font-black uppercase opacity-40 tracking-[0.4em] mt-2">Modo Caos ⚡</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-10">
+            <!-- Phase Progress -->
+            <div class="hidden lg:flex flex-col items-end">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-ink/40 mb-2">Tiempo de Resolución</span>
+                <div class="w-64 h-4 bg-ink/5 rounded-full overflow-hidden border-2 border-ink shadow-inner-hard">
+                    <div class="h-full bg-purple animate-countdown"></div>
+                </div>
+            </div>
+
+            <!-- Timer -->
+            <div class="bg-purple-muted px-8 py-4 rounded-3xl border-4 border-purple flex items-center gap-4 shadow-hard">
+                <span class="material-symbols-outlined text-purple text-3xl">timer</span>
+                <div class="flex flex-col">
+                    <span class="font-mono font-black text-purple text-3xl leading-none uppercase">00:45</span>
+                    <span class="text-[9px] font-bold text-purple/60 uppercase tracking-widest text-center">Restante</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: Dual Layout -->
+    <main class="w-full max-w-6xl flex gap-12 mt-12 flex-1 px-8 items-start mb-10 overflow-hidden">
+        
+        <!-- Mode Selection Panel -->
+        <aside class="w-1/3 flex flex-col gap-8">
+            <div class="flex flex-col gap-6">
+                <button onclick="setMode('link')" id="btn-link" class="mode-btn active w-full bg-white/20 p-8 rounded-card border-4 border-white/20 shadow-hard flex items-center gap-8 group">
+                    <div class="w-20 h-20 bg-secondary rounded-2xl border-2 border-ink shadow-hard-sm flex items-center justify-center text-white shrink-0">
+                        <span class="material-symbols-outlined text-5xl">link</span>
+                    </div>
+                    <div class="text-left text-ink">
+                        <span class="font-display text-3xl uppercase block">Vincular</span>
+                        <span class="text-xs font-bold opacity-40 uppercase tracking-widest">Elige 1 compañero</span>
+                    </div>
+                </button>
+
+                <button onclick="setMode('accuse')" id="btn-accuse" class="mode-btn w-full bg-white/20 p-8 rounded-card border-4 border-white/20 shadow-hard flex items-center gap-8 group opacity-40">
+                    <div class="w-20 h-20 bg-danger rounded-2xl border-2 border-ink shadow-hard-sm flex items-center justify-center text-white shrink-0">
+                        <span class="material-symbols-outlined text-5xl">person_search</span>
+                    </div>
+                    <div class="text-left text-ink">
+                        <span class="font-display text-3xl uppercase block">Acusar</span>
+                        <span class="text-xs font-bold opacity-40 uppercase tracking-widest">Denuncia a 2 sospechosos</span>
+                    </div>
+                </button>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md p-8 rounded-card border-4 border-white/20 shadow-hard">
+                <p id="instruction-text" class="text-lg font-bold uppercase tracking-[0.2em] text-center">Selecciona a 1 persona para vincularte</p>
+                <div class="w-full h-2 bg-white/10 rounded-full mt-6 overflow-hidden">
+                    <div class="h-full bg-white animate-countdown"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Players Grid Area -->
+        <section class="flex-1 overflow-y-auto no-scrollbar max-h-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pr-4">
+                <!-- Player Card 1 -->
+                <label class="block relative cursor-pointer group">
+                    <input type="checkbox" name="vote" class="peer hidden">
+                    <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-secondary peer-checked:bg-secondary-muted transition-all paper-card flex flex-col items-center gap-6" id="card-1">
+                        <div class="w-32 h-32 bg-primary rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                            🐱
+                        </div>
+                        <div class="text-center text-ink">
+                            <h3 class="font-display text-3xl uppercase tracking-tight leading-none">Bruno</h3>
+                            <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Host</p>
+                        </div>
+                    </div>
+                    <!-- Selection Indicator -->
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10" id="check-1">
+                        <span class="material-symbols-outlined text-2xl font-black">check</span>
+                    </div>
+                </label>
+
+                <!-- Player Card 2 -->
+                <label class="block relative cursor-pointer group">
+                    <input type="checkbox" name="vote" class="peer hidden">
+                    <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-secondary peer-checked:bg-secondary-muted transition-all paper-card flex flex-col items-center gap-6" id="card-2">
+                        <div class="w-32 h-32 bg-secondary rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                            🦊
+                        </div>
+                        <div class="text-center text-ink">
+                            <h3 class="font-display text-3xl uppercase tracking-tight leading-none">Ana</h3>
+                            <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Invitado</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10" id="check-2">
+                        <span class="material-symbols-outlined text-2xl font-black">check</span>
+                    </div>
+                </label>
+
+                <!-- Player Card 3 -->
+                <label class="block relative cursor-pointer group">
+                    <input type="checkbox" name="vote" class="peer hidden">
+                    <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-secondary peer-checked:bg-secondary-muted transition-all paper-card flex flex-col items-center gap-6" id="card-3">
+                        <div class="w-32 h-32 bg-accent rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                            🤖
+                        </div>
+                        <div class="text-center text-ink">
+                            <h3 class="font-display text-3xl uppercase tracking-tight leading-none">Luis</h3>
+                            <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Invitado</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10" id="check-3">
+                        <span class="material-symbols-outlined text-2xl font-black">check</span>
+                    </div>
+                </label>
+
+                <!-- Player Card 4 -->
+                <label class="block relative cursor-pointer group">
+                    <input type="checkbox" name="vote" class="peer hidden">
+                    <div class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg peer-checked:border-secondary peer-checked:bg-secondary-muted transition-all paper-card flex flex-col items-center gap-6" id="card-4">
+                        <div class="w-32 h-32 bg-purple rounded-full border-4 border-ink shadow-hard flex items-center justify-center text-6xl shrink-0 transition-transform group-hover:scale-110">
+                            👾
+                        </div>
+                        <div class="text-center text-ink">
+                            <h3 class="font-display text-3xl uppercase tracking-tight leading-none">Sara</h3>
+                            <p class="text-xs font-black uppercase opacity-40 mt-3 tracking-widest">Invitado</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center border-4 border-ink shadow-hard-sm opacity-0 peer-checked:opacity-100 transition-all peer-checked:scale-110 z-10" id="check-4">
+                        <span class="material-symbols-outlined text-2xl font-black">check</span>
+                    </div>
+                </label>
+            </div>
+        </section>
+    </main>
+
+    <!-- Action Footer (Wide, Centered) -->
+    <footer class="w-full max-w-6xl px-8 pb-10 mt-auto z-30">
+        <div class="bg-white/10 backdrop-blur-md border-4 border-white/20 rounded-card p-8 shadow-hard-lg flex items-center justify-between gap-12">
+            
+            <button class="flex-1 max-w-xs bg-white/10 border-4 border-white/20 text-white/40 font-display text-2xl py-6 rounded-btn shadow-hard hover:bg-white/20 active:translate-y-2 active:shadow-none transition-all uppercase tracking-widest text-center flex items-center justify-center gap-4">
+                Saltar Jugada
+                <span class="text-xs font-black bg-purple-muted text-purple px-4 py-2 rounded-full border-2 border-purple/20 shadow-hard-sm">+5 PTS</span>
+            </button>
+
+            <div class="flex-1 flex flex-col items-center">
+                <div class="w-full h-1 bg-white/10 rounded-full mb-4"></div>
+                <p class="font-bold text-sm text-white/60 uppercase tracking-widest text-center">Modo Caos: Las alianzas puntúan doble</p>
+            </div>
+
+            <a href="08_Elimination_Suspense_Desktop.html" class="flex-1 max-w-md bg-white text-purple font-display text-4xl py-8 rounded-btn shadow-hard-lg hover:scale-[1.05] active:translate-y-2 active:shadow-hard transition-all uppercase tracking-[0.2em] text-center border-2 border-ink flex items-center justify-center gap-6">
+                Confirmar
+                <span class="material-symbols-outlined text-4xl">check_circle</span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function setMode(mode) {
+            const btnLink = document.getElementById('btn-link');
+            const btnAccuse = document.getElementById('btn-accuse');
+            const instruction = document.getElementById('instruction-text');
+            const cards = [document.getElementById('card-1'), document.getElementById('card-2'), document.getElementById('card-3'), document.getElementById('card-4')];
+            const checks = [document.getElementById('check-1'), document.getElementById('check-2'), document.getElementById('check-3'), document.getElementById('check-4')];
+
+            if (mode === 'link') {
+                btnLink.classList.add('active');
+                btnAccuse.classList.remove('active');
+                btnAccuse.classList.add('opacity-40');
+                btnLink.classList.remove('opacity-40');
+                instruction.innerText = "Selecciona a 1 persona para vincularte";
+                
+                cards.forEach(card => {
+                    card.classList.replace('peer-checked:border-danger', 'peer-checked:border-secondary');
+                    card.classList.replace('peer-checked:bg-danger-muted', 'peer-checked:bg-secondary-muted');
+                });
+                checks.forEach(check => {
+                    check.classList.replace('bg-danger', 'bg-secondary');
+                });
+            } else {
+                btnAccuse.classList.add('active');
+                btnLink.classList.remove('active');
+                btnLink.classList.add('opacity-40');
+                btnAccuse.classList.remove('opacity-40');
+                instruction.innerText = "Selecciona a 2 personas para acusarlas";
+
+                cards.forEach(card => {
+                    card.classList.replace('peer-checked:border-secondary', 'peer-checked:border-danger');
+                    card.classList.replace('peer-checked:bg-secondary-muted', 'peer-checked:bg-danger-muted');
+                });
+                checks.forEach(check => {
+                    check.classList.replace('bg-secondary', 'bg-danger');
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "TRADICIONAL": [
+    { "mainWord": "Gato", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Piscina", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Helado", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Hospital", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Playa", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Montaña", "infiltradoWord": null, "relatedWords": null }
+  ],
+  "CERCANAS": [
+    { "mainWord": "León", "infiltradoWord": "Tigre", "relatedWords": null },
+    { "mainWord": "Pizza", "infiltradoWord": "Lasaña", "relatedWords": null },
+    { "mainWord": "Guitarra", "infiltradoWord": "Bajo", "relatedWords": null },
+    { "mainWord": "Avión", "infiltradoWord": "Helicóptero", "relatedWords": null },
+    { "mainWord": "Café", "infiltradoWord": "Té", "relatedWords": null }
+  ]
+}

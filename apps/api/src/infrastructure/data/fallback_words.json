@@ -1,0 +1,16 @@
+{
+  "TRADICIONAL": [
+    { "mainWord": "Gato", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Piscina", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Helado", "infiltradoWord": null, "relatedWords": null }
+  ],
+  "CERCANAS": [
+    { "mainWord": "León", "infiltradoWord": "Tigre", "relatedWords": null },
+    { "mainWord": "Pizza", "infiltradoWord": "Lasaña", "relatedWords": null },
+    { "mainWord": "Guitarra", "infiltradoWord": "Bajo", "relatedWords": null }
+  ],
+  "CAOS": [
+    { "mainWord": "Playa", "infiltradoWord": null, "relatedWords": ["Arena", "Océano", "Palmera", "Sol", "Sombrilla", "Ola", "Coco", "Brisa", "Costa", "Verano"] },
+    { "mainWord": "Cine", "infiltradoWord": null, "relatedWords": ["Película", "Palomitas", "Pantalla", "Asiento", "Ticket", "Proyector", "Camara", "Actor", "Director", "Escena"] }
+  ]
+}

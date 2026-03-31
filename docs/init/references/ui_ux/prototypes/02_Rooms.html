@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salas - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .paper-card { transition: all 0.1s ease; }
+        .paper-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15); }
+        .sticky-note { transform: rotate(-1deg); }
+        .sticky-note:nth-child(even) { transform: rotate(1deg); }
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex flex-col max-w-md mx-auto shadow-2xl relative pattern-dots">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-6 pb-2">
+        <h1 class="font-display text-4xl text-ink uppercase tracking-tight">La Mesa</h1>
+        <div class="h-12 w-12 bg-white rounded-full flex items-center justify-center shadow-hard border-2 border-transparent">
+            <span class="material-symbols-outlined text-ink text-3xl">notifications</span>
+        </div>
+    </header>
+
+    <div class="flex-1 overflow-y-auto pb-32 px-6 space-y-10 no-scrollbar">
+        
+        <!-- Join Private Game -->
+        <section class="mt-4">
+            <label class="block text-ink text-xs font-extrabold tracking-[0.2em] uppercase mb-4 ml-1 opacity-60">Unirse a Partida Privada</label>
+            <div class="bg-white p-6 rounded-card shadow-hard border border-ink/5">
+                <p class="text-center text-ink/40 font-bold mb-6 text-xs uppercase tracking-widest">Ingresa el código</p>
+                <div class="flex gap-3 justify-center mb-8">
+                    <input class="w-12 h-16 text-center font-mono text-3xl bg-bg-paper border-2 border-dashed border-ink/20 rounded-xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase" maxlength="1" placeholder="•" type="text"/>
+                    <input class="w-12 h-16 text-center font-mono text-3xl bg-bg-paper border-2 border-dashed border-ink/20 rounded-xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase" maxlength="1" placeholder="•" type="text"/>
+                    <input class="w-12 h-16 text-center font-mono text-3xl bg-bg-paper border-2 border-dashed border-ink/20 rounded-xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase" maxlength="1" placeholder="•" type="text"/>
+                    <input class="w-12 h-16 text-center font-mono text-3xl bg-bg-paper border-2 border-dashed border-ink/20 rounded-xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase" maxlength="1" placeholder="•" type="text"/>
+                </div>
+                <button class="w-full bg-primary text-white font-display text-xl py-5 rounded-btn shadow-hard paper-card active:shadow-hard-sm flex items-center justify-center gap-3 uppercase tracking-widest">
+                    ENTRAR
+                    <span class="material-symbols-outlined text-2xl font-bold">arrow_forward</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Saved Games (Sticky Notes) -->
+        <section>
+            <div class="flex items-center justify-between mb-4 ml-1">
+                <h2 class="text-ink text-xl font-display uppercase tracking-tight">Partidas Guardadas</h2>
+                <button class="text-secondary font-bold text-xs uppercase">Limpiar</button>
+            </div>
+            <div class="flex gap-5 overflow-x-auto pb-6 pt-2 no-scrollbar -mx-6 px-6">
+                <!-- Sticky Note 1 -->
+                <div class="sticky-note flex-shrink-0 w-36 h-36 p-4 shadow-hard flex flex-col justify-between paper-card bg-sticky-yellow relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-5 bg-white/30 rotate-2 backdrop-blur-sm shadow-sm border-l border-r border-white/20"></div>
+                    <div>
+                        <span class="font-mono text-ink/50 text-[10px] block mb-1 font-bold uppercase">CÓDIGO: A4B2</span>
+                        <span class="font-display text-xl leading-tight text-ink block">Local Party</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-[10px] font-extrabold text-ink/40 uppercase">Hace 3m</span>
+                        <span class="material-symbols-outlined text-ink text-3xl">play_circle</span>
+                    </div>
+                </div>
+                <!-- Sticky Note 2 -->
+                <div class="sticky-note flex-shrink-0 w-36 h-36 p-4 shadow-hard flex flex-col justify-between paper-card bg-[#9df0c6] relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-5 bg-white/30 -rotate-1 backdrop-blur-sm shadow-sm border-l border-r border-white/20"></div>
+                    <div>
+                        <span class="font-mono text-ink/50 text-[10px] block mb-1 font-bold uppercase">CÓDIGO: 9XJ1</span>
+                        <span class="font-display text-xl leading-tight text-ink block uppercase">Cine Pro</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-[10px] font-extrabold text-ink/40 uppercase">Ayer</span>
+                        <span class="material-symbols-outlined text-ink text-3xl">play_circle</span>
+                    </div>
+                </div>
+                <!-- Sticky Note 3 -->
+                <div class="sticky-note flex-shrink-0 w-36 h-36 p-4 shadow-hard flex flex-col justify-between paper-card bg-[#f2a6a6] relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-5 bg-white/30 rotate-3 backdrop-blur-sm shadow-sm border-l border-r border-white/20"></div>
+                    <div>
+                        <span class="font-mono text-ink/50 text-[10px] block mb-1 font-bold uppercase">CÓDIGO: LOLZ</span>
+                        <span class="font-display text-xl leading-tight text-ink block uppercase">Panchos</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <span class="text-[10px] font-extrabold text-ink/40 uppercase">2 días</span>
+                        <span class="material-symbols-outlined text-ink text-3xl">play_circle</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Public Rooms List -->
+        <section>
+            <div class="flex items-center justify-between mb-4 ml-1">
+                <h2 class="text-ink text-xl font-display uppercase tracking-tight">Mesas Abiertas</h2>
+                <span class="bg-secondary/10 text-secondary text-[10px] font-extrabold px-3 py-1 rounded-full border border-secondary/20 uppercase tracking-widest">12 Online</span>
+            </div>
+            <div class="flex flex-col gap-5">
+                <div class="bg-white rounded-2xl p-5 shadow-hard flex items-center justify-between paper-card border border-ink/5 group">
+                    <div class="flex items-center gap-4">
+                        <div class="h-14 w-14 rounded-full bg-accent-muted border-4 border-white shadow-hard-sm flex items-center justify-center overflow-hidden">
+                            <span class="text-3xl">🐱</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="font-display text-ink text-lg leading-none mb-1 uppercase">Mesa de Alex</h3>
+                            <div class="flex items-center gap-1 text-ink/40">
+                                <span class="material-symbols-outlined text-sm">style</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wide">Tradicional</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-secondary/10 px-4 py-2 rounded-full flex items-center gap-2 border border-secondary/20">
+                        <span class="material-symbols-outlined text-secondary text-lg">person</span>
+                        <span class="text-secondary font-extrabold text-sm">4/8</span>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-hard flex items-center justify-between paper-card border border-ink/5 group">
+                    <div class="flex items-center gap-4">
+                        <div class="h-14 w-14 rounded-full bg-purple-muted border-4 border-white shadow-hard-sm flex items-center justify-center overflow-hidden">
+                            <span class="text-3xl">🦊</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <h3 class="font-display text-ink text-lg leading-none mb-1 uppercase">Caos Total</h3>
+                            <div class="flex items-center gap-1 text-ink/40">
+                                <span class="material-symbols-outlined text-sm">bolt</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wide">Modo Caos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple/10 px-4 py-2 rounded-full flex items-center gap-2 border border-purple/20">
+                        <span class="material-symbols-outlined text-purple text-lg">person</span>
+                        <span class="text-purple font-extrabold text-sm">12/20</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 bg-white border-t border-ink/5 p-4 pb-8 rounded-t-[32px] shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+        <div class="flex justify-between items-end">
+            <a href="01_Home.html" class="flex flex-col items-center gap-1 group w-16">
+                <div class="w-12 h-12 bg-transparent text-ink/30 rounded-2xl flex items-center justify-center transition-all group-hover:bg-bg-paper group-hover:-translate-y-1">
+                    <span class="material-symbols-outlined text-2xl">home</span>
+                </div>
+                <span class="text-[8px] font-bold uppercase tracking-widest text-ink/30">Inicio</span>
+            </a>
+            <a href="02_Rooms.html" class="flex flex-col items-center gap-1 group w-16">
+                <div class="w-12 h-12 bg-secondary-muted text-secondary rounded-2xl flex items-center justify-center transition-all group-hover:-translate-y-1">
+                    <span class="material-symbols-outlined text-2xl">layers</span>
+                </div>
+                <span class="text-[8px] font-bold uppercase tracking-widest text-secondary">Salas</span>
+            </a>
+            <a href="03_Create_Step1_Connection.html" class="flex flex-col items-center gap-1 group w-16 -mt-10">
+                <div class="w-16 h-16 bg-ink text-white rounded-2xl shadow-hard-lg flex items-center justify-center transition-all group-hover:-translate-y-2 active:translate-y-0 active:shadow-none border-4 border-white">
+                    <span class="material-symbols-outlined text-4xl">add</span>
+                </div>
+                <span class="text-[8px] font-bold uppercase tracking-widest text-ink mt-1">Crear</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-1 group w-16">
+                <div class="w-12 h-12 bg-transparent text-ink/30 rounded-2xl flex items-center justify-center transition-all group-hover:bg-bg-paper group-hover:-translate-y-1">
+                    <span class="material-symbols-outlined text-2xl">person</span>
+                </div>
+                <span class="text-[8px] font-bold uppercase tracking-widest text-ink/30">Perfil</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-1 group w-16">
+                <div class="w-12 h-12 bg-transparent text-ink/30 rounded-2xl flex items-center justify-center transition-all group-hover:bg-bg-paper group-hover:-translate-y-1">
+                    <span class="material-symbols-outlined text-2xl">settings</span>
+                </div>
+                <span class="text-[8px] font-bold uppercase tracking-widest text-ink/30">Ajustes</span>
+            </a>
+        </div>
+    </nav>
+
+</body>
+</html>

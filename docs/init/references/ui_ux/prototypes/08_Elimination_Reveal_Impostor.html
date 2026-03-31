@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelación - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "secondary": "#4D9DE0",
+                        "accent": "#87C38F",
+                        "danger": "#E63946",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '8px 8px 0px rgba(43, 45, 66, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes spotlight {
+            0% { opacity: 0; transform: scale(0.8); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes reveal-bg {
+            0% { background-color: #2B2D42; }
+            100% { background-color: #E63946; } /* Rojo al ser Impostor */
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        @keyframes stamp {
+            0% { transform: scale(5); opacity: 0; }
+            100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+        }
+
+        .animate-spotlight { animation: spotlight 1s ease-out forwards; }
+        .animate-heartbeat { animation: heartbeat 0.8s infinite; }
+        .animate-reveal-bg { animation: reveal-bg 0.5s 3.5s forwards; }
+        .animate-shake { animation: shake 0.1s 3s 5; }
+        .animate-stamp { opacity: 0; animation: stamp 0.4s 4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        .delay-1 { animation-delay: 1s; }
+        .delay-2 { animation-delay: 2s; }
+
+        .pattern-dots {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-ink text-white font-body min-h-screen flex flex-col items-center justify-center overflow-hidden animate-reveal-bg">
+    
+    <div class="absolute inset-0 pattern-dots opacity-20"></div>
+
+    <!-- Escena de Suspenso -->
+    <main class="relative z-10 flex flex-col items-center gap-12 w-full max-w-md p-6">
+        
+        <!-- Fase 1: El Veredicto -->
+        <div class="text-center space-y-4">
+            <p class="font-display text-xl uppercase tracking-[0.3em] opacity-0 animate-spotlight">El pueblo ha decidido...</p>
+            <h1 class="font-display text-6xl uppercase tracking-tighter opacity-0 animate-spotlight delay-1">BRUNO</h1>
+        </div>
+
+        <!-- Fase 2: Spotlight en el Jugador -->
+        <div class="relative group animate-spotlight delay-2">
+            <!-- Aura de peligro -->
+            <div class="absolute inset-0 bg-danger/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
+            
+            <div class="relative bg-white p-2 rounded-full border-8 border-ink shadow-hard-lg animate-heartbeat animate-shake">
+                <div class="w-48 h-48 rounded-full overflow-hidden bg-primary flex items-center justify-center border-4 border-ink">
+                    <span class="text-9xl">🐱</span>
+                </div>
+            </div>
+
+            <!-- Fase 3: El Sello del Rol (Aparece tras el shake) -->
+            <div class="absolute -bottom-4 -right-4 z-20 animate-stamp">
+                <div class="bg-danger text-white px-8 py-4 border-4 border-ink shadow-hard rounded-xl rotate-[-5deg]">
+                    <p class="font-display text-4xl uppercase leading-none">¡IMPOSTOR!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fase 4: Mensaje Final -->
+        <div class="text-center h-20">
+            <p class="font-display text-2xl uppercase tracking-widest opacity-0 animate-stamp" style="animation-delay: 4.5s">
+                Justicia divina
+            </p>
+            <p class="text-sm font-bold uppercase tracking-[0.2em] opacity-40 opacity-0 animate-stamp" style="animation-delay: 4.8s">
+                Victoria para los Agentes
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Botón para continuar (Aparece al final) -->
+    <footer class="absolute bottom-12 w-full max-w-xs px-6 opacity-0 animate-stamp" style="animation-delay: 5.5s">
+        <a href="09_Results_Points.html" class="w-full block bg-white text-ink font-display text-2xl py-5 rounded-xl shadow-hard hover:translate-y-1 active:translate-y-2 active:shadow-none transition-all text-center uppercase tracking-widest">
+            Continuar
+        </a>
+    </footer>
+
+</body>
+</html>

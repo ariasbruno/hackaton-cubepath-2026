@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pistas (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "danger-muted": "#FFF0F1",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "ink-muted": "#8D8FA1",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '6px 6px 0px rgba(43, 45, 66, 0.2)',
+                        'hard-sm': '3px 3px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '10px 10px 0px rgba(43, 45, 66, 0.25)',
+                        'inner-hard': 'inset 4px 4px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '32px',
+                        'btn': '20px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.07) 2px, transparent 2px);
+            background-size: 32px 32px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .bubble-left::before {
+            content: ''; position: absolute; left: -12px; top: 20px; width: 0; height: 0;
+            border-top: 10px solid transparent; border-bottom: 10px solid transparent; 
+            border-right: 12px solid white; filter: drop-shadow(-3px 3px 0px rgba(43, 45, 66, 0.15));
+        }
+
+        @keyframes countdown {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-countdown {
+            animation: countdown 45s linear forwards;
+        }
+
+        .player-active {
+            @apply border-secondary bg-secondary-muted scale-105 shadow-hard-sm;
+        }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen pattern-dots flex flex-col items-center">
+
+    <!-- Desktop Header (Wide, Centered) -->
+    <header class="w-full max-w-5xl mt-6 px-6 py-4 bg-white border-2 border-ink rounded-card shadow-hard flex items-center justify-between z-30">
+        <div class="flex items-center gap-6">
+            <div class="flex flex-col">
+                <span class="font-display text-primary text-2xl leading-none uppercase tracking-tight">El Impostor</span>
+                <span class="text-[10px] font-extrabold uppercase opacity-40 tracking-[0.3em] mt-1">Partida en curso</span>
+            </div>
+            <div class="h-10 w-px bg-ink/10"></div>
+            <div class="flex flex-col">
+                <span class="font-display text-ink text-xl leading-none uppercase">Ronda 1</span>
+                <span class="text-[10px] font-extrabold uppercase text-secondary tracking-[0.2em] mt-1">Fase de Pistas</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-8">
+            <!-- Global Timer -->
+            <div class="flex flex-col items-end">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-ink/40 mb-1">Tiempo Restante</span>
+                <div class="bg-secondary-muted px-6 py-2 rounded-full border-2 border-secondary flex items-center gap-3 shadow-hard-sm">
+                    <span class="material-symbols-outlined text-secondary text-base">timer</span>
+                    <span class="font-mono font-black text-secondary text-lg">00:45</span>
+                </div>
+            </div>
+            
+            <!-- Turn Progress -->
+            <div class="flex flex-col items-center">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-ink/40 mb-1">Turno de <span class="text-secondary">Ana</span></span>
+                <div class="w-40 h-3 bg-ink/5 rounded-full overflow-hidden border border-ink/10 shadow-inner-hard">
+                    <div class="h-full bg-secondary animate-countdown"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Game Area -->
+    <main class="w-full max-w-5xl flex gap-8 my-8 flex-1 px-6 min-h-0">
+        
+        <!-- Left: Chat Container (Wide) -->
+        <section class="flex-1 flex flex-col bg-white border-2 border-ink rounded-card shadow-hard-lg overflow-hidden relative">
+            <!-- Chat Header -->
+            <div class="p-4 border-b-2 border-ink/5 bg-ink/[0.02] flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-ink/40">forum</span>
+                    <span class="font-bold text-sm uppercase tracking-widest text-ink/60">Canal de Pistas</span>
+                </div>
+                <div class="text-[10px] font-bold text-ink/30 italic">Las pistas aparecerán aquí en orden</div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="flex-1 p-8 space-y-8 overflow-y-auto no-scrollbar bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5">
+                
+                <!-- Message 1 -->
+                <div class="flex items-start gap-4 animate-fade-in group">
+                    <div class="w-14 h-14 bg-primary rounded-2xl border-2 border-ink shadow-hard-sm flex items-center justify-center text-3xl shrink-0 group-hover:-rotate-3 transition-transform">
+                        🐱
+                    </div>
+                    <div class="relative bg-white p-5 rounded-btn shadow-hard border-2 border-ink bubble-left max-w-[80%]">
+                        <div class="flex items-center justify-between mb-2">
+                            <p class="font-display text-primary text-xs uppercase tracking-wider">Bruno</p>
+                            <span class="text-[9px] font-bold text-ink/30 font-mono">14:02</span>
+                        </div>
+                        <p class="text-lg leading-relaxed font-medium">Es algo que se puede comer a cualquier hora y a todos les gusta.</p>
+                    </div>
+                </div>
+
+                <!-- Message 2 -->
+                <div class="flex items-start gap-4 animate-fade-in group">
+                    <div class="w-14 h-14 bg-purple rounded-2xl border-2 border-ink shadow-hard-sm flex items-center justify-center text-3xl shrink-0 group-hover:rotate-3 transition-transform">
+                        🦊
+                    </div>
+                    <div class="relative bg-white p-5 rounded-btn shadow-hard border-2 border-ink bubble-left max-w-[80%]">
+                        <div class="flex items-center justify-between mb-2">
+                            <p class="font-display text-purple text-xs uppercase tracking-wider">Carlos</p>
+                            <span class="text-[9px] font-bold text-ink/30 font-mono">14:03</span>
+                        </div>
+                        <p class="text-lg leading-relaxed font-medium">Lleva salsa de tomate y mucho queso fundido.</p>
+                    </div>
+                </div>
+
+                <!-- System Wait -->
+                <div class="flex flex-col items-center py-6">
+                    <div class="bg-sticky-yellow/20 border-2 border-dashed border-sticky-yellow px-8 py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] text-ink/60 animate-pulse">
+                        Ana está redactando su pista...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer / Input Area -->
+            <footer class="p-8 bg-white border-t-2 border-ink/5">
+                <!-- If it's NOT your turn -->
+                <div class="bg-ink/[0.03] border-2 border-dashed border-ink/10 p-8 rounded-card flex flex-col items-center justify-center gap-4 transition-all hover:bg-ink/[0.05]">
+                    <div class="w-16 h-16 bg-white border-2 border-ink/10 rounded-full flex items-center justify-center shadow-inner-hard">
+                        <span class="material-symbols-outlined text-ink/20 text-4xl animate-spin-slow">hourglass_bottom</span>
+                    </div>
+                    <div class="text-center">
+                        <p class="font-display text-xl text-ink/40 uppercase tracking-tight">Espera tu turno</p>
+                        <p class="font-bold text-xs text-ink/30 uppercase tracking-[0.2em] mt-1">Ana y Elena van antes que tú</p>
+                    </div>
+                </div>
+
+                <!-- Hint for Developers: Transition Button (Prototype Only) -->
+                <div class="mt-4 flex justify-end">
+                    <a href="07_Discussion_Desktop.html" class="flex items-center gap-2 text-ink/20 hover:text-secondary transition-colors text-[10px] font-bold uppercase tracking-widest">
+                        Simular Siguiente Fase (Discusión)
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+            </footer>
+        </section>
+
+        <!-- Right: Info Sidebar Panel -->
+        <aside class="w-80 flex flex-col gap-6">
+            
+            <!-- Word Reminder (High Visibility) -->
+            <div class="bg-white p-6 rounded-card border-2 border-ink shadow-hard-lg relative overflow-hidden group">
+                <div class="absolute -right-4 -bottom-4 opacity-[0.05] group-hover:opacity-10 transition-opacity">
+                    <span class="material-symbols-outlined text-9xl transform -rotate-12">restaurant</span>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-accent rounded-lg border-2 border-ink flex items-center justify-center text-white shadow-hard-sm">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                        </div>
+                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-accent">Tu Palabra Secreta</p>
+                    </div>
+                    <p class="font-display text-5xl text-ink leading-none uppercase tracking-tighter">PIZZA</p>
+                    <div class="mt-4 pt-4 border-t border-ink/5">
+                        <p class="text-[9px] font-bold text-ink/40 leading-relaxed italic">No dejes que el impostor descubra esta palabra.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Turn List -->
+            <div class="flex-1 bg-white border-2 border-ink rounded-card shadow-hard flex flex-col overflow-hidden">
+                <div class="p-4 bg-ink/5 border-b-2 border-ink/5">
+                    <p class="font-bold text-[10px] uppercase tracking-[0.2em] text-ink/60">Orden de Turnos</p>
+                </div>
+                <div class="p-4 space-y-3 overflow-y-auto no-scrollbar">
+                    <!-- Done -->
+                    <div class="flex items-center gap-3 p-3 rounded-btn border-2 border-ink/5 opacity-40 bg-ink/[0.02]">
+                        <div class="w-8 h-8 bg-primary rounded-full border border-ink flex items-center justify-center text-sm shadow-hard-sm">🐱</div>
+                        <span class="font-bold text-sm flex-1">Bruno</span>
+                        <span class="material-symbols-outlined text-accent text-sm">check_circle</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-btn border-2 border-ink/5 opacity-40 bg-ink/[0.02]">
+                        <div class="w-8 h-8 bg-purple rounded-full border border-ink flex items-center justify-center text-sm shadow-hard-sm">🦊</div>
+                        <span class="font-bold text-sm flex-1">Carlos</span>
+                        <span class="material-symbols-outlined text-accent text-sm">check_circle</span>
+                    </div>
+                    <!-- Current -->
+                    <div class="flex items-center gap-3 p-3 rounded-btn border-2 border-secondary bg-secondary-muted shadow-hard-sm scale-[1.02] relative transition-transform">
+                        <div class="w-8 h-8 bg-secondary rounded-full border border-ink flex items-center justify-center text-sm shadow-hard-sm">🐼</div>
+                        <span class="font-black text-sm flex-1 text-ink">Ana</span>
+                        <div class="flex gap-1">
+                            <span class="w-1.5 h-1.5 bg-secondary rounded-full animate-bounce"></span>
+                            <span class="w-1.5 h-1.5 bg-secondary rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                            <span class="w-1.5 h-1.5 bg-secondary rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                        </div>
+                    </div>
+                    <!-- Pending -->
+                    <div class="flex items-center gap-3 p-3 rounded-btn border-2 border-ink/5 bg-white transition-opacity">
+                        <div class="w-8 h-8 bg-accent rounded-full border border-ink flex items-center justify-center text-sm shadow-hard-sm">🐨</div>
+                        <span class="font-bold text-sm flex-1 text-ink/60">Elena</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-btn border-2 border-ink/5 bg-white transition-opacity">
+                        <div class="w-8 h-8 bg-danger rounded-full border border-ink flex items-center justify-center text-sm shadow-hard-sm">🦁</div>
+                        <span class="font-bold text-sm flex-1 text-ink/60">Tú (Dani)</span>
+                    </div>
+                </div>
+                <div class="p-4 bg-accent/5 border-t border-ink/5 mt-auto">
+                    <div class="flex items-center gap-2 text-accent">
+                        <span class="material-symbols-outlined text-sm">info</span>
+                        <p class="text-[9px] font-bold uppercase tracking-wider leading-tight">Faltan 3 pistas para pasar a votación</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <style>
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acusación Caos - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "secondary": "#4D9DE0",
+                        "accent": "#87C38F",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '8px 8px 0px rgba(43, 45, 66, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes spotlight {
+            0% { opacity: 0; transform: scale(0.8); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        @keyframes reveal-bg-danger {
+            0% { background-color: #2B2D42; }
+            100% { background-color: #E63946; }
+        }
+        @keyframes stamp-danger {
+            0% { transform: scale(5); opacity: 0; }
+            100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+        }
+        @keyframes target-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        @keyframes shake-extreme {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-10px, -10px); }
+            20% { transform: translate(10px, 10px); }
+            30% { transform: translate(-10px, 10px); }
+            40% { transform: translate(10px, -10px); }
+        }
+
+        .animate-spotlight { animation: spotlight 1s ease-out forwards; }
+        .animate-reveal-bg { animation: reveal-bg-danger 0.5s 3.5s forwards; }
+        .animate-stamp { opacity: 0; animation: stamp-danger 0.4s 4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .animate-target { animation: target-pulse 1.5s infinite; }
+        .animate-shake-hard { animation: shake-extreme 0.15s 2.5s 6; }
+        
+        .delay-1 { animation-delay: 1s; }
+        .delay-2 { animation-delay: 2s; }
+
+        .pattern-checkers-dark {
+            background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25px, transparent 25px, transparent 50px, rgba(0, 0, 0, 0.1) 50px, rgba(0, 0, 0, 0.1) 75px, transparent 75px, transparent 100px);
+        }
+    </style>
+</head>
+<body class="bg-ink text-white font-body min-h-screen flex flex-col items-center justify-center overflow-hidden animate-reveal-bg">
+    
+    <div class="absolute inset-0 pattern-checkers-dark opacity-20"></div>
+
+    <!-- Escena de Acusación Confirmada -->
+    <main class="relative z-10 flex flex-col items-center gap-12 w-full max-w-lg p-6">
+        
+        <!-- Fase 1: El Título de Alerta -->
+        <div class="text-center space-y-2">
+            <p class="font-display text-lg uppercase tracking-[0.4em] text-danger animate-pulse">Analizando acusación...</p>
+            <h1 class="font-display text-5xl uppercase tracking-tighter opacity-0 animate-spotlight delay-1">OBJETIVOS FIJADOS</h1>
+        </div>
+
+        <!-- Fase 2: Los dos acusados bajo la mira -->
+        <div class="w-full flex items-center justify-center gap-8 relative animate-shake-hard">
+            
+            <!-- Jugador 1 -->
+            <div class="relative z-10 animate-spotlight delay-2">
+                <div class="absolute -inset-4 border-4 border-danger rounded-full border-dashed animate-target"></div>
+                <div class="bg-white p-1 rounded-full border-4 border-ink shadow-hard">
+                    <div class="w-24 h-24 rounded-full overflow-hidden bg-primary flex items-center justify-center border-2 border-ink">
+                        <span class="text-5xl">🐱</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VS / AND -->
+            <div class="relative z-20 font-display text-4xl text-danger italic">
+                &
+            </div>
+
+            <!-- Jugador 2 -->
+            <div class="relative z-10 animate-spotlight delay-2">
+                <div class="absolute -inset-4 border-4 border-danger rounded-full border-dashed animate-target"></div>
+                <div class="bg-white p-1 rounded-full border-4 border-ink shadow-hard">
+                    <div class="w-24 h-24 rounded-full overflow-hidden bg-secondary flex items-center justify-center border-2 border-ink">
+                        <span class="text-5xl">🦊</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fase 3: El Resultado de la Acusación -->
+        <div class="flex flex-col items-center gap-6">
+            <div class="opacity-0 animate-stamp">
+                <div class="bg-white text-danger px-10 py-4 border-4 border-ink shadow-hard-lg rounded-2xl rotate-[-5deg]">
+                    <p class="font-display text-4xl uppercase leading-none">¡VÍNCULO CAZADO!</p>
+                </div>
+            </div>
+            
+            <div class="text-center space-y-2 opacity-0 animate-stamp" style="animation-delay: 4.5s">
+                <p class="font-display text-2xl uppercase tracking-widest text-white">Palabra: RAYO</p>
+                <p class="text-sm font-bold uppercase tracking-[0.2em] opacity-60">Los dispersos ganan puntos extra</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Botón para continuar -->
+    <footer class="absolute bottom-10 w-full max-w-xs px-6 opacity-0 animate-stamp" style="animation-delay: 5.5s">
+        <a href="09_Results_Points.html" class="w-full block bg-white text-ink font-display text-2xl py-5 rounded-xl shadow-hard hover:translate-y-1 active:translate-y-2 active:shadow-none transition-all text-center uppercase tracking-widest">
+            Continuar
+        </a>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "danger-muted": "#FFF0F1",
+                        "purple": "#9D4EDD",
+                        "ink": "#2B2D42",
+                        "ink-muted": "#8D8FA1",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .bubble-left::before {
+            content: ''; position: absolute; left: -8px; top: 12px; width: 0; height: 0;
+            border-top: 8px solid transparent; border-bottom: 8px solid transparent; 
+            border-right: 8px solid white; filter: drop-shadow(-2px 2px 0px rgba(43, 45, 66, 0.15));
+        }
+
+        @keyframes countdown {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-countdown {
+            animation: countdown 120s linear forwards;
+        }
+
+        /* Transition for collapsible history */
+        #history-content {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 500px; /* Large enough to show content */
+        }
+        .history-collapsed #history-content {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            overflow: hidden;
+        }
+        .history-collapsed #expand-icon {
+            transform: rotate(0deg);
+        }
+        #expand-icon {
+            transition: transform 0.3s ease;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen h-screen flex flex-col pattern-dots max-w-md mx-auto shadow-2xl overflow-hidden relative">
+
+    <!-- Header -->
+    <header class="p-6 bg-white border-b border-ink/5 flex items-center justify-between shadow-[0_4px_20px_rgba(43,45,66,0.05)] z-30">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-danger/10 text-danger rounded-full flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl">forum</span>
+            </div>
+            <h2 class="font-display text-2xl text-danger uppercase tracking-tight">¡Debate!</h2>
+        </div>
+        <div class="bg-danger-muted px-4 py-2 rounded-full border-2 border-danger/10 flex items-center gap-2">
+            <span class="material-symbols-outlined text-danger text-sm font-bold">timer</span>
+            <span class="font-mono font-bold text-danger text-sm uppercase">01:54</span>
+        </div>
+    </header>
+
+    <!-- Main Content Split Area -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+        
+        <!-- UPPER PART: Live Chat (Now flex-1 to fill space when history is collapsed) -->
+        <div class="flex-1 flex flex-col bg-ink/5 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-ink/5 z-10 overflow-hidden">
+                <div class="h-full bg-danger animate-countdown"></div>
+            </div>
+            
+            <div class="flex-1 p-6 space-y-4 overflow-y-auto no-scrollbar pt-8">
+                <div class="text-center mb-2">
+                    <span class="bg-white/80 text-[8px] font-extrabold px-3 py-1 rounded-full shadow-sm opacity-40 uppercase tracking-[0.2em]">Discusión en tiempo real</span>
+                </div>
+                
+                <div class="flex items-start gap-3 animate-fade-in">
+                    <div class="w-8 h-8 bg-secondary rounded-full border-2 border-white shadow-hard-sm flex items-center justify-center text-sm shrink-0">🦊</div>
+                    <div class="relative bg-white p-3 rounded-btn shadow-hard-sm border border-ink/5 bubble-left">
+                        <p class="font-bold text-secondary text-[10px] uppercase tracking-tight mb-1">Ana</p>
+                        <p class="text-xs leading-relaxed">¡Creo que es Bruno! Su pista fue demasiado genérica en la ronda 1.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 justify-end animate-fade-in">
+                    <div class="bg-primary text-white p-3 rounded-btn shadow-hard-sm text-xs relative">
+                        <p class="font-bold text-white/80 text-[10px] uppercase tracking-tight mb-1 text-right">Tú</p>
+                        <p class="leading-relaxed">¿Yo? Pero si Ana dijo "masa", ¡eso lo sabe cualquiera!</p>
+                    </div>
+                    <div class="w-8 h-8 bg-primary rounded-full border-2 border-white shadow-hard-sm flex items-center justify-center text-sm shrink-0">🐱</div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-4 bg-white/50 backdrop-blur-md border-t border-ink/5">
+                <div class="relative flex items-center gap-2">
+                    <div class="flex-1 relative">
+                        <input type="text" placeholder="ESCRIBE TU ACUSACIÓN..." 
+                            class="w-full bg-white border-2 border-ink/5 p-4 pr-12 rounded-btn shadow-inner-hard font-bold text-xs uppercase focus:outline-none focus:border-danger transition-all duration-200" id="chat-input">
+                        <!-- Character Limit Wheel (SVG) -->
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center">
+                            <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                                <circle cx="18" cy="18" r="16" fill="none" class="stroke-ink/5" stroke-width="4"></circle>
+                                <circle cx="18" cy="18" r="16" fill="none" class="stroke-danger transition-all duration-200" stroke-width="4" stroke-dasharray="100" stroke-dashoffset="30"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="bg-danger text-white p-4 rounded-btn shadow-hard active:translate-y-1 active:shadow-none transition-all">
+                        <span class="material-symbols-outlined text-2xl">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+        .animate-shake { animation: shake 0.2s ease-in-out 0s 2; }
+        .input-error { border-color: #E63946 !important; background-color: #FFF0F1 !important; }
+    </style>
+
+        <!-- LOWER PART: Clues History (Collapsible) -->
+        <div id="history-section" class="flex flex-col bg-white border-t-4 border-dashed border-ink/10 relative">
+            <header onclick="toggleHistory()" class="px-6 py-4 bg-bg-paper border-b border-ink/5 flex items-center justify-between cursor-pointer active:bg-ink/5 transition-colors">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-ink/40 text-xl">history</span>
+                    <h3 class="font-display text-xs text-ink/40 uppercase tracking-widest">Historial de Pistas</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="expand-text" class="text-[8px] font-extrabold uppercase opacity-30 tracking-tighter">Presiona para ver más</span>
+                    <span id="expand-icon" class="material-symbols-outlined text-ink/20 text-xl">expand_less</span>
+                </div>
+            </header>
+            
+            <div id="history-content" class="overflow-y-auto no-scrollbar bg-white">
+                <div class="p-6 space-y-6">
+                    <!-- Round Group -->
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-primary text-white text-[8px] font-bold px-2 py-0.5 rounded-full shadow-sm uppercase">Ronda 1</span>
+                            <div class="flex-1 h-px bg-ink/5"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-primary-muted p-3 rounded-btn border border-primary/10 shadow-hard-sm relative overflow-hidden">
+                                <div class="absolute -right-2 -bottom-2 opacity-5 text-primary"><span class="material-symbols-outlined text-4xl">restaurant</span></div>
+                                <p class="text-[8px] font-extrabold uppercase opacity-40 mb-1">Bruno</p>
+                                <p class="text-[10px] font-bold leading-tight">"Capa de queso"</p>
+                            </div>
+                            <div class="bg-secondary-muted p-3 rounded-btn border border-secondary/10 shadow-hard-sm relative overflow-hidden">
+                                <div class="absolute -right-2 -bottom-2 opacity-5 text-secondary"><span class="material-symbols-outlined text-4xl">restaurant</span></div>
+                                <p class="text-[8px] font-extrabold uppercase opacity-40 mb-1">Ana</p>
+                                <p class="text-[10px] font-bold leading-tight">"Tiene masa"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Round 2 (Example) -->
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 opacity-60">
+                            <span class="bg-accent text-white text-[8px] font-bold px-2 py-0.5 rounded-full shadow-sm uppercase">Ronda 2</span>
+                            <div class="flex-1 h-px bg-ink/5"></div>
+                        </div>
+                        <div class="bg-accent-muted p-3 rounded-btn border border-accent/10 shadow-hard-sm">
+                            <p class="text-[8px] font-extrabold uppercase opacity-40 mb-1">Luis</p>
+                            <p class="text-[10px] font-bold leading-tight">"Horno de leña"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Action Footer -->
+    <footer class="p-6 bg-white border-t border-ink/5 z-30">
+        <a href="08_Vote.html" class="w-full block bg-danger text-white font-display text-2xl py-5 rounded-btn shadow-hard-lg active:translate-y-1 active:shadow-hard transition-all uppercase tracking-widest text-center">
+            Votar Jugador
+        </a>
+    </footer>
+
+    <script>
+        function toggleHistory() {
+            const section = document.getElementById('history-section');
+            const text = document.getElementById('expand-text');
+            const isCollapsed = section.classList.toggle('history-collapsed');
+            
+            text.innerText = isCollapsed ? 'Presiona para ver más' : 'Presiona para ocultar';
+        }
+        
+        // Start collapsed for the demo if you prefer, or expanded.
+        // Let's start it expanded as in the original design.
+    </script>
+
+</body>
+</html>

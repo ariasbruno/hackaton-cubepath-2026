@@ -1,0 +1,5 @@
+# 1. Cargamos tu configuración normal de Linux Mint (colores, variables, PATH de Bun)
+source ~/.bashrc
+
+# 2. Ejecutamos el servidor
+bun run dev

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <!-- Sombra base Neubrutalista -->
+  <rect x="24" y="32" width="84" height="84" rx="28" fill="#2B2D42" opacity="0.15" />
+  
+  <!-- Cuerpo Principal (Primary Orange) -->
+  <rect x="16" y="24" width="84" height="84" rx="28" fill="#FF8C42" stroke="#2B2D42" stroke-width="8" stroke-linejoin="round" />
+  
+  <!-- Acento: Signo de Interrogación (Secondary Blue) -->
+  <!-- Reemplaza al cuadrado azul original, manteniendo la posición y rotación -->
+  <g transform="translate(100, 22) rotate(15)">
+    <!-- Sombra del signo -->
+    <path d="M -8 -14 C -8 -22, 8 -22, 8 -14 C 8 -10, 0 -10, 0 -4 M 0 8 L 0 8" fill="none" stroke="#2B2D42" stroke-width="12" stroke-linecap="round" opacity="0.15" transform="translate(4, 4)" />
+    <!-- Borde del signo -->
+    <path d="M -8 -14 C -8 -22, 8 -22, 8 -14 C 8 -10, 0 -10, 0 -4 M 0 8 L 0 8" fill="none" stroke="#2B2D42" stroke-width="12" stroke-linecap="round" />
+    <!-- Relleno del signo -->
+    <path d="M -8 -14 C -8 -22, 8 -22, 8 -14 C 8 -10, 0 -10, 0 -4 M 0 8 L 0 8" fill="none" stroke="#4D9DE0" stroke-width="6" stroke-linecap="round" />
+  </g>
+  
+  <!-- Ojos saltones -->
+  <circle cx="42" cy="62" r="11" fill="#FFFFFF" stroke="#2B2D42" stroke-width="8" />
+  <circle cx="74" cy="62" r="11" fill="#FFFFFF" stroke="#2B2D42" stroke-width="8" />
+  
+  <!-- Brillos en los ojos -->
+  <circle cx="45" cy="58" r="3" fill="#2B2D42" />
+  <circle cx="77" cy="58" r="3" fill="#2B2D42" />
+
+  <!-- Boca (Mueca sospechosa) -->
+  <path d="M 46 88 Q 58 84 70 86" fill="none" stroke="#2B2D42" stroke-width="6" stroke-linecap="round" />
+</svg>

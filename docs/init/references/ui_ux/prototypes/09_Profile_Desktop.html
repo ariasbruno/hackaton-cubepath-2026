@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Desktop - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .sidebar-item:hover { transform: translateX(4px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex relative overflow-hidden pattern-dots">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r-4 border-ink/5 flex flex-col p-8 z-30 shadow-hard shrink-0">
+        <div class="mb-12 text-link">
+            <a href="01_Home_Desktop.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary border-2 border-ink rounded-xl flex items-center justify-center text-white shadow-hard-sm rotate-3">
+                    <span class="material-symbols-outlined text-2xl">theater_comedy</span>
+                </div>
+                <h1 class="font-display text-2xl text-ink uppercase tracking-tight">El Impostor</h1>
+            </a>
+        </div>
+
+        <nav class="flex-1 space-y-4">
+            <a href="01_Home_Desktop.html" class="sidebar-item flex items-center gap-4 text-ink/40 p-4 rounded-btn border-2 border-transparent hover:bg-bg-paper transition-all">
+                <span class="material-symbols-outlined">home</span>
+                <span class="font-display text-lg uppercase tracking-wide">Inicio</span>
+            </a>
+            <a href="02_Rooms_Desktop.html" class="sidebar-item flex items-center gap-4 text-ink/40 p-4 rounded-btn border-2 border-transparent hover:bg-bg-paper transition-all">
+                <span class="material-symbols-outlined">groups</span>
+                <span class="font-display text-lg uppercase tracking-wide">Salas</span>
+            </a>
+            <a href="09_Profile_Desktop.html" class="sidebar-item flex items-center gap-4 bg-primary-muted text-primary p-4 rounded-btn border-2 border-primary/10 shadow-hard-sm transition-all">
+                <span class="material-symbols-outlined">person</span>
+                <span class="font-display text-lg uppercase tracking-wide">Mi Perfil</span>
+            </a>
+            <a href="10_Settings_Desktop.html" class="sidebar-item flex items-center gap-4 text-ink/40 p-4 rounded-btn border-2 border-transparent hover:bg-bg-paper transition-all">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-display text-lg uppercase tracking-wide">Ajustes</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto">
+            <button class="w-full bg-danger-muted text-danger py-4 rounded-btn border-2 border-danger/10 flex items-center justify-center gap-3 hover:bg-danger hover:text-white transition-all uppercase font-display tracking-widest text-sm">
+                <span class="material-symbols-outlined">logout</span>
+                Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <!-- Top Header -->
+        <header class="h-24 bg-white/50 backdrop-blur-sm border-b-2 border-ink/5 px-10 flex items-center justify-between shrink-0">
+            <div>
+                <h2 class="font-display text-3xl uppercase tracking-tight text-ink">Mi Perfil</h2>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="bg-white px-6 py-3 rounded-full shadow-hard-sm border-2 border-ink/5 flex items-center gap-3 hover:translate-y-0.5 transition-all">
+                    <span class="material-symbols-outlined text-ink text-xl">share</span>
+                    <span class="font-bold text-xs uppercase tracking-widest text-ink/60">Compartir</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="flex-1 overflow-y-auto p-10 no-scrollbar">
+            <div class="grid grid-cols-12 gap-10">
+                
+                <!-- Left Column: Identity & Personal Card -->
+                <div class="col-span-5 space-y-8">
+                    <section class="bg-white p-10 rounded-card border-4 border-ink shadow-hard-lg flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-primary/5 pattern-dots opacity-20"></div>
+                        
+                        <!-- Large Avatar -->
+                        <div class="relative mb-8">
+                            <div class="w-48 h-48 bg-primary rounded-full border-8 border-white shadow-hard flex items-center justify-center text-[120px] relative z-10">
+                                🐱
+                            </div>
+                            <div class="absolute -top-4 -right-4 bg-sticky-yellow text-ink p-4 rounded-full shadow-hard border-4 border-white rotate-12 z-20">
+                                <span class="material-symbols-outlined text-4xl">workspace_premium</span>
+                            </div>
+                            <button class="absolute bottom-0 right-0 bg-white p-3 rounded-full shadow-hard-sm border-2 border-ink z-30 hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-ink">photo_camera</span>
+                            </button>
+                        </div>
+
+                        <!-- User Info -->
+                        <div class="space-y-2 mb-10 relative z-10">
+                            <div class="flex items-center justify-center gap-4">
+                                <h2 class="font-display text-5xl text-ink uppercase tracking-tight">Félix</h2>
+                                <button class="material-symbols-outlined text-ink/20 hover:text-primary transition-colors text-2xl">edit</button>
+                            </div>
+                            <p class="text-sm font-extrabold uppercase tracking-[0.4em] text-ink/30">Nivel 15 • Leyenda del Engaño</p>
+                        </div>
+
+                        <!-- Big Stats -->
+                        <div class="grid grid-cols-2 gap-6 w-full relative z-10">
+                            <div class="bg-primary-muted p-6 rounded-btn border-4 border-primary/10 shadow-hard-sm">
+                                <p class="text-[10px] font-extrabold text-primary uppercase tracking-widest mb-1">Puntos Totales</p>
+                                <p class="font-display text-4xl text-primary leading-none">12,450</p>
+                            </div>
+                            <div class="bg-secondary-muted p-6 rounded-btn border-4 border-secondary/10 shadow-hard-sm">
+                                <p class="text-[10px] font-extrabold text-secondary uppercase tracking-widest mb-1">Global Rank</p>
+                                <p class="font-display text-4xl text-secondary leading-none">#42</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Profile Bio / Badges -->
+                    <section class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard space-y-6">
+                        <h3 class="font-display text-xl uppercase tracking-tight text-ink/40">Insignias</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="w-16 h-16 bg-accent-muted rounded-2xl border-2 border-accent/20 flex items-center justify-center text-accent shadow-sm rotate-3" title="Primer Ganador">
+                                <span class="material-symbols-outlined text-3xl">emoji_events</span>
+                            </div>
+                            <div class="w-16 h-16 bg-purple-muted rounded-2xl border-2 border-purple/20 flex items-center justify-center text-purple shadow-sm -rotate-2" title="Maestro del Caos">
+                                <span class="material-symbols-outlined text-3xl">bolt</span>
+                            </div>
+                            <div class="w-16 h-16 bg-danger-muted rounded-2xl border-2 border-danger/20 flex items-center justify-center text-danger shadow-sm rotate-6" title="Impostor Letal">
+                                <span class="material-symbols-outlined text-3xl">skull</span>
+                            </div>
+                            <div class="w-16 h-16 bg-bg-paper rounded-2xl border-2 border-ink/5 border-dashed flex items-center justify-center text-ink/10">
+                                <span class="material-symbols-outlined text-3xl">lock</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column: Stats & History -->
+                <div class="col-span-7 space-y-10">
+                    
+                    <!-- Detailed Stats Grid -->
+                    <section class="space-y-6">
+                        <h3 class="font-display text-2xl uppercase tracking-tight text-ink ml-2">Estadísticas de Juego</h3>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard flex items-center gap-6 group hover:border-primary transition-colors">
+                                <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-4xl">skull</span>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-display text-primary leading-none">85</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-ink/40 mt-1">Partidas Impostor</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard flex items-center gap-6 group hover:border-secondary transition-colors">
+                                <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-4xl">verified_user</span>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-display text-secondary leading-none">142</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-ink/40 mt-1">Partidas Agente</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard flex items-center gap-6 group hover:border-accent transition-colors">
+                                <div class="w-16 h-16 bg-accent/10 text-accent rounded-2xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-4xl">ads_click</span>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-display text-accent leading-none">78%</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-ink/40 mt-1">Eficacia de Voto</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard flex items-center gap-6 group hover:border-purple transition-colors">
+                                <div class="w-16 h-16 bg-purple/10 text-purple rounded-2xl flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-4xl">bolt</span>
+                                </div>
+                                <div>
+                                    <p class="text-4xl font-display text-purple leading-none">12</p>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-ink/40 mt-1">Vínculos Caos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Recent Activity Table -->
+                    <section class="space-y-6">
+                        <div class="flex justify-between items-end px-2">
+                            <h3 class="font-display text-2xl uppercase tracking-tight">Actividad Reciente</h3>
+                            <button class="text-xs font-bold text-secondary uppercase hover:underline">Historial Completo</button>
+                        </div>
+                        <div class="bg-white rounded-card border-4 border-ink/5 shadow-hard overflow-hidden">
+                            <div class="p-4 bg-ink/5 flex items-center justify-between px-8 border-b-2 border-ink/5">
+                                <span class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-ink/30">Evento</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-ink/30">Sala</span>
+                                <span class="text-[10px] font-extrabold uppercase tracking-[0.2em] text-ink/30 text-right">Resultado</span>
+                            </div>
+                            <div class="divide-y-2 divide-ink/5">
+                                <div class="flex items-center justify-between p-6 px-8 hover:bg-bg-paper transition-colors">
+                                    <div class="flex items-center gap-4 w-1/3">
+                                        <div class="w-10 h-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                                            <span class="material-symbols-outlined">emoji_events</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-ink uppercase tracking-tight text-sm">Victoria Agente</p>
+                                            <p class="text-[10px] font-bold text-ink/30 uppercase">Ayer</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-mono text-xs text-ink/40 text-center w-1/3">#X9Z2</span>
+                                    <div class="w-1/3 text-right">
+                                        <span class="font-display text-2xl text-accent">+300</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between p-6 px-8 hover:bg-bg-paper transition-colors">
+                                    <div class="flex items-center gap-4 w-1/3">
+                                        <div class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+                                            <span class="material-symbols-outlined">skull</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-ink uppercase tracking-tight text-sm">Victoria Impostor</p>
+                                            <p class="text-[10px] font-bold text-ink/30 uppercase">Hace 2 días</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-mono text-xs text-ink/40 text-center w-1/3">#A4B2</span>
+                                    <div class="w-1/3 text-right">
+                                        <span class="font-display text-2xl text-primary">+750</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

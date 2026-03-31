@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinculados Descubiertos (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "danger-muted": "#FFF0F1",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "ink-muted": "#8D8FA1",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.3)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.3)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.2)',
+                        'hard-lg': '12px 12px 0px rgba(43, 45, 66, 0.4)',
+                    },
+                    borderRadius: {
+                        'card': '32px',
+                        'btn': '24px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-checkers {
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08) 50px, transparent 50px, transparent 100px, rgba(255, 255, 255, 0.08) 100px, rgba(255, 255, 255, 0.08) 150px, transparent 150px, transparent 200px);
+            background-size: 400px 400px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        
+        @keyframes countdown {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-countdown {
+            animation: countdown 10s linear forwards;
+        }
+
+        .glow-purple {
+            background: radial-gradient(circle at center, rgba(157, 78, 221, 0.3) 0%, transparent 75%);
+        }
+
+        @keyframes energy {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .energy-line {
+            background: linear-gradient(90deg, #E63946, #9D4EDD, #E63946);
+            background-size: 200% 200%;
+            animation: energy 2s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-purple text-white font-body min-h-screen flex flex-col items-center justify-center pattern-checkers overflow-hidden relative">
+
+    <div class="absolute inset-0 glow-purple z-0"></div>
+
+    <main class="w-full max-w-6xl flex flex-col items-center justify-center space-y-24 relative z-10 py-20">
+        
+        <div class="text-center space-y-8 relative">
+            <div class="absolute inset-0 bg-white/10 blur-3xl rounded-full scale-150 animate-pulse"></div>
+            <h1 class="font-display text-8xl md:text-9xl drop-shadow-[0_10px_10px_rgba(0,0,0,0.4)] leading-none uppercase tracking-tighter text-white rotate-[-3deg] italic">
+                ¡VÍNCULO<br/><span class="text-white/90">EXPUESTO!</span>
+            </h1>
+            <p class="text-white font-black uppercase tracking-[1em] text-xl">Detección de sincronía completada</p>
+        </div>
+
+        <!-- Connection Visual (XL) -->
+        <div class="w-full relative py-20 max-w-5xl">
+            <!-- Central Line (Robust Energy Line) -->
+            <div class="absolute top-1/2 left-0 right-0 h-6 energy-line shadow-hard-lg border-y-4 border-white/20 z-0 transform -translate-y-1/2 rounded-full"></div>
+            
+            <div class="grid grid-cols-2 gap-32 relative z-10 px-20">
+                <!-- Vinculado 1 -->
+                <div class="bg-white text-ink p-10 rounded-card border-8 border-danger shadow-hard-lg animate-[bounce_2s_infinite] transform hover:scale-105 transition-transform">
+                    <div class="w-40 h-40 bg-primary rounded-full border-8 border-ink shadow-hard flex items-center justify-center mx-auto mb-8">
+                        <span class="text-8xl">🐱</span>
+                    </div>
+                    <p class="font-display text-4xl uppercase tracking-tighter text-center">BRUNO</p>
+                </div>
+
+                <!-- Vinculado 2 -->
+                <div class="bg-white text-ink p-10 rounded-card border-8 border-danger shadow-hard-lg animate-[bounce_2s_infinite_1s] transform hover:scale-105 transition-transform">
+                    <div class="w-40 h-40 bg-secondary rounded-full border-8 border-ink shadow-hard flex items-center justify-center mx-auto mb-8">
+                        <span class="text-8xl">🦊</span>
+                    </div>
+                    <p class="font-display text-4xl uppercase tracking-tighter text-center">ANA</p>
+                </div>
+            </div>
+
+            <!-- The Word (Floating XL Badge) -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <div class="bg-ink text-white px-12 py-6 rounded-full border-8 border-white shadow-hard-lg font-display text-5xl uppercase tracking-[0.2em] rotate-[5deg] hover:rotate-0 transition-transform cursor-default">
+                    RAYO
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-3xl space-y-10">
+            <div class="bg-white/10 backdrop-blur-md p-10 rounded-card border-4 border-white/20 shadow-hard-lg">
+                <p class="text-white font-display text-4xl uppercase tracking-widest text-center italic">¡VICTORIA DISPERSOS!</p>
+            </div>
+            
+            <div class="flex flex-col items-center gap-6">
+                <p class="text-white/60 font-black uppercase tracking-[0.5em] text-sm animate-pulse">Calculando bonificaciones de Caos...</p>
+                <!-- Robust Time Bar -->
+                <div class="w-full h-6 bg-white/10 rounded-full overflow-hidden border-2 border-white/10 shadow-inner-hard p-1">
+                    <div class="h-full bg-white rounded-full animate-countdown shadow-[0_0_20px_rgba(255,255,255,0.5)]"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Action Footer -->
+    <footer class="w-full max-w-6xl px-10 pb-16 z-20">
+        <a href="09_Results_Caos_Desktop.html" class="w-full block bg-white text-purple font-display text-4xl py-10 rounded-btn shadow-hard-lg hover:translate-y-[-4px] active:translate-y-4 active:shadow-none transition-all uppercase tracking-[0.2em] text-center border-4 border-ink">
+            Ver Resultados
+        </a>
+    </footer>
+
+</body>
+</html>

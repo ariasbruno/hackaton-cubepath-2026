@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Desktop - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .sidebar-item:hover { transform: translateX(4px); }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex relative overflow-hidden pattern-dots">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r-4 border-ink/5 flex flex-col p-8 z-30 shadow-hard shrink-0">
+        <div class="mb-12">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary border-2 border-ink rounded-xl flex items-center justify-center text-white shadow-hard-sm rotate-3">
+                    <span class="material-symbols-outlined text-2xl">theater_comedy</span>
+                </div>
+                <h1 class="font-display text-2xl text-ink uppercase tracking-tight">El Impostor</h1>
+            </div>
+        </div>
+
+        <nav class="flex-1 space-y-4">
+            <a href="01_Home_Desktop.html" class="sidebar-item flex items-center gap-4 bg-secondary-muted text-secondary p-4 rounded-btn border-2 border-secondary/10 shadow-hard-sm transition-all">
+                <span class="material-symbols-outlined">home</span>
+                <span class="font-display text-lg uppercase tracking-wide">Inicio</span>
+            </a>
+            <a href="02_Rooms_Desktop.html" class="sidebar-item flex items-center gap-4 text-ink/40 p-4 rounded-btn border-2 border-transparent hover:bg-bg-paper transition-all">
+                <span class="material-symbols-outlined">groups</span>
+                <span class="font-display text-lg uppercase tracking-wide">Salas</span>
+            </a>
+            <a href="09_Profile_Desktop.html" class="sidebar-item flex items-center gap-4 text-ink/40 p-4 rounded-btn border-2 border-transparent hover:bg-bg-paper transition-all">
+                <span class="material-symbols-outlined">person</span>
+                <span class="font-display text-lg uppercase tracking-wide">Mi Perfil</span>
+            </a>
+            <a href="10_Settings_Desktop.html" class="sidebar-item flex items-center gap-4 text-ink/40 p-4 rounded-btn border-2 border-transparent hover:bg-bg-paper transition-all">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-display text-lg uppercase tracking-wide">Ajustes</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto">
+            <div class="bg-ink/5 p-6 rounded-card border-2 border-ink/5 relative overflow-hidden group">
+                <div class="relative z-10">
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-ink/30 mb-2">¿Necesitas Ayuda?</p>
+                    <button class="text-xs font-bold text-secondary uppercase hover:underline">Ver Tutoriales</button>
+                </div>
+                <span class="material-symbols-outlined absolute -right-2 -bottom-2 text-6xl opacity-5 rotate-12 group-hover:rotate-0 transition-transform">help</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <!-- Top Header -->
+        <header class="h-24 bg-white/50 backdrop-blur-sm border-b-2 border-ink/5 px-10 flex items-center justify-between shrink-0">
+            <div>
+                <h2 class="font-display text-2xl uppercase tracking-tight text-ink/20">Bienvenido de nuevo, <span class="text-ink">Félix</span></h2>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-hard-sm border-2 border-ink/5">
+                    <span class="material-symbols-outlined text-yellow-500 text-2xl">stars</span>
+                    <span class="font-bold font-mono text-xl">1,250</span>
+                </div>
+                <div class="w-14 h-14 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden">
+                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Grid -->
+        <div class="flex-1 overflow-y-auto p-10 space-y-10 no-scrollbar">
+            
+            <!-- Hero Grid -->
+            <div class="grid grid-cols-12 gap-8">
+                <!-- Main CTA -->
+                <div class="col-span-8">
+                    <a href="#" class="block w-full h-64 bg-primary text-white rounded-card shadow-hard-lg hover:translate-y-1 hover:shadow-hard transition-all active:translate-y-2 active:shadow-none relative overflow-hidden group p-10">
+                        <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                        <div class="relative z-10 flex flex-col justify-between h-full">
+                            <div>
+                                <h3 class="font-display text-6xl uppercase tracking-tighter mb-2">¡A Jugar!</h3>
+                                <p class="font-bold text-white/80 uppercase tracking-widest text-lg">Crea una sala o únete a una partida</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-6xl">play_circle</span>
+                                <span class="bg-white/20 px-6 py-2 rounded-full font-bold uppercase tracking-widest text-sm backdrop-blur-sm">12 Salas activas ahora</span>
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined absolute -right-8 -bottom-8 text-[200px] opacity-10 rotate-12 group-hover:rotate-45 transition-transform duration-700">videogame_asset</span>
+                    </a>
+                </div>
+
+                <!-- Featured Category -->
+                <div class="col-span-4 h-64 bg-white rounded-card shadow-hard border-4 border-ink/5 p-8 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-danger text-white px-4 py-1 font-bold text-[10px] uppercase tracking-widest rotate-12 translate-x-2 translate-y-4 shadow-sm border-2 border-white">¡NUEVO!</div>
+                    <div>
+                        <h4 class="font-display text-2xl uppercase text-ink">Modo Caos</h4>
+                        <p class="text-sm font-bold text-ink/40 uppercase leading-snug mt-2">Prueba la nueva dinámica de vínculos secretos.</p>
+                    </div>
+                    <button class="bg-purple text-white py-3 rounded-btn shadow-hard font-display uppercase tracking-widest text-sm hover:translate-y-0.5 transition-all">Explorar</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Sections -->
+            <div class="grid grid-cols-12 gap-8 pb-10">
+                
+                <!-- Quick Guides -->
+                <div class="col-span-7 space-y-6">
+                    <h3 class="font-display text-3xl uppercase tracking-tight ml-2">¿Cómo Funciona?</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-8 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-4 hover:bg-bg-paper transition-all cursor-pointer group">
+                            <div class="w-20 h-20 bg-secondary-muted text-secondary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                                <span class="material-symbols-outlined text-4xl">person_search</span>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl uppercase">Obtener Rol</h4>
+                                <p class="text-[10px] text-ink/40 font-bold uppercase mt-1">Recibe tu palabra secreta</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-4 hover:bg-bg-paper transition-all cursor-pointer group">
+                            <div class="w-20 h-20 bg-purple-muted text-purple rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                                <span class="material-symbols-outlined text-4xl">theater_comedy</span>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl uppercase">Engañar</h4>
+                                <p class="text-[10px] text-ink/40 font-bold uppercase mt-1">Miente sin que te atrapen</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-4 hover:bg-bg-paper transition-all cursor-pointer group">
+                            <div class="w-20 h-20 bg-danger-muted text-danger rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                                <span class="material-symbols-outlined text-4xl">how_to_vote</span>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl uppercase">Votar</h4>
+                                <p class="text-[10px] text-ink/40 font-bold uppercase mt-1">Expulsa al impostor</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-4 hover:bg-bg-paper transition-all cursor-pointer group">
+                            <div class="w-20 h-20 bg-accent-muted text-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                                <span class="material-symbols-outlined text-4xl">help</span>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-xl uppercase">Ayuda</h4>
+                                <p class="text-[10px] text-ink/40 font-bold uppercase mt-1">Guías y consejos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Sidebar -->
+                <div class="col-span-5 space-y-6">
+                    <div class="flex justify-between items-end px-2">
+                        <h3 class="font-display text-3xl uppercase tracking-tight">Salas Recientes</h3>
+                        <button class="text-xs font-bold text-secondary uppercase hover:underline">Ver Todo</button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-6 rounded-card shadow-hard-sm border border-ink/5 flex items-center justify-between group cursor-pointer hover:translate-x-2 transition-all">
+                            <div class="flex items-center gap-5">
+                                <div class="w-16 h-16 bg-primary text-white rounded-2xl border-4 border-white shadow-hard-sm flex items-center justify-center font-display text-3xl relative overflow-hidden shrink-0">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, white 5px, white 10px);"></div>
+                                    <span class="relative z-10">#1</span>
+                                </div>
+                                <div>
+                                    <p class="font-display text-xl text-ink uppercase">Noche de Pizza</p>
+                                    <p class="text-xs font-bold text-ink/40 uppercase mt-1">Host: Alex • 5/8 Jugadores</p>
+                                </div>
+                            </div>
+                            <button class="bg-bg-paper text-ink p-4 rounded-full shadow-hard-sm border border-ink/5 group-hover:bg-primary group-hover:text-white transition-all">
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-card shadow-hard-sm border border-ink/5 flex items-center justify-between group cursor-pointer hover:translate-x-2 transition-all opacity-80">
+                            <div class="flex items-center gap-5">
+                                <div class="w-16 h-16 bg-purple text-white rounded-2xl border-4 border-white shadow-hard-sm flex items-center justify-center font-display text-3xl relative overflow-hidden shrink-0">
+                                    <span class="relative z-10">#2</span>
+                                </div>
+                                <div>
+                                    <p class="font-display text-xl text-ink uppercase">Caos en el Bar</p>
+                                    <p class="text-xs font-bold text-ink/40 uppercase mt-1">Host: Bruno • Hace 2h</p>
+                                </div>
+                            </div>
+                            <button class="bg-bg-paper text-ink p-4 rounded-full shadow-hard-sm border border-ink/5 group-hover:bg-purple group-hover:text-white transition-all">
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                        </div>
+
+                        <!-- Empty State Example -->
+                        <div class="border-4 border-dashed border-ink/5 rounded-card p-10 flex flex-col items-center justify-center gap-4 opacity-30">
+                            <span class="material-symbols-outlined text-5xl">history</span>
+                            <p class="font-bold uppercase tracking-widest text-sm">Fin del historial</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

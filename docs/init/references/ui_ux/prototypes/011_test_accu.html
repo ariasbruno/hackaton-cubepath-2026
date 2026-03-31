@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Acusación - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "secondary": "#4D9DE0",
+                        "accent": "#87C38F",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '8px 8px 0px rgba(43, 45, 66, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes spotlight {
+            0% { opacity: 0; transform: scale(0.8); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        @keyframes reveal-bg-red {
+            0% { background-color: #2B2D42; }
+            100% { background-color: #E63946; }
+        }
+        @keyframes shake-hit {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-15px, -15px); }
+            30% { transform: translate(15px, 15px); }
+            50% { transform: translate(-15px, 15px); }
+            70% { transform: translate(15px, -15px); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes uncover {
+            0% { filter: blur(15px) grayscale(1); opacity: 0.5; }
+            100% { filter: blur(0) grayscale(0); opacity: 1; }
+        }
+        @keyframes question-out {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        @keyframes name-in {
+            0% { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes stamp {
+            0% { transform: scale(5); opacity: 0; }
+            100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+        }
+        @keyframes fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes target-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .animate-spotlight { animation: spotlight 1s ease-out forwards; }
+        .scene-bg { animation: reveal-bg-red 0.4s 3s forwards; background-color: #2B2D42; }
+        .hit-shake { animation: shake-hit 0.3s 3s ease-in-out; }
+        .avatar-hidden { filter: blur(15px) grayscale(1); opacity: 0.5; }
+        .avatar-reveal { animation: uncover 0.4s 3s forwards; }
+        .question-mark { animation: question-out 0.4s 3s forwards; }
+        .name-reveal { opacity: 0; animation: name-in 0.4s 3.2s forwards; }
+        .stamp-reveal { opacity: 0; animation: stamp 0.4s 4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .word-reveal { opacity: 0; animation: name-in 0.5s 4.5s forwards; }
+        .animate-target { animation: target-pulse 1.5s infinite; }
+        
+        .pattern-checkers {
+            background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25px, transparent 25px, transparent 50px, rgba(0, 0, 0, 0.1) 50px, rgba(0, 0, 0, 0.1) 75px, transparent 75px, transparent 100px);
+        }
+        .delay-1 { animation-delay: 1s; }
+    </style>
+</head>
+<body class="scene-bg text-white font-body min-h-screen flex flex-col items-center justify-center overflow-hidden relative">
+    
+    <div class="absolute inset-0 pattern-checkers opacity-20 pointer-events-none"></div>
+
+    <main class="relative z-10 flex flex-col items-center gap-12 w-full max-w-lg p-6 hit-shake">
+        <!-- Fase 1: El Título -->
+        <div class="text-center space-y-2 relative h-24">
+            <div style="animation: fade-out 0.3s 3s forwards">
+                <p class="font-mono text-xs md:text-sm uppercase tracking-[0.4em] text-danger animate-pulse">
+                    Analizando acusación...
+                </p>
+            </div>
+            <h1 class="font-display font-bold text-4xl md:text-5xl uppercase tracking-tighter opacity-0 animate-spotlight delay-1 absolute inset-0 w-full" style="animation: spotlight 1s 1s ease-out forwards, fade-out 0.3s 3s forwards">
+                OBJETIVOS FIJADOS
+            </h1>
+            <div class="stamp-reveal absolute top-0 w-[110vw] max-w-xl left-1/2 -translate-x-1/2 flex justify-center">
+                <h1 class="font-display font-black text-4xl md:text-5xl uppercase leading-none text-white drop-shadow-2xl">
+                    VÍNCULO EXPUESTO
+                </h1>
+            </div>
+        </div>
+
+        <!-- Fase 2: Revelación de Jugadores -->
+        <div class="w-full flex items-center justify-center gap-16 relative">
+            <!-- Jugador 1 -->
+            <div class="flex flex-col items-center gap-4">
+                <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center">
+                    <div class="absolute -inset-4" style="animation: fade-out 0.3s 3s forwards">
+                        <div class="absolute inset-0 border-4 border-danger rounded-full border-dashed animate-target"></div>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center text-6xl font-display text-white z-20 question-mark font-bold drop-shadow-lg">
+                        ?
+                    </div>
+                    <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-white/10 border-4 border-ink shadow-hard avatar-hidden avatar-reveal relative z-10 flex items-center justify-center bg-primary">
+                        <span class="text-6xl">🐱</span>
+                    </div>
+                </div>
+                <p class="font-display font-bold text-lg md:text-xl uppercase tracking-widest name-reveal">Félix</p>
+            </div>
+
+            <div class="font-display text-4xl text-white italic name-reveal opacity-0">&</div>
+
+            <!-- Jugador 2 -->
+            <div class="flex flex-col items-center gap-4">
+                <div class="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center">
+                    <div class="absolute -inset-4" style="animation: fade-out 0.3s 3s forwards">
+                        <div class="absolute inset-0 border-4 border-danger rounded-full border-dashed animate-target"></div>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center text-6xl font-display text-white z-20 question-mark font-bold drop-shadow-lg">
+                        ?
+                    </div>
+                    <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-white/10 border-4 border-ink shadow-hard avatar-hidden avatar-reveal relative z-10 flex items-center justify-center bg-secondary">
+                        <span class="text-6xl">🦊</span>
+                    </div>
+                </div>
+                <p class="font-display font-bold text-lg md:text-xl uppercase tracking-widest name-reveal">Ana</p>
+            </div>
+        </div>
+
+        <!-- Fase 3: Sello y Palabra -->
+        <div class="flex flex-col items-center gap-8 mt-2">
+            <div class="stamp-reveal">
+                <div class="whitespace-nowrap bg-white text-danger px-8 py-3 border-4 border-ink/5 shadow-[8px_8px_0px_rgba(43,45,66,0.3)] rounded-2xl rotate-[-5deg]">
+                    <p class="font-display font-black text-3xl md:text-4xl uppercase leading-none">
+                        ¡VÍNCULO CAZADO!
+                    </p>
+                </div>
+            </div>
+            
+            <div class="word-reveal">
+                <div class="bg-white text-purple px-10 py-4 border-4 border-ink/5 shadow-hard rounded-2xl rotate-2">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-purple/40 mb-1 text-center">
+                        Palabra Compartida
+                    </p>
+                    <p class="font-display font-black text-4xl md:text-5xl uppercase leading-none text-purple">
+                        RAYO
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-sm md:text-base font-medium text-white/60 leading-relaxed px-8 pt-8 text-center opacity-0" style="animation: name-in 0.5s 5s forwards">
+            Los Dispersos han triunfado en el Caos. <br />
+            La conexión fue destruida.
+        </p>
+    </main>
+
+    <!-- Botón para continuar -->
+    <footer class="absolute bottom-10 w-full max-w-xs px-6 opacity-0 word-reveal" style="animation-delay: 5.5s">
+        <a href="09_Results_Points.html" class="w-full block bg-white text-ink font-display text-2xl py-5 rounded-xl shadow-hard hover:translate-y-1 active:translate-y-2 active:shadow-none transition-all text-center uppercase tracking-widest">
+            Continuar
+        </a>
+    </footer>
+
+</body>
+</html>

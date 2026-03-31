@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Sala - Paso 1 (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .sidebar-item:hover { transform: translateX(4px); }
+        .paper-card { transition: all 0.1s ease; }
+        .paper-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15); }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex flex-col relative overflow-hidden pattern-dots">
+
+    <!-- Top Header -->
+    <header class="h-24 bg-white/80 backdrop-blur-md border-b-4 border-ink/5 px-10 flex items-center justify-between shrink-0 z-30 shadow-sm">
+        <div class="flex items-center gap-8">
+            <a href="02_Rooms_Desktop.html" class="flex items-center gap-3 group">
+                <div class="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-hard-sm border-2 border-ink group-hover:bg-danger group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-2xl font-bold">close</span>
+                </div>
+                <span class="font-display text-xl uppercase tracking-tight text-ink group-hover:text-danger transition-colors">Salir</span>
+            </a>
+            <div class="h-8 w-px bg-ink/10"></div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary border-2 border-ink rounded-lg flex items-center justify-center text-white shadow-hard-sm rotate-3">
+                    <span class="material-symbols-outlined text-xl">add_circle</span>
+                </div>
+                <h1 class="font-display text-2xl text-ink uppercase tracking-tight">Configuración de Sala</h1>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-12">
+            <div class="flex flex-col items-end">
+                <div class="flex gap-2 mb-1">
+                    <div class="w-10 h-2 bg-primary rounded-full shadow-sm"></div>
+                    <div class="w-10 h-2 bg-ink/10 rounded-full"></div>
+                    <div class="w-10 h-2 bg-ink/10 rounded-full"></div>
+                    <div class="w-10 h-2 bg-ink/10 rounded-full"></div>
+                </div>
+                <span class="font-display text-primary text-xs uppercase tracking-widest font-bold">Paso 1 de 4</span>
+            </div>
+            <div class="w-14 h-14 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Centered -->
+    <main class="flex-1 overflow-y-auto no-scrollbar py-16 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col items-center">
+                
+                <div class="max-w-4xl w-full">
+                <div class="text-center mb-12">
+                    <h3 class="font-display text-5xl mb-4 uppercase tracking-tight leading-none">¿Cómo Jugamos?</h3>
+                    <p class="text-sm text-ink/40 font-bold uppercase tracking-widest">Elige el tipo de conexión para tu partida</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 mb-12">
+                    <!-- Option Local -->
+                    <label class="block relative cursor-pointer group">
+                        <input type="radio" name="connectivity" class="peer hidden" checked>
+                        <div class="h-full bg-white p-10 rounded-card border-4 border-ink/5 shadow-hard peer-checked:border-primary peer-checked:bg-primary-muted transition-all paper-card flex flex-col items-center text-center gap-8 hover:bg-white group-hover:border-primary/40">
+                            <div class="w-32 h-32 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner-hard">
+                                <span class="material-symbols-outlined text-7xl">smartphone</span>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-3xl uppercase mb-3">Modo Local</h4>
+                                <p class="text-xs font-bold text-ink/40 uppercase leading-relaxed max-w-[240px]">Un solo teléfono en la mesa para jugar con amigos en persona.</p>
+                            </div>
+                        </div>
+                        <!-- Selection Indicator -->
+                        <div class="absolute -top-3 -right-3 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center border-4 border-white shadow-hard opacity-0 peer-checked:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-2xl">check</span>
+                        </div>
+                    </label>
+
+                    <!-- Option Online -->
+                    <label class="block relative cursor-pointer group">
+                        <input type="radio" name="connectivity" class="peer hidden">
+                        <div class="h-full bg-white p-10 rounded-card border-4 border-ink/5 shadow-hard peer-checked:border-secondary peer-checked:bg-secondary-muted transition-all paper-card flex flex-col items-center text-center gap-8 hover:bg-white group-hover:border-secondary/40">
+                            <div class="w-32 h-32 bg-secondary/10 text-secondary rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner-hard">
+                                <span class="material-symbols-outlined text-7xl">language</span>
+                            </div>
+                            <div>
+                                <h4 class="font-display text-3xl uppercase mb-3">Modo Online</h4>
+                                <p class="text-xs font-bold text-ink/40 uppercase leading-relaxed max-w-[240px]">Cada uno con su móvil a través de internet. ¡Juega desde cualquier lugar!</p>
+                            </div>
+                        </div>
+                        <!-- Selection Indicator -->
+                        <div class="absolute -top-3 -right-3 w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center border-4 border-white shadow-hard opacity-0 peer-checked:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-2xl">check</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="flex justify-end">
+                    <a href="03_Create_Step2_Desktop.html" class="px-16 bg-primary text-white font-display text-3xl py-6 rounded-btn shadow-hard-lg hover:translate-y-1 hover:shadow-hard active:translate-y-2 active:shadow-none transition-all uppercase tracking-widest text-center">
+                        Siguiente
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

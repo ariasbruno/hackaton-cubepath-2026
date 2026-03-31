@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoria del Impostor - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "danger-muted": "#FFF0F1",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "ink-muted": "#8D8FA1",
+                        "bg-paper": "#FDFBF7",
+                        "sticky-yellow": "#FFD166",
+                        "yellow-muted": "#FFF9E5",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka One", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .paper-tear {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 85% 92%, 75% 100%, 65% 92%, 55% 100%, 45% 92%, 35% 100%, 25% 92%, 15% 100%, 5% 92%, 0% 100%);
+        }
+        .pattern-checkers {
+            background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 25px, transparent 25px, transparent 50px, rgba(0, 0, 0, 0.05) 50px, rgba(0, 0, 0, 0.05) 75px, transparent 75px, transparent 100px);
+        }
+    </style>
+</head>
+<body class="bg-danger text-white font-body min-h-screen flex flex-col items-center justify-center p-6 text-center pattern-checkers">
+
+    <main class="w-full max-w-lg flex flex-col items-center gap-8">
+        <h1 class="font-display text-4xl md:text-5xl uppercase tracking-widest drop-shadow-lg leading-tight rotate-[-2deg]">
+            ¡EL IMPOSTOR HA ENGAÑADO A TODOS!
+        </h1>
+
+        <div class="bg-white w-full paper-tear shadow-hard-lg p-10 pb-16 relative">
+            <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-danger text-white px-8 py-2 rounded-full font-display text-2xl shadow-hard border-4 border-white">VICTORIA</div>
+            
+            <div class="flex flex-col items-center mt-6">
+                <div class="w-32 h-32 bg-danger rounded-full border-4 border-ink shadow-hard flex items-center justify-center mb-6 relative">
+                    <span class="material-symbols-outlined text-[80px] text-white">psychology</span>
+                    <div class="absolute -bottom-2 -right-2 bg-white text-danger w-10 h-10 rounded-full border-2 border-danger flex items-center justify-center shadow-hard-sm">
+                        <span class="material-symbols-outlined text-xl">done_all</span>
+                    </div>
+                </div>
+                <h2 class="font-display text-4xl text-ink mb-2">BRUNO</h2>
+                <p class="text-ink/40 font-bold uppercase tracking-widest text-xs mb-8">El Genio del Engaño</p>
+                
+                <div class="w-full space-y-3">
+                    <div class="flex justify-between items-center bg-danger-muted p-4 rounded-btn border-2 border-danger/10">
+                        <span class="text-danger font-bold uppercase tracking-tighter text-sm">Supervivencia</span>
+                        <span class="text-danger font-display text-2xl">+500</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-danger-muted p-4 rounded-btn border-2 border-danger/10">
+                        <span class="text-danger font-bold uppercase tracking-tighter text-sm">Votos desviados</span>
+                        <span class="text-danger font-display text-2xl">+250</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-4 w-full">
+            <button class="w-full bg-white text-danger font-display text-2xl py-5 rounded-btn shadow-hard-lg active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest">
+                Ver Puntuaciones
+            </button>
+            <button class="w-full bg-ink text-white font-display text-lg py-4 rounded-btn shadow-hard active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest">
+                Volver al Lobby
+            </button>
+        </div>
+    </main>
+
+</body>
+</html>

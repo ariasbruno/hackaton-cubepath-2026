@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Sala - Paso 2 (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .sidebar-item:hover { transform: translateX(4px); }
+        .paper-card { transition: all 0.1s ease; }
+        .paper-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15); }
+        
+        #modal { transition: opacity 0.3s ease; }
+        .modal-hidden { opacity: 0; pointer-events: none; }
+        .modal-content { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .modal-hidden .modal-content { transform: scale(0.9) translateY(20px); }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex flex-col relative overflow-hidden pattern-dots">
+
+    <!-- Top Header -->
+    <header class="h-24 bg-white/80 backdrop-blur-md border-b-4 border-ink/5 px-10 flex items-center justify-between shrink-0 z-30 shadow-sm">
+        <div class="flex items-center gap-8">
+            <a href="02_Rooms_Desktop.html" class="flex items-center gap-3 group">
+                <div class="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-hard-sm border-2 border-ink group-hover:bg-danger group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-2xl font-bold">close</span>
+                </div>
+                <span class="font-display text-xl uppercase tracking-tight text-ink group-hover:text-danger transition-colors">Salir</span>
+            </a>
+            <div class="h-8 w-px bg-ink/10"></div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary border-2 border-ink rounded-lg flex items-center justify-center text-white shadow-hard-sm rotate-3">
+                    <span class="material-symbols-outlined text-xl">add_circle</span>
+                </div>
+                <h1 class="font-display text-2xl text-ink uppercase tracking-tight">Configuración de Sala</h1>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-12">
+            <div class="flex flex-col items-end">
+                <div class="flex gap-2 mb-1">
+                    <div class="w-10 h-2 bg-accent rounded-full shadow-sm"></div>
+                    <div class="w-10 h-2 bg-primary rounded-full shadow-sm"></div>
+                    <div class="w-10 h-2 bg-ink/10 rounded-full"></div>
+                    <div class="w-10 h-2 bg-ink/10 rounded-full"></div>
+                </div>
+                <span class="font-display text-primary text-xs uppercase tracking-widest font-bold">Paso 2 de 4</span>
+            </div>
+            <div class="w-14 h-14 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Centered -->
+    <main class="flex-1 overflow-y-auto no-scrollbar py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col items-center">
+                
+                <div class="max-w-5xl w-full">
+                <div class="text-center mb-12">
+                    <h3 class="font-display text-5xl mb-4 uppercase tracking-tight leading-none">Elegí el Tema</h3>
+                    <p class="text-sm text-ink/40 font-bold uppercase tracking-widest">Toca una categoría para ver subtemas y personalizar tu mazo</p>
+                </div>
+
+                <!-- Category Grid -->
+                <div class="grid grid-cols-4 gap-6 mb-12">
+                    <button onclick="openModal('Comida', 'restaurant', 'secondary')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-secondary paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-secondary/10 text-secondary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">restaurant</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Comida</p>
+                    </button>
+
+                    <button onclick="openModal('Cine', 'movie', 'primary')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-primary paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-primary/10 text-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">movie</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Cine</p>
+                    </button>
+
+                    <button onclick="openModal('Animales', 'pets', 'accent')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-accent paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">pets</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Animales</p>
+                    </button>
+
+                    <button onclick="openModal('Mundo', 'travel_explore', 'purple')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-purple paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-purple/10 text-purple rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">travel_explore</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Mundo</p>
+                    </button>
+                    
+                    <button onclick="openModal('Deportes', 'sports_soccer', 'secondary')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-secondary paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-secondary/10 text-secondary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">sports_soccer</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Deportes</p>
+                    </button>
+
+                    <button onclick="openModal('Ciencia', 'science', 'primary')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-primary paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-primary/10 text-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">science</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Ciencia</p>
+                    </button>
+
+                    <button onclick="openModal('Historia', 'history_edu', 'accent')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-accent paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">history_edu</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Historia</p>
+                    </button>
+
+                    <button onclick="openModal('Música', 'music_note', 'purple')" class="bg-white p-8 rounded-card border-4 border-ink/5 shadow-hard hover:border-purple paper-card flex flex-col items-center gap-4 group transition-all">
+                        <div class="w-24 h-24 bg-purple/10 text-purple rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard">
+                            <span class="material-symbols-outlined text-5xl">music_note</span>
+                        </div>
+                        <p class="font-display text-2xl uppercase tracking-tight">Música</p>
+                    </button>
+                </div>
+
+                <div class="bg-ink/5 p-8 rounded-card text-center border-4 border-dashed border-ink/10">
+                    <p class="font-display text-xl text-ink/30 uppercase tracking-widest">Selecciona un tema para continuar</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Desktop Modal -->
+    <div id="modal" class="absolute inset-0 bg-ink/40 backdrop-blur-sm z-50 flex items-center justify-center modal-hidden">
+        <div class="bg-bg-paper w-full max-w-lg rounded-card border-4 border-ink shadow-hard-lg p-10 modal-content relative">
+            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-hard-sm border-2 border-ink active:translate-y-0.5 transition-all">
+                <span class="material-symbols-outlined text-ink">close</span>
+            </button>
+
+            <div class="flex items-center gap-6 mb-10">
+                <div id="modal-icon-bg" class="w-20 h-20 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center shadow-inner-hard">
+                    <span id="modal-icon" class="material-symbols-outlined text-5xl">restaurant</span>
+                </div>
+                <div>
+                    <h3 id="modal-title" class="font-display text-4xl uppercase tracking-tight text-secondary">Categoría</h3>
+                    <p class="text-xs font-bold text-ink/40 uppercase tracking-widest mt-1">Configura los subtemas</p>
+                </div>
+            </div>
+
+            <!-- Subcategories Switches -->
+            <div class="space-y-4 mb-10">
+                <label class="flex justify-between items-center bg-white p-6 rounded-btn border-2 border-ink/5 shadow-hard-sm cursor-pointer hover:bg-white transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent/10 text-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-2xl">check_circle</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-lg uppercase tracking-wide">Subcategoría A</span>
+                            <p class="text-[10px] font-bold text-ink/40 uppercase">Palabras básicas y comunes</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" checked class="hidden peer">
+                    <div class="w-16 h-9 bg-ink/10 peer-checked:bg-accent rounded-full relative transition-colors shadow-inner">
+                        <div class="w-7 h-7 bg-white rounded-full absolute top-1 left-1 peer-checked:left-8 shadow-md transition-all"></div>
+                    </div>
+                </label>
+
+                <label class="flex justify-between items-center bg-white p-6 rounded-btn border-2 border-ink/5 shadow-hard-sm cursor-pointer hover:bg-white transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent/10 text-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-2xl">check_circle</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-lg uppercase tracking-wide">Subcategoría B</span>
+                            <p class="text-[10px] font-bold text-ink/40 uppercase">Conceptos avanzados</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="hidden peer">
+                    <div class="w-16 h-9 bg-ink/10 peer-checked:bg-accent rounded-full relative transition-colors shadow-inner">
+                        <div class="w-7 h-7 bg-white rounded-full absolute top-1 left-1 peer-checked:left-8 shadow-md transition-all"></div>
+                    </div>
+                </label>
+            </div>
+
+            <a href="03_Create_Step3_Desktop.html" class="w-full block bg-primary text-white font-display text-3xl py-6 rounded-btn shadow-hard-lg hover:translate-y-1 hover:shadow-hard active:translate-y-2 active:shadow-none transition-all uppercase tracking-widest text-center">
+                Confirmar
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const titleEl = document.getElementById('modal-title');
+        const iconEl = document.getElementById('modal-icon');
+        const iconBgEl = document.getElementById('modal-icon-bg');
+
+        function openModal(title, icon, colorClass) {
+            titleEl.innerText = title;
+            iconEl.innerText = icon;
+            
+            const colors = {
+                'secondary': { text: '#4D9DE0', bg: 'rgba(77, 157, 224, 0.1)' },
+                'primary': { text: '#FF8C42', bg: 'rgba(255, 140, 66, 0.1)' },
+                'accent': { text: '#87C38F', bg: 'rgba(135, 195, 143, 0.1)' },
+                'purple': { text: '#9D4EDD', bg: 'rgba(157, 78, 221, 0.1)' }
+            }[colorClass];
+            
+            titleEl.style.color = colors.text;
+            iconEl.style.color = colors.text;
+            iconBgEl.style.backgroundColor = colors.bg;
+
+            modal.classList.remove('modal-hidden');
+        }
+
+        function closeModal() {
+            modal.classList.add('modal-hidden');
+        }
+    </script>
+
+</body>
+</html>

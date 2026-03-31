@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspenso Impostor - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "secondary": "#4D9DE0",
+                        "accent": "#87C38F",
+                        "danger": "#E63946",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '8px 8px 0px rgba(43, 45, 66, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes spotlight {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes reveal-bg-red {
+            0% { background-color: #2B2D42; }
+            100% { background-color: #E63946; }
+        }
+        @keyframes shake-hit {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-15px, -15px); }
+            30% { transform: translate(15px, 15px); }
+            50% { transform: translate(-15px, 15px); }
+            70% { transform: translate(15px, -15px); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes uncover {
+            0% { filter: blur(20px) grayscale(1); opacity: 0.5; }
+            100% { filter: blur(0) grayscale(0); opacity: 1; }
+        }
+        @keyframes question-out {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        @keyframes title-swap-out {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-30px); }
+        }
+        @keyframes title-swap-in {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes stamp {
+            0% { transform: scale(5); opacity: 0; }
+            100% { transform: scale(1) rotate(-8deg); opacity: 1; }
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10px) rotate(0); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .scene-bg { animation: reveal-bg-red 0.4s 3s forwards; background-color: #2B2D42; }
+        .hit-shake { animation: shake-hit 0.3s 3s ease-in-out; }
+        
+        .avatar-hidden { filter: blur(20px) grayscale(1); opacity: 0.5; }
+        .avatar-reveal { animation: uncover 0.4s 3s forwards; }
+        
+        .question-mark { animation: question-out 0.4s 3s forwards; }
+        
+        .title-out { animation: title-swap-out 0.3s 3s forwards; }
+        .title-in { opacity: 0; animation: title-swap-in 0.4s 3.2s forwards; }
+        
+        .stamp-reveal { opacity: 0; animation: stamp 0.4s 4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .info-reveal { opacity: 0; animation: title-swap-in 0.5s 4.5s forwards; }
+
+        .confetti {
+            position: absolute; width: 10px; height: 10px; background: #FFD166;
+            opacity: 0; animation: confetti-fall 4s 3.2s linear infinite;
+        }
+
+        .pattern-dots {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body class="scene-bg text-white font-body min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    
+    <div class="absolute inset-0 pattern-dots opacity-20"></div>
+
+    <!-- Partículas de Confeti (Solo aparecen tras el golpe) -->
+    <div class="confetti" style="left: 10%; animation-delay: 3.2s"></div>
+    <div class="confetti" style="left: 25%; animation-delay: 3.5s; background: #FF8C42"></div>
+    <div class="confetti" style="left: 45%; animation-delay: 3.8s"></div>
+    <div class="confetti" style="left: 65%; animation-delay: 3.3s; background: #FF8C42"></div>
+    <div class="confetti" style="left: 85%; animation-delay: 3.6s"></div>
+
+    <main class="relative z-10 flex flex-col items-center gap-16 w-full max-w-lg p-6 hit-shake">
+        
+        <!-- Fase 1: Transición de Título -->
+        <div class="text-center h-32 flex flex-col justify-center overflow-hidden">
+            <p class="font-display text-xl uppercase tracking-[0.4em] text-white/40 animate-pulse">Analizando veredicto...</p>
+            <div class="relative h-20 w-full flex items-center justify-center">
+                <h1 class="font-display text-6xl uppercase tracking-tighter opacity-0 animate-spotlight title-out absolute whitespace-nowrap">
+                    VEREDICTO FINAL
+                </h1>
+                <h1 class="font-display text-6xl uppercase tracking-tighter title-in absolute text-white drop-shadow-2xl whitespace-nowrap">
+                    ¡ATRAPADO!
+                </h1>
+            </div>
+        </div>
+
+        <!-- Fase 2: El Sospechoso -->
+        <div class="relative">
+            <!-- Aura de peligro -->
+            <div class="absolute inset-0 bg-danger/20 blur-3xl rounded-full scale-150 animate-pulse"></div>
+            
+            <div class="relative w-64 h-64 flex items-center justify-center">
+                <!-- Pregunta inicial -->
+                <div class="absolute inset-0 flex items-center justify-center text-9xl font-display text-white z-20 question-mark">?</div>
+                
+                <!-- Avatar -->
+                <div class="w-56 h-56 rounded-full overflow-hidden bg-white/10 border-8 border-ink shadow-hard-lg avatar-hidden avatar-reveal relative z-10">
+                    <div class="w-full h-full bg-primary flex items-center justify-center">
+                        <span class="text-[120px]">🐱</span>
+                    </div>
+                </div>
+
+                <!-- Sello de Culpable -->
+                <div class="absolute -bottom-4 -right-8 z-30 stamp-reveal">
+                    <div class="bg-white text-danger px-8 py-4 border-4 border-ink shadow-hard-lg rounded-xl rotate-[-8deg]">
+                        <p class="font-display text-5xl uppercase leading-none">¡CULPABLE!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fase 3: Resolución -->
+        <div class="text-center space-y-4">
+            <h2 class="font-display text-4xl uppercase tracking-widest opacity-0 title-in" style="animation-delay: 3.5s">
+                BRUNO
+            </h2>
+            <div class="opacity-0 info-reveal">
+                <div class="bg-white/10 backdrop-blur-md px-8 py-3 rounded-full border-2 border-white/20 inline-block">
+                    <p class="text-sm font-bold uppercase tracking-[0.2em]">Era el Impostor de la sala</p>
+                </div>
+                <div class="mt-6">
+                    <p class="text-primary font-display text-2xl uppercase tracking-tighter">+100 PTS PARA AGENTES</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Botón para continuar -->
+    <footer class="absolute bottom-12 w-full max-w-xs px-6 opacity-0 info-reveal">
+        <a href="09_Results_Points.html" class="w-full block bg-white text-ink font-display text-2xl py-5 rounded-xl shadow-hard hover:translate-y-1 active:translate-y-2 active:shadow-none transition-all text-center uppercase tracking-widest">
+            Ver Resultados
+        </a>
+    </footer>
+
+</body>
+</html>

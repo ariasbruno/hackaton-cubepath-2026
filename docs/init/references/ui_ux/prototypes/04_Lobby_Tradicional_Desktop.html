@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby Tradicional (Desktop) - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .pattern-checkers {
+            background-image: repeating-linear-gradient(45deg, rgba(43, 45, 66, 0.05) 25px, transparent 25px, transparent 50px, rgba(43, 45, 66, 0.05) 50px, rgba(43, 45, 66, 0.05) 75px, transparent 75px, transparent 100px);
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .paper-card { transition: all 0.1s ease; }
+        .paper-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15); }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex flex-col relative overflow-hidden pattern-dots">
+
+    <!-- Top Header -->
+    <header class="h-24 bg-white/80 backdrop-blur-md border-b-4 border-ink/5 px-10 flex items-center justify-between shrink-0 z-30 shadow-sm">
+        <div class="flex items-center gap-8">
+            <a href="02_Rooms_Desktop.html" class="flex items-center gap-3 group">
+                <div class="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-hard-sm border-2 border-ink group-hover:bg-danger group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-2xl font-bold">close</span>
+                </div>
+                <span class="font-display text-xl uppercase tracking-tight text-ink group-hover:text-danger transition-colors">Salir</span>
+            </a>
+            <div class="h-8 w-px bg-ink/10"></div>
+            <div class="flex items-center gap-3">
+                <div class="bg-primary text-white px-4 py-1 rounded-full shadow-hard-sm font-display text-xs uppercase tracking-widest rotate-[-2deg] border-2 border-ink flex items-center gap-2">
+                    <span class="material-symbols-outlined text-xs">person_search</span>
+                    Tradicional
+                </div>
+                <h1 class="font-display text-2xl text-ink uppercase tracking-tight">Sala de Espera</h1>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <div class="text-right mr-2">
+                <p class="text-[10px] font-bold text-ink/40 uppercase tracking-widest leading-none mb-1">Host de la Sala</p>
+                <p class="font-display text-lg text-ink uppercase leading-none">Felix_The_Cat</p>
+            </div>
+            <div class="w-14 h-14 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden relative">
+        <!-- Center Content: Code & Players -->
+        <div class="flex-1 overflow-y-auto no-scrollbar p-12">
+            <div class="max-w-4xl mx-auto space-y-12">
+                
+                <!-- Room Code Card -->
+                <div class="flex flex-col items-center">
+                    <div class="bg-sticky-yellow text-ink px-16 py-10 shadow-hard-lg flex flex-col items-center justify-center relative w-full max-w-md pattern-checkers rotate-[0.5deg] border-4 border-ink" style="border-radius: 4px 4px 60px 4px; clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 92% 100%, 0% 100%);">
+                        <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-48 h-12 bg-white/30 -rotate-1 shadow-sm border-l border-r border-white/40 backdrop-blur-sm"></div>
+                        <p class="font-display text-2xl opacity-40 mb-2 uppercase tracking-[0.2em] leading-none">Código de Sala</p>
+                        <h1 class="font-mono text-7xl font-bold tracking-[0.3em] border-b-8 border-ink/10 pb-2 border-dashed uppercase text-ink">A4B2</h1>
+                        <div class="mt-6 flex gap-4">
+                            <button class="bg-white/50 hover:bg-white p-3 rounded-xl border-2 border-ink/10 transition-all flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
+                                <span class="material-symbols-outlined text-xl">content_copy</span>
+                                Copiar
+                            </button>
+                            <button class="bg-white/50 hover:bg-white p-3 rounded-xl border-2 border-ink/10 transition-all flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
+                                <span class="material-symbols-outlined text-xl">share</span>
+                                Compartir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Grid -->
+                <section>
+                    <div class="flex justify-between items-end mb-10 border-b-4 border-ink/5 pb-4">
+                        <div class="flex items-center gap-4">
+                            <h2 class="font-display text-4xl uppercase tracking-tight text-ink">Jugadores</h2>
+                            <span class="bg-primary text-white text-lg font-display px-6 py-1 rounded-full shadow-hard-sm border-2 border-ink uppercase">5 / 12</span>
+                        </div>
+                        <p class="text-sm font-bold text-ink/40 uppercase tracking-widest italic">Esperando a que todos estén listos...</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-4 gap-10">
+                        <!-- Host Card -->
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="relative group">
+                                <div class="w-32 h-32 bg-primary rounded-full border-8 border-ink shadow-hard flex items-center justify-center relative overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-primary/10 animate-pulse"></div>
+                                </div>
+                                <div class="absolute -bottom-2 -right-2 bg-ink text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border-2 border-white shadow-hard-sm">
+                                    Host
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-display text-xl uppercase text-ink">Felix_The_Cat</p>
+                                <p class="text-[10px] font-bold text-primary uppercase tracking-widest">¡Listo!</p>
+                            </div>
+                        </div>
+
+                        <!-- Player 2 -->
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="relative group">
+                                <div class="w-32 h-32 bg-secondary rounded-full border-8 border-white shadow-hard flex items-center justify-center relative overflow-hidden transition-all group-hover:scale-105">
+                                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Ana" alt="Avatar" class="w-full h-full object-cover">
+                                </div>
+                                <div class="absolute -top-2 -right-2 bg-white rounded-full border-4 border-secondary p-1 shadow-hard-sm">
+                                    <span class="material-symbols-outlined text-secondary text-2xl font-bold">check_circle</span>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-display text-xl uppercase text-ink">Ana_Logic</p>
+                                <p class="text-[10px] font-bold text-secondary uppercase tracking-widest italic">Preparada</p>
+                            </div>
+                        </div>
+
+                        <!-- Player 3 -->
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="relative group">
+                                <div class="w-32 h-32 bg-accent rounded-full border-8 border-white shadow-hard flex items-center justify-center relative overflow-hidden transition-all group-hover:scale-105">
+                                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Luis" alt="Avatar" class="w-full h-full object-cover">
+                                </div>
+                                <div class="absolute -top-2 -right-2 bg-white rounded-full border-4 border-secondary p-1 shadow-hard-sm">
+                                    <span class="material-symbols-outlined text-secondary text-2xl font-bold">check_circle</span>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-display text-xl uppercase text-ink">Luis_Robot</p>
+                                <p class="text-[10px] font-bold text-secondary uppercase tracking-widest italic">Preparado</p>
+                            </div>
+                        </div>
+
+                        <!-- Player 4 (Not Ready) -->
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="relative group">
+                                <div class="w-32 h-32 bg-purple/20 rounded-full border-8 border-white border-dashed shadow-hard flex items-center justify-center relative overflow-hidden opacity-60">
+                                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Sofi" alt="Avatar" class="w-full h-full object-cover grayscale">
+                                </div>
+                                <div class="absolute -top-2 -right-2 bg-white rounded-full border-4 border-ink/10 p-1 shadow-hard-sm">
+                                    <span class="material-symbols-outlined text-ink/20 text-2xl font-bold">pending</span>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-display text-xl uppercase text-ink/40">Sofi_Space</p>
+                                <p class="text-[10px] font-bold text-ink/20 uppercase tracking-widest">Escribiendo...</p>
+                            </div>
+                        </div>
+
+                        <!-- Invitation Slot -->
+                        <div class="flex flex-col items-center gap-4 cursor-pointer group">
+                            <div class="w-32 h-32 bg-ink/5 rounded-full border-4 border-dashed border-ink/10 flex items-center justify-center group-hover:border-primary/40 group-hover:bg-primary-muted transition-all paper-card">
+                                <span class="material-symbols-outlined text-5xl text-ink/20 group-hover:text-primary transition-colors">person_add</span>
+                            </div>
+                            <p class="font-display text-lg uppercase text-ink/20 group-hover:text-primary transition-colors">Invitar</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Right Side: Chat Panel -->
+        <aside class="w-96 bg-white border-l-4 border-ink/5 flex flex-col shadow-2xl z-20">
+            <div class="p-6 border-b-2 border-ink/5 flex items-center justify-between bg-white">
+                <h2 class="font-display text-xl uppercase tracking-tight text-primary flex items-center gap-2">
+                    <span class="material-symbols-outlined">chat</span>
+                    Chat de Sala
+                </h2>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-ink/40 uppercase tracking-widest">Online</span>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar bg-bg-paper/30">
+                <!-- System Message -->
+                <div class="flex justify-center">
+                    <span class="bg-ink/5 text-[10px] font-bold text-ink/40 px-4 py-1 rounded-full uppercase tracking-widest">Felix_The_Cat creó la sala</span>
+                </div>
+
+                <!-- Message Left -->
+                <div class="flex gap-3 items-start">
+                    <div class="w-10 h-10 rounded-full border-2 border-ink shadow-hard-sm shrink-0 overflow-hidden bg-secondary">
+                        <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Ana" class="w-full h-full object-cover">
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-hard-sm border-2 border-ink/5 max-w-[85%] relative">
+                        <p class="text-[10px] font-bold text-secondary uppercase leading-none mb-2">Ana_Logic</p>
+                        <p class="text-sm leading-tight text-ink">¿Listos para perder? Soy la mejor detectando impostores. 🕵️‍♀️</p>
+                        <div class="absolute top-2 -left-2 w-4 h-4 bg-white border-l-2 border-b-2 border-ink/5 rotate-45"></div>
+                    </div>
+                </div>
+
+                <!-- Message Right (Me) -->
+                <div class="flex gap-3 items-start justify-end">
+                    <div class="bg-primary text-white p-4 rounded-2xl shadow-hard-sm border-2 border-ink/5 max-w-[85%] relative text-right">
+                        <p class="text-[10px] font-bold text-white/80 uppercase leading-none mb-2">Tú</p>
+                        <p class="text-sm leading-tight">Eso dijiste la última vez y te eliminamos en ronda 1... 😂</p>
+                        <div class="absolute top-2 -right-2 w-4 h-4 bg-primary rotate-45"></div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full border-2 border-ink shadow-hard-sm shrink-0 overflow-hidden bg-primary">
+                        <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Message Left -->
+                <div class="flex gap-3 items-start">
+                    <div class="w-10 h-10 rounded-full border-2 border-ink shadow-hard-sm shrink-0 overflow-hidden bg-accent">
+                        <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Luis" class="w-full h-full object-cover">
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-hard-sm border-2 border-ink/5 max-w-[85%] relative">
+                        <p class="text-[10px] font-bold text-accent uppercase leading-none mb-2">Luis_Robot</p>
+                        <p class="text-sm leading-tight text-ink">¡Iniciemos ya! El café se me enfría.</p>
+                        <div class="absolute top-2 -left-2 w-4 h-4 bg-white border-l-2 border-b-2 border-ink/5 rotate-45"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-6 bg-white border-t-4 border-ink/5">
+                <div class="relative flex gap-3">
+                    <div class="flex-1 relative">
+                        <input type="text" placeholder="ESCRIBE ALGO..." class="w-full bg-bg-paper border-4 border-ink/5 p-4 pr-12 rounded-xl text-xs font-bold uppercase focus:outline-none focus:border-primary transition-all outline-none">
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6">
+                            <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                                <circle cx="18" cy="18" r="16" fill="none" class="stroke-ink/5" stroke-width="4"></circle>
+                                <circle cx="18" cy="18" r="16" fill="none" class="stroke-primary" stroke-width="4" stroke-dasharray="100" stroke-dashoffset="65"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="bg-primary text-white p-4 rounded-xl shadow-hard border-2 border-ink active:translate-y-1 active:shadow-none transition-all">
+                        <span class="material-symbols-outlined text-2xl font-bold">send</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Bottom Actions (Host Perspective) -->
+    <footer class="h-28 bg-white border-t-4 border-ink/5 px-12 flex items-center justify-between z-30 shadow-lg">
+        <div class="flex items-center gap-10">
+            <div class="flex -space-x-6">
+                <div class="w-14 h-14 rounded-full border-4 border-white shadow-hard overflow-hidden bg-primary rotate-3">
+                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" class="w-full h-full object-cover">
+                </div>
+                <div class="w-14 h-14 rounded-full border-4 border-white shadow-hard overflow-hidden bg-secondary -rotate-2">
+                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Ana" class="w-full h-full object-cover">
+                </div>
+                <div class="w-14 h-14 rounded-full border-4 border-white shadow-hard overflow-hidden bg-accent rotate-2">
+                    <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Luis" class="w-full h-full object-cover">
+                </div>
+                <div class="w-14 h-14 rounded-full bg-bg-paper border-4 border-white shadow-hard flex items-center justify-center font-display text-primary">+2</div>
+            </div>
+            <div class="h-10 w-px bg-ink/10"></div>
+            <div>
+                <p class="text-xs font-bold text-ink/40 uppercase tracking-[0.2em] mb-1">Estado de la Mesa</p>
+                <div class="flex items-center gap-3">
+                    <span class="text-secondary font-display text-xl uppercase italic">3 Listos</span>
+                    <span class="text-ink/20 font-display text-xl uppercase">/ 5 Jugadores</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex gap-6">
+            <button class="px-8 py-4 bg-white border-4 border-ink shadow-hard rounded-xl font-display text-xl uppercase tracking-widest hover:translate-y-0.5 active:shadow-none transition-all flex items-center gap-3">
+                <span class="material-symbols-outlined">settings</span>
+                Config
+            </button>
+            <a href="05_Assign_Agente.html" class="px-16 py-4 bg-primary text-white border-4 border-ink shadow-hard rounded-xl font-display text-2xl uppercase tracking-[0.1em] hover:translate-y-0.5 active:shadow-none transition-all flex items-center gap-4 group">
+                INICIAR PARTIDA
+                <span class="material-symbols-outlined text-3xl font-bold group-hover:rotate-12 transition-transform">play_circle</span>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

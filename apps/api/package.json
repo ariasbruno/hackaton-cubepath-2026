@@ -1,0 +1,32 @@
+{
+  "name": "@impostor/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch run src/index.ts",
+    "start": "bun run src/index.ts",
+    "build": "tsc",
+    "lint": "eslint .",
+    "test": "bun test",
+    "db:push": "bun run scripts/migrate.ts",
+    "db:status": "bun run scripts/status.ts",
+    "db:verify": "bun run scripts/verify-completeness.ts"
+  },
+  "dependencies": {
+    "@impostor/shared": "workspace:*",
+    "@google/genai": "1.46.0",
+    "@hono/zod-validator": "0.4.1",
+    "hono": "4.7.0",
+    "postgres": "3.4.0",
+    "zod": "3.24.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.21.0",
+    "@types/node": "22.13.5",
+    "eslint": "9.21.0",
+    "globals": "15.15.0",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.24.1"
+  }
+}

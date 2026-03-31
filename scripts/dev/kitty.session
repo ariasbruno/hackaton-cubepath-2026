@@ -1,0 +1,17 @@
+# Layout Maestro a la izquierda
+layout tall:bias=50;full_size=1
+
+# Ventana 1: Frontend
+title FRONTEND
+cd apps/web
+launch bash --rcfile ../../scripts/dev/.bashrc_dev
+
+# Ventana 2: API
+title API
+cd apps/api
+launch bash --rcfile ../../scripts/dev/.bashrc_dev
+
+# Ventana 3: Game Server
+title GAME SERVER
+cd apps/game-server
+launch bash --rcfile ../../scripts/dev/.bashrc_dev

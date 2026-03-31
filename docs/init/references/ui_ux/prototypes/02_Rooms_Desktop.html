@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salas Desktop - El Impostor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@200..800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#FF8C42",
+                        "primary-muted": "#FFF0E5",
+                        "secondary": "#4D9DE0",
+                        "secondary-muted": "#EBF5FF",
+                        "accent": "#87C38F",
+                        "accent-muted": "#F0F9F1",
+                        "danger": "#E63946",
+                        "purple": "#9D4EDD",
+                        "purple-muted": "#F5E6FF",
+                        "ink": "#2B2D42",
+                        "bg-paper": "#FDFBF7",
+                        "shadow-col": "rgba(43, 45, 66, 0.15)",
+                        "sticky-yellow": "#FFD166",
+                    },
+                    fontFamily: {
+                        "display": ["Fredoka", "cursive"],
+                        "body": ["Nunito", "sans-serif"],
+                        "mono": ["Varela Round", "monospace"],
+                    },
+                    boxShadow: {
+                        'hard': '4px 4px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-sm': '2px 2px 0px rgba(43, 45, 66, 0.15)',
+                        'hard-lg': '6px 6px 0px rgba(43, 45, 66, 0.15)',
+                        'inner-hard': 'inset 3px 3px 0px rgba(0,0,0,0.1)',
+                    },
+                    borderRadius: {
+                        'card': '24px',
+                        'btn': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .pattern-dots {
+            background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .sidebar-item:hover { transform: translateX(4px); }
+        .paper-card { transition: all 0.1s ease; }
+        .paper-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15); }
+        .sticky-note { transform: rotate(-1deg); transition: all 0.2s ease; }
+        .sticky-note:hover { transform: rotate(0deg) scale(1.02); z-index: 10; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-bg-paper text-ink font-body min-h-screen flex flex-col relative overflow-hidden pattern-dots">
+
+    <!-- Top Header -->
+    <header class="h-24 bg-white/80 backdrop-blur-md border-b-4 border-ink/5 px-10 flex items-center justify-between shrink-0 z-30 shadow-sm">
+        <div class="flex items-center gap-8">
+            <a href="01_Home_Desktop.html" class="flex items-center gap-3 group">
+                <div class="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-hard-sm border-2 border-ink group-hover:bg-danger group-hover:text-white transition-all">
+                    <span class="material-symbols-outlined text-2xl font-bold">close</span>
+                </div>
+                <span class="font-display text-xl uppercase tracking-tight text-ink group-hover:text-danger transition-colors">Salir</span>
+            </a>
+            <div class="h-8 w-px bg-ink/10"></div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary border-2 border-ink rounded-lg flex items-center justify-center text-white shadow-hard-sm rotate-3">
+                    <span class="material-symbols-outlined text-xl">groups</span>
+                </div>
+                <h1 class="font-display text-2xl text-ink uppercase tracking-tight">Salas Disponibles</h1>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <div class="text-right mr-2">
+                <p class="text-[10px] font-bold text-ink/40 uppercase tracking-widest leading-none mb-1">Tu Perfil</p>
+                <p class="font-display text-lg text-ink uppercase leading-none">Felix_The_Cat</p>
+            </div>
+            <div class="w-14 h-14 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/noto-emoji/svg?seed=Felix" alt="Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Centered -->
+    <main class="flex-1 overflow-y-auto no-scrollbar py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-12 gap-10">
+                
+                <!-- Left Column: Public Rooms & Join -->
+                <div class="col-span-8 space-y-12">
+                    
+                    <!-- Join Private Game -->
+                    <section>
+                        <div class="bg-white p-10 rounded-card shadow-hard border-4 border-ink/5 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-10 opacity-5">
+                                <span class="material-symbols-outlined text-[120px]">key</span>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <h3 class="font-display text-2xl uppercase tracking-tight text-ink mb-2">Unirse a Partida Privada</h3>
+                                <p class="text-sm font-bold text-ink/40 uppercase tracking-widest mb-8">Ingresa el código de 4 dígitos proporcionado por el host</p>
+                                
+                                <div class="flex items-center gap-6">
+                                    <div class="flex gap-4">
+                                        <input class="w-16 h-20 text-center font-mono text-4xl bg-bg-paper border-4 border-dashed border-ink/10 rounded-2xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase transition-colors" maxlength="1" placeholder="•" type="text"/>
+                                        <input class="w-16 h-20 text-center font-mono text-4xl bg-bg-paper border-4 border-dashed border-ink/10 rounded-2xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase transition-colors" maxlength="1" placeholder="•" type="text"/>
+                                        <input class="w-16 h-20 text-center font-mono text-4xl bg-bg-paper border-4 border-dashed border-ink/10 rounded-2xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase transition-colors" maxlength="1" placeholder="•" type="text"/>
+                                        <input class="w-16 h-20 text-center font-mono text-4xl bg-bg-paper border-4 border-dashed border-ink/10 rounded-2xl focus:border-primary focus:ring-0 text-primary shadow-inner outline-none uppercase transition-colors" maxlength="1" placeholder="•" type="text"/>
+                                    </div>
+                                    <button class="bg-primary text-white font-display text-2xl px-12 py-6 rounded-btn shadow-hard hover:translate-y-0.5 active:shadow-none transition-all uppercase tracking-widest flex items-center justify-center gap-4">
+                                        ENTRAR
+                                        <span class="material-symbols-outlined text-3xl font-bold">arrow_forward</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Public Rooms List -->
+                    <section class="space-y-6">
+                        <div class="flex items-center justify-between px-2">
+                            <h2 class="text-ink text-3xl font-display uppercase tracking-tight">Mesas Abiertas</h2>
+                            <div class="flex items-center gap-4">
+                                <span class="bg-secondary/10 text-secondary text-xs font-extrabold px-4 py-2 rounded-full border-2 border-secondary/20 uppercase tracking-widest">12 Jugadores Online</span>
+                                <button class="material-symbols-outlined text-ink/40 hover:text-secondary transition-colors">refresh</button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-6">
+                            <!-- Room Card 1 -->
+                            <div class="bg-white rounded-card p-8 shadow-hard flex items-center justify-between paper-card border-4 border-ink/5 group cursor-pointer">
+                                <div class="flex items-center gap-8">
+                                    <div class="h-20 w-20 rounded-full bg-accent-muted border-4 border-white shadow-hard-sm flex items-center justify-center overflow-hidden shrink-0">
+                                        <span class="text-5xl">🐱</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <h3 class="font-display text-ink text-2xl leading-none mb-2 uppercase tracking-tight">Mesa de Alex</h3>
+                                        <div class="flex items-center gap-4 text-ink/40">
+                                            <div class="flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-lg">style</span>
+                                                <span class="text-xs font-extrabold uppercase tracking-wide">Tradicional</span>
+                                            </div>
+                                            <div class="w-1 h-1 bg-ink/10 rounded-full"></div>
+                                            <span class="text-xs font-extrabold uppercase tracking-wide italic">Host: Alex_Pro</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-8">
+                                    <div class="flex flex-col items-end gap-1">
+                                        <div class="bg-secondary/10 px-6 py-2 rounded-full flex items-center gap-2 border-2 border-secondary/20">
+                                            <span class="material-symbols-outlined text-secondary text-xl">person</span>
+                                            <span class="text-secondary font-extrabold text-lg">4 / 8</span>
+                                        </div>
+                                        <p class="text-[10px] font-bold text-ink/20 uppercase tracking-widest">Esperando...</p>
+                                    </div>
+                                    <button class="bg-bg-paper text-ink p-5 rounded-full shadow-hard-sm border-2 border-ink/5 group-hover:bg-primary group-hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-3xl font-bold">login</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Room Card 2 -->
+                            <div class="bg-white rounded-card p-8 shadow-hard flex items-center justify-between paper-card border-4 border-ink/5 group cursor-pointer">
+                                <div class="flex items-center gap-8">
+                                    <div class="h-20 w-20 rounded-full bg-purple-muted border-4 border-white shadow-hard-sm flex items-center justify-center overflow-hidden shrink-0">
+                                        <span class="text-5xl">🦊</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <h3 class="font-display text-ink text-2xl leading-none uppercase tracking-tight">Caos Total</h3>
+                                            <span class="bg-purple text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm">EVENTO</span>
+                                        </div>
+                                        <div class="flex items-center gap-4 text-ink/40">
+                                            <div class="flex items-center gap-1 text-purple">
+                                                <span class="material-symbols-outlined text-lg">bolt</span>
+                                                <span class="text-xs font-extrabold uppercase tracking-wide">Modo Caos</span>
+                                            </div>
+                                            <div class="w-1 h-1 bg-ink/10 rounded-full"></div>
+                                            <span class="text-xs font-extrabold uppercase tracking-wide italic">Host: CyberPlayer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-8">
+                                    <div class="flex flex-col items-end gap-1">
+                                        <div class="bg-purple/10 px-6 py-2 rounded-full flex items-center gap-2 border-2 border-purple/20">
+                                            <span class="material-symbols-outlined text-purple text-xl">person</span>
+                                            <span class="text-purple font-extrabold text-lg">12 / 20</span>
+                                        </div>
+                                        <p class="text-[10px] font-bold text-ink/20 uppercase tracking-widest italic">Partida en curso</p>
+                                    </div>
+                                    <button class="bg-bg-paper text-ink p-5 rounded-full shadow-hard-sm border-2 border-ink/5 group-hover:bg-purple group-hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-3xl font-bold">visibility</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column: Saved Games & Stats -->
+                <div class="col-span-4 space-y-10">
+                    
+                    <!-- Saved Games (Sticky Notes) -->
+                    <section class="space-y-6">
+                        <div class="flex items-center justify-between px-2">
+                            <h2 class="text-ink text-2xl font-display uppercase tracking-tight">Guardadas</h2>
+                            <button class="text-secondary font-bold text-xs uppercase hover:underline">Limpiar todo</button>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 gap-8">
+                            <!-- Sticky Note 1 -->
+                            <div class="sticky-note p-8 shadow-hard flex flex-col justify-between paper-card bg-sticky-yellow relative aspect-square">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-20 h-8 bg-white/30 rotate-2 backdrop-blur-sm shadow-sm border-l border-r border-white/20"></div>
+                                <div>
+                                    <span class="font-mono text-ink/50 text-xs block mb-2 font-bold uppercase tracking-widest">CÓDIGO: A4B2</span>
+                                    <span class="font-display text-3xl leading-tight text-ink block uppercase">Local Party</span>
+                                    <div class="w-12 h-1 bg-ink/5 mt-4 rounded-full"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <span class="text-xs font-extrabold text-ink/40 uppercase tracking-tighter">Hace 3m • 5 Jug.</span>
+                                    <button class="w-14 h-14 bg-white/50 hover:bg-white rounded-full flex items-center justify-center shadow-hard-sm border-2 border-ink transition-all">
+                                        <span class="material-symbols-outlined text-ink text-4xl">play_arrow</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Sticky Note 2 -->
+                            <div class="sticky-note p-8 shadow-hard flex flex-col justify-between paper-card bg-[#9df0c6] relative aspect-square rotate-2">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-20 h-8 bg-white/30 -rotate-1 backdrop-blur-sm shadow-sm border-l border-r border-white/20"></div>
+                                <div>
+                                    <span class="font-mono text-ink/50 text-xs block mb-2 font-bold uppercase tracking-widest">CÓDIGO: 9XJ1</span>
+                                    <span class="font-display text-3xl leading-tight text-ink block uppercase">Cine Pro</span>
+                                    <div class="w-12 h-1 bg-ink/5 mt-4 rounded-full"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <span class="text-xs font-extrabold text-ink/40 uppercase tracking-tighter">Ayer • 8 Jug.</span>
+                                    <button class="w-14 h-14 bg-white/50 hover:bg-white rounded-full flex items-center justify-center shadow-hard-sm border-2 border-ink transition-all">
+                                        <span class="material-symbols-outlined text-ink text-4xl">play_arrow</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Info Stats -->
+                    <div class="bg-ink text-white p-8 rounded-card shadow-hard relative overflow-hidden">
+                        <div class="absolute inset-0 bg-white/5 pattern-dots opacity-10"></div>
+                        <div class="relative z-10">
+                            <h4 class="font-display text-xl uppercase mb-4 tracking-wide">Tus Estadísticas</h4>
+                            <div class="space-y-4">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-[10px] font-bold uppercase opacity-40">Victorias</span>
+                                    <span class="font-mono font-bold">124</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-[10px] font-bold uppercase opacity-40">Derrotas</span>
+                                    <span class="font-mono font-bold text-danger">42</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-[10px] font-bold uppercase opacity-40">Prestigio</span>
+                                    <span class="text-accent font-bold uppercase text-xs tracking-widest">LEYENDA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

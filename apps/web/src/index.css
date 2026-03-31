@@ -1,0 +1,850 @@
+@import "tailwindcss";
+
+/* ── Design System: Party Pop (El Impostor) ── */
+
+@theme {
+  /* Colors: Solid */
+  --color-primary: #FF8C42;
+  --color-secondary: #4D9DE0;
+  --color-accent: #87C38F;
+  --color-danger: #E63946;
+  --color-purple: #9D4EDD;
+  --color-yellow: #FFD166;
+  --color-sticky-yellow: #FFD166;
+  --color-ink: #2B2D42;
+  --color-paper: #FDFBF7;
+
+  /* Colors: Muted / Surface */
+  --color-primary-muted: #FFF0E5;
+  --color-secondary-muted: #EBF5FF;
+  --color-accent-muted: #F0F9F1;
+  --color-danger-muted: #FFF0F1;
+  --color-purple-muted: #F5E6FF;
+  --color-yellow-muted: #FFF9E5;
+  --color-ink-muted: #8D8FA1;
+
+  /* Typography */
+  --font-display: "Fredoka One", cursive;
+  --font-body: "Nunito", sans-serif;
+  --font-mono: "Varela Round", monospace;
+
+  /* Border Radius */
+  --radius-card: 24px;
+  --radius-btn: 16px;
+
+  /* Material Symbols */
+  --material-symbols: "Material Symbols Outlined";
+}
+
+.material-symbols-outlined {
+  font-family: var(--material-symbols);
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Shadows (Hard-Edge Neubrutalismo, matching prototypes) ── */
+
+@utility shadow-hard {
+  box-shadow: 4px 4px 0px rgba(43, 45, 66, 0.15);
+}
+
+@utility shadow-hard-sm {
+  box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15);
+}
+
+@utility shadow-hard-lg {
+  box-shadow: 6px 6px 0px rgba(43, 45, 66, 0.15);
+}
+
+@utility shadow-hard-xl {
+  box-shadow: 12px 12px 0px rgba(43, 45, 66, 0.15);
+}
+
+@utility shadow-inner-hard {
+  box-shadow: inset 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Background Patterns ── */
+
+@utility pattern-dots {
+  background-image: radial-gradient(rgba(43, 45, 66, 0.1) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+@utility sticky-note {
+  transform: rotate(-1deg);
+
+  &:nth-child(even) {
+    transform: rotate(1deg);
+  }
+}
+
+@utility pattern-lines {
+  background-image: repeating-linear-gradient(45deg,
+      rgba(43, 45, 66, 0.05) 25px,
+      transparent 25px,
+      transparent 50px,
+      rgba(43, 45, 66, 0.05) 50px,
+      rgba(43, 45, 66, 0.05) 75px,
+      transparent 75px,
+      transparent 100px);
+}
+
+@utility pattern-checkers {
+  background-image: repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.05) 25px,
+      transparent 25px,
+      transparent 50px,
+      rgba(255, 255, 255, 0.05) 50px,
+      rgba(255, 255, 255, 0.05) 75px,
+      transparent 75px,
+      transparent 100px);
+}
+
+@utility pattern-checkers-danger {
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25px, transparent 25px, transparent 50px, rgba(0, 0, 0, 0.1) 50px, rgba(0, 0, 0, 0.1) 75px, transparent 75px, transparent 100px);
+}
+
+@utility paper-tear {
+  clip-path: polygon(0% -20%, 100% -20%, 100% 95%, 95% 100%, 85% 92%, 75% 100%, 65% 92%, 55% 100%,
+      45% 92%, 35% 100%, 25% 92%, 15% 100%, 5% 92%, 0% 100%);
+}
+
+/* ── Interaction Utilities ── */
+
+@utility paper-card {
+  transition: all 0.1s ease;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px rgba(43, 45, 66, 0.15);
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+/* ── Keyframe Animations ── */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-in {
+  0% {
+    transform: translateY(-100%) scale(0.9);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateY(10%) scale(1.02);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@utility animate-toast-in {
+  animation: toast-in 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@utility animate-slide-down {
+  animation: slide-down 0.4s ease-out forwards;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  70% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes countdown {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse-icon {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heartbeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.15);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.15);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(3deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+
+@keyframes bounce-subtle {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(12deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(10deg);
+  }
+}
+
+@keyframes progress-fast {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+/* ── Caos Reveal Animations ── */
+
+@keyframes spotlight {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  20% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shake-extreme {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  5%,
+  15%,
+  25% {
+    transform: translate(-8px, -4px) scale(1.02);
+  }
+
+  10%,
+  20%,
+  30% {
+    transform: translate(8px, 4px) scale(0.98);
+  }
+
+  40% {
+    transform: translate(0, 0) scale(1.1);
+  }
+
+  80% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes shake-hit {
+  0% {
+    transform: scale(1);
+  }
+
+  10% {
+    transform: scale(1.1) rotate(2deg);
+  }
+
+  20% {
+    transform: scale(0.9) rotate(-2deg);
+  }
+
+  30% {
+    transform: scale(1.05) rotate(1deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes stamp {
+  0% {
+    transform: scale(5) rotate(20deg);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(-5deg);
+    opacity: 1;
+  }
+}
+
+@keyframes uncover {
+  0% {
+    transform: scale(0.8) rotate(5deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes line-draw {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 100px;
+    opacity: 1;
+  }
+}
+
+/* ── Immersive Suspense Animations ── */
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes noise-grain {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-1%, -1%);
+  }
+
+  20% {
+    transform: translate(1%, 1%);
+  }
+
+  30% {
+    transform: translate(-2%, 1%);
+  }
+
+  40% {
+    transform: translate(2%, -1%);
+  }
+
+  50% {
+    transform: translate(-1%, 2%);
+  }
+
+  60% {
+    transform: translate(1%, -2%);
+  }
+
+  70% {
+    transform: translate(-2%, -2%);
+  }
+
+  80% {
+    transform: translate(2%, 2%);
+  }
+
+  90% {
+    transform: translate(-1%, 1%);
+  }
+}
+
+@keyframes glitch-anim {
+
+  0%,
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-2px, 1px);
+    filter: hue-rotate(90deg);
+  }
+
+  20% {
+    transform: translate(2px, -1px);
+  }
+
+  30% {
+    transform: translate(-1px, 2px);
+    filter: hue-rotate(180deg);
+  }
+
+  40% {
+    transform: translate(1px, -2px);
+  }
+
+  50% {
+    transform: translate(-2px, -1px);
+    filter: hue-rotate(270deg);
+  }
+}
+
+@keyframes vibration-low-to-high {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(var(--v-x, 1px), var(--v-y, 1px));
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes slow-zoom-in {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes blur-pulse {
+
+  0%,
+  100% {
+    filter: blur(4px);
+    opacity: 0.6;
+  }
+
+  50% {
+    filter: blur(8px);
+    opacity: 0.3;
+  }
+}
+
+
+/* Animation Utilities */
+@utility animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@utility animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+@utility animate-bounce-in {
+  animation: bounce-in 0.6s ease-out forwards;
+}
+
+@utility animate-countdown {
+  animation: countdown linear forwards;
+}
+
+@utility animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@utility animate-pulse-icon {
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+@utility animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@utility animate-confetti {
+  animation: confetti-fall 5s linear infinite;
+}
+
+@utility animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+@utility animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+@utility animate-progress-fast {
+  animation: progress-fast 1s ease-in-out infinite;
+}
+
+@utility animate-scale-in {
+  animation: bounce-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Suspense Utilities */
+@utility animate-scanline {
+  animation: scanline 4s linear infinite;
+}
+
+@utility animate-noise {
+  animation: noise-grain 0.2s steps(2) infinite;
+}
+
+@utility animate-glitch {
+  animation: glitch-anim 0.4s ease-in-out infinite;
+}
+
+@utility animate-slow-zoom {
+  animation: slow-zoom-in 3s ease-out forwards;
+}
+
+
+/* Page Transitions */
+@keyframes page-enter {
+  0% {
+    transform: scale(0.98);
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  100% {
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@keyframes pure-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@utility animate-page-enter {
+  animation: page-enter 0.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@utility animate-pure-fade-in {
+  animation: pure-fade-in 0.4s ease-out forwards;
+}
+
+@utility animate-fade-in {
+  animation: pure-fade-in 0.2s ease-out forwards;
+}
+
+@utility animate-slide-in-bottom {
+  animation: slide-in-bottom 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* 3D Flip Card Utilities */
+@utility perspective-1000 {
+  perspective: 1000px;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@utility rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@utility transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+/* ── Base Styles ── */
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@keyframes radar-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@utility animate-radar-spin {
+  animation: radar-spin 2s linear infinite;
+}
+
+@keyframes border-pulse-white {
+  0%, 100% { border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+  50% { border-color: rgba(255, 255, 255, 1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
+}
+
+@utility animate-border-pulse-white {
+  animation: border-pulse-white 2s infinite;
+}
+
+@keyframes target-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@utility animate-target-pulse {
+  animation: target-pulse 1.5s infinite;
+}
+
+@keyframes shake-hit-extreme {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-15px, -15px); }
+  30% { transform: translate(15px, 15px); }
+  50% { transform: translate(-15px, 15px); }
+  70% { transform: translate(15px, -15px); }
+  100% { transform: translate(0, 0); }
+}
+
+@utility animate-shake-hit-extreme {
+  animation: shake-hit-extreme 0.3s ease-in-out;
+}
+
+@keyframes question-out {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+@utility animate-question-out {
+  animation: question-out 0.4s forwards;
+}
+
+@keyframes name-in {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@utility animate-name-in {
+  animation: name-in 0.4s forwards;
+}
+
+@keyframes reveal-to-purple {
+  0% { background-color: #2B2D42; }
+  100% { background-color: #9D4EDD; }
+}
+
+@keyframes stamp {
+  0% { transform: scale(5); opacity: 0; }
+  100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+}
+
+@utility animate-stamp {
+  animation: stamp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@utility animate-fade-out {
+  animation: fade-out 0.3s forwards;
+}
+
+@keyframes shake-hard {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-10px, -10px); }
+  20% { transform: translate(10px, 10px); }
+  30% { transform: translate(-10px, 10px); }
+  40% { transform: translate(10px, -10px); }
+}
+
+@utility animate-shake-hard {
+  animation: shake-hard 0.15s infinite;
+}
+
+@utility pattern-checkers {
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25px, transparent 25px, transparent 50px, rgba(0, 0, 0, 0.1) 50px, rgba(0, 0, 0, 0.1) 75px, transparent 75px, transparent 100px);
+}
+
+@keyframes spotlight {
+  0% { opacity: 0; transform: scale(0.8); filter: blur(10px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@utility animate-spotlight {
+  animation: spotlight 1s ease-out forwards;
+}
+
+@keyframes reveal-bg-red {
+  0% { background-color: #2B2D42; }
+  100% { background-color: #E63946; }
+}
+
+@keyframes reveal-bg-green {
+  0% { background-color: #2B2D42; }
+  100% { background-color: #06D6A0; }
+}
+
+@utility animate-reveal-bg-red {
+  animation: reveal-bg-red 0.4s forwards;
+}
+
+@utility animate-reveal-bg-green {
+  animation: reveal-bg-green 0.4s forwards;
+}
