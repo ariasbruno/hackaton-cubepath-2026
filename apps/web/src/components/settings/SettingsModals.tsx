@@ -20,13 +20,13 @@ export const SettingsModals: React.FC<SettingsModalsProps> = ({
     <Modal 
       isOpen={isOpen} 
       onClose={onClose}
-      title={
+    >
+      <Modal.Header title={
         type === 'about' ? 'EL IMPOSTOR' :
         type === 'delete' ? '¿ELIMINAR TODO?' : 
         '¿CERRAR SESIÓN?'
-      }
-    >
-      <div className="space-y-6">
+      } />
+      <Modal.Body className="space-y-6">
         {type === 'about' ? (
           <div className="text-center space-y-4">
             <div className="w-20 h-20 bg-primary/10 rounded-3xl mx-auto flex items-center justify-center text-primary shadow-hard-sm border-2 border-primary/20">
@@ -80,7 +80,7 @@ export const SettingsModals: React.FC<SettingsModalsProps> = ({
             </div>
           </>
         )}
-      </div>
+      </Modal.Body>
     </Modal>
   );
 };

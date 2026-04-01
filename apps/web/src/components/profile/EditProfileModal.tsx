@@ -34,8 +34,9 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
   errorText,
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Editar Perfil">
-      <div className="space-y-6">
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal.Header title="Editar Perfil" />
+      <Modal.Body className="space-y-6">
         <div className="flex justify-center mb-4">
           <Avatar avatarId={editAvatar} bgColor={editColor} size="xl" />
         </div>
@@ -86,16 +87,16 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             {errorText}
           </div>
         )}
+      </Modal.Body>
 
-        <div className="flex flex-col gap-3 pt-4">
-          <Button fullWidth onClick={onSave} disabled={isLoading || !editName.trim()}>
-            {isLoading ? 'Guardando...' : 'Guardar Cambios'}
-          </Button>
-          <Button variant="ghost" fullWidth onClick={onClose}>
-            Cancelar
-          </Button>
-        </div>
-      </div>
+      <Modal.Footer>
+        <Button fullWidth onClick={onSave} disabled={isLoading || !editName.trim()}>
+          {isLoading ? 'Guardando...' : 'Guardar Cambios'}
+        </Button>
+        <Button variant="ghost" fullWidth onClick={onClose}>
+          Cancelar
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };

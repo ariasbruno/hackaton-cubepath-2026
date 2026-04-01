@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { AVATAR_COMPONENTS } from './profile';
 
 interface AvatarProps {
@@ -28,7 +28,7 @@ const borderMap = {
   full: 'border-0',
 };
 
-export const Avatar: React.FC<AvatarProps> = ({
+export const Avatar: React.FC<AvatarProps> = memo(({
   avatarId,
   size = 'md',
   borderColor = 'border-ink/5',
@@ -61,4 +61,4 @@ export const Avatar: React.FC<AvatarProps> = ({
       )}
     </div>
   );
-};
+});

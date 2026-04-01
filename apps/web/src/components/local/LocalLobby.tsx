@@ -184,9 +184,9 @@ export const LocalLobby: React.FC<LocalLobbyProps> = ({
       <Modal
         isOpen={!!editingPlayerId}
         onClose={() => setEditingPlayerId(null)}
-        title="Editar Perfil"
       >
-        <div className="space-y-8 py-2">
+        <Modal.Header title="Editar Perfil" />
+        <Modal.Body className="space-y-8 py-2">
           {/* Avatar/Color selection same as before... */}
           <div className="flex justify-center mb-4">
             <Avatar
@@ -208,29 +208,27 @@ export const LocalLobby: React.FC<LocalLobbyProps> = ({
               maxLength={12}
             />
           </div>
-
-          {/* ... keeping it simple for the rest of the modal ... */}
-          <div className="flex gap-4 pt-4">
-            <Button fullWidth variant="paper" onClick={() => setEditingPlayerId(null)} className="h-14 font-bold text-ink/50">Cancelar</Button>
-            <Button fullWidth variant="primary" onClick={handleSaveEdit} disabled={!tempName.trim()} className="h-14 shadow-hard-sm">Guardar Cambios</Button>
-          </div>
-        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button fullWidth variant="paper" onClick={() => setEditingPlayerId(null)} className="h-14 font-bold text-ink/50">Cancelar</Button>
+          <Button fullWidth variant="primary" onClick={handleSaveEdit} disabled={!tempName.trim()} className="h-14 shadow-hard-sm">Guardar Cambios</Button>
+        </Modal.Footer>
       </Modal>
 
       <Modal
         isOpen={showDeleteConfirm}
         onClose={() => setShowDeleteConfirm(false)}
-        title="¿Eliminar Partida?"
       >
-        <div className="space-y-6">
+        <Modal.Header title="¿Eliminar Partida?" />
+        <Modal.Body>
           <p className="text-ink/60 text-center text-lg">
             Esta acción borrará todos los jugadores y eliminará esta sala permanentemente.
           </p>
-          <div className="flex flex-col gap-3">
-            <Button variant="danger" fullWidth size="md" onClick={() => { onDelete(); setShowDeleteConfirm(false); }}>Sí, Eliminar Sala</Button>
-            <Button variant="paper" fullWidth size="md" onClick={() => setShowDeleteConfirm(false)}>Cancelar</Button>
-          </div>
-        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" fullWidth size="md" onClick={() => { onDelete(); setShowDeleteConfirm(false); }}>Sí, Eliminar Sala</Button>
+          <Button variant="paper" fullWidth size="md" onClick={() => setShowDeleteConfirm(false)}>Cancelar</Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );

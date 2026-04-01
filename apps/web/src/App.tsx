@@ -1,17 +1,19 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Rooms } from './pages/Rooms';
-import { CreateRoom } from './pages/CreateRoom';
-import { Lobby } from './pages/Lobby';
-import { Profile } from './pages/Profile';
-import { Settings } from './pages/Settings';
 import { AppLayout } from './components/layout/AppLayout';
 import { BottomNav } from './components/layout/BottomNav';
 import { SideNav } from './components/layout/SideNav';
 import { useAuthStore } from './store/useAuthStore';
 import { ToastContainer } from './components/ui/ToastContainer';
-import { LocalGameFlow } from './pages/LocalMode/LocalGameFlow';
+
+// Main Pages (Lazy Loaded)
+const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
+const Rooms = lazy(() => import('./pages/Rooms').then(m => ({ default: m.Rooms })));
+const CreateRoom = lazy(() => import('./pages/CreateRoom').then(m => ({ default: m.CreateRoom })));
+const Lobby = lazy(() => import('./pages/Lobby').then(m => ({ default: m.Lobby })));
+const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
+const Settings = lazy(() => import('./pages/Settings').then(m => ({ default: m.Settings })));
+const LocalGameFlow = lazy(() => import('./pages/LocalMode/LocalGameFlow').then(m => ({ default: m.LocalGameFlow })));
 
 // Dev pages (lazy loaded, only defined in development)
 const DatabaseAdmin = import.meta.env.DEV
@@ -94,37 +96,43 @@ function AppContent() {
 
       {/* Main layout area */}
       <AppLayout showNav={showNav} fullWidth={location.pathname.startsWith('/admin')}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/create" element={<CreateRoom />} />
-          <Route path="/room/:code" element={<Lobby />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/local/:code" element={<LocalGameFlow />} />
-          {/* Development Routes - Automatically excluded from production build */}
-          {import.meta.env.DEV && (
-            <>
-              <Route path="/admin" element={<Suspense><DatabaseAdmin /></Suspense>} />
-              <Route path="/test/brand" element={<Suspense><BrandIdentity /></Suspense>} />
-              <Route path="/prototypes/pistas" element={<Suspense><PlayingPrototype /></Suspense>} />
-              <Route path="/prototypes/votacion" element={<Suspense><VotingPrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-empate" element={<Suspense><TieRevealPrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-impostor" element={<Suspense><RevealImpostorPrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-agente" element={<Suspense><RevealAgentePrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-infiltrado" element={<Suspense><RevealInfiltradoPrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-caos-empate" element={<Suspense><RevealCaosEmpatePrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-caos-reveal" element={<Suspense><RevealCaosRevealPrototype /></Suspense>} />
-              <Route path="/prototypes/reveal-caos-reveal2" element={<Suspense><RevealCaosReveal2Prototype /></Suspense>} />
-              <Route path="/prototypes/reveal-caos-vinculados" element={<Suspense><RevealCaosVinculadosPrototype /></Suspense>} />
-              <Route path="/prototypes/tmp/caos-encontrado" element={<Suspense><TmpCaosFound /></Suspense>} />
-              <Route path="/prototypes/tmp/caos-victoria" element={<Suspense><TmpCaosVictory /></Suspense>} />
-              <Route path="/prototypes/tmp/caos-empate" element={<Suspense><TmpCaosTie /></Suspense>} />
-              <Route path="/prototypes/tmp/impostor" element={<Suspense><TmpImpostorReveal /></Suspense>} />
-            </>
-          )}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={
+          <div className="flex-1 flex items-center justify-center bg-paper">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        }>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/rooms" element={<Rooms />} />
+            <Route path="/create" element={<CreateRoom />} />
+            <Route path="/room/:code" element={<Lobby />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/local/:code" element={<LocalGameFlow />} />
+            {/* Development Routes - Automatically excluded from production build */}
+            {import.meta.env.DEV && (
+              <>
+                <Route path="/admin" element={<DatabaseAdmin />} />
+                <Route path="/test/brand" element={<BrandIdentity />} />
+                <Route path="/prototypes/pistas" element={<PlayingPrototype />} />
+                <Route path="/prototypes/votacion" element={<VotingPrototype />} />
+                <Route path="/prototypes/reveal-empate" element={<TieRevealPrototype />} />
+                <Route path="/prototypes/reveal-impostor" element={<RevealImpostorPrototype />} />
+                <Route path="/prototypes/reveal-agente" element={<RevealAgentePrototype />} />
+                <Route path="/prototypes/reveal-infiltrado" element={<RevealInfiltradoPrototype />} />
+                <Route path="/prototypes/reveal-caos-empate" element={<RevealCaosEmpatePrototype />} />
+                <Route path="/prototypes/reveal-caos-reveal" element={<RevealCaosRevealPrototype />} />
+                <Route path="/prototypes/reveal-caos-reveal2" element={<RevealCaosReveal2Prototype />} />
+                <Route path="/prototypes/reveal-caos-vinculados" element={<RevealCaosVinculadosPrototype />} />
+                <Route path="/prototypes/tmp/caos-encontrado" element={<TmpCaosFound />} />
+                <Route path="/prototypes/tmp/caos-victoria" element={<TmpCaosVictory />} />
+                <Route path="/prototypes/tmp/caos-empate" element={<TmpCaosTie />} />
+                <Route path="/prototypes/tmp/impostor" element={<TmpImpostorReveal />} />
+              </>
+            )}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
         {showNav && <BottomNav />}
       </AppLayout>
     </div>

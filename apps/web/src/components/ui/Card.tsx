@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'solid' | 'muted' | 'paper' | 'sticky';
@@ -7,7 +7,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   borderWidth?: 'none' | 'thin' | 'thick';
 }
 
-export const Card: React.FC<CardProps> = ({
+export const Card: React.FC<CardProps> = memo(({
   children,
   variant = 'solid',
   color = 'primary',
@@ -67,4 +67,4 @@ export const Card: React.FC<CardProps> = ({
       {children}
     </div>
   );
-};
+});

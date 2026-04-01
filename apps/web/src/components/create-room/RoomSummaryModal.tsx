@@ -29,32 +29,35 @@ export const RoomSummaryModal: React.FC<RoomSummaryModalProps> = ({
   const modeColor = gameMode === 'CERCANAS' ? 'secondary' : gameMode === 'CAOS' ? 'purple' : 'primary';
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Resumen de Sala">
-      <div className="space-y-3 mb-8">
-        {[
-          { label: 'Nombre', value: roomName.toUpperCase(), icon: CategoryIcon },
-          { label: 'Modo', value: gameMode || '', highlight: true, icon: SportsEsportsIcon },
-          { label: 'Jugadores', value: `Máximo ${maxPlayers}`, icon: GroupsIcon },
-          { label: 'Tiempos', value: `${clueTime}s / ${discussionTime}s / ${votingTime}s`, icon: TimerIcon },
-          { label: 'Visibilidad', value: isPrivate ? 'Privada (Oculta)' : 'Pública', icon: isPrivate ? VisibilityOffIcon : VisibilityIcon },
-        ].map((row, i, arr) => (
-          <div 
-            key={row.label} 
-            className={`flex items-center justify-between p-3 rounded-xl ${i < arr.length - 1 ? 'border-b border-dashed border-ink/10' : ''}`}
-          >
-            <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-lg bg-paper border border-ink/5 shadow-hard-sm flex items-center justify-center ${row.highlight ? `text-${modeColor}` : 'text-ink/40'}`}>
-                <row.icon className="w-4 h-4" />
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal.Header title="Resumen de Sala" />
+      <Modal.Body className="mb-8">
+        <div className="space-y-3">
+          {[
+            { label: 'Nombre', value: roomName.toUpperCase(), icon: CategoryIcon },
+            { label: 'Modo', value: gameMode || '', highlight: true, icon: SportsEsportsIcon },
+            { label: 'Jugadores', value: `Máximo ${maxPlayers}`, icon: GroupsIcon },
+            { label: 'Tiempos', value: `${clueTime}s / ${discussionTime}s / ${votingTime}s`, icon: TimerIcon },
+            { label: 'Visibilidad', value: isPrivate ? 'Privada (Oculta)' : 'Pública', icon: isPrivate ? VisibilityOffIcon : VisibilityIcon },
+          ].map((row, i, arr) => (
+            <div 
+              key={row.label} 
+              className={`flex items-center justify-between p-3 rounded-xl ${i < arr.length - 1 ? 'border-b border-dashed border-ink/10' : ''}`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-lg bg-paper border border-ink/5 shadow-hard-sm flex items-center justify-center ${row.highlight ? `text-${modeColor}` : 'text-ink/40'}`}>
+                  <row.icon className="w-4 h-4" />
+                </div>
+                <span className="text-[10px] font-extrabold uppercase opacity-40">{row.label}</span>
               </div>
-              <span className="text-[10px] font-extrabold uppercase opacity-40">{row.label}</span>
+              <span className={`text-xs font-bold uppercase tracking-tight ${row.highlight ? `text-${modeColor}` : 'text-ink'}`}>
+                {row.value}
+              </span>
             </div>
-            <span className={`text-xs font-bold uppercase tracking-tight ${row.highlight ? `text-${modeColor}` : 'text-ink'}`}>
-              {row.value}
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="flex flex-col gap-3">
+          ))}
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
         <Button 
           fullWidth 
           onClick={onConfirm} 
@@ -67,7 +70,7 @@ export const RoomSummaryModal: React.FC<RoomSummaryModalProps> = ({
         <Button variant="ghost" fullWidth onClick={onClose} className="font-bold uppercase text-[10px] tracking-widest opacity-60">
           Cambiar algo
         </Button>
-      </div>
+      </Modal.Footer>
     </Modal>
   );
 };

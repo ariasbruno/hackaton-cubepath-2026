@@ -123,8 +123,15 @@ export const Rooms: React.FC = () => {
     Object.keys(localGames).forEach(code => deleteLocalGame(code));
   };
 
+  const [isPending, startTransition] = React.useTransition();
   const modeFilters = ['Todos', 'Tradicional', 'Cercanas', 'Caos'];
   const [activeFilter, setActiveFilter] = useState('Todos');
+
+  const handleFilterChange = (filter: string) => {
+    startTransition(() => {
+      setActiveFilter(filter);
+    });
+  };
 
   const filteredRooms = activeFilter === 'Todos'
     ? rooms
@@ -154,20 +161,22 @@ export const Rooms: React.FC = () => {
         <ModeFilters 
           filters={modeFilters}
           activeFilter={activeFilter}
-          onFilterClick={setActiveFilter}
+          onFilterClick={handleFilterChange}
         />
         
-        <SavedRooms 
-          games={allSavedGames}
-          onClear={handleClearSaved}
-          onJoin={attemptJoin}
-        />
+        <div className={isPending ? 'opacity-50 transition-opacity' : 'transition-opacity'}>
+          <SavedRooms 
+            games={allSavedGames}
+            onClear={handleClearSaved}
+            onJoin={attemptJoin}
+          />
 
-        <PublicRoomsList 
-          rooms={filteredRooms}
-          onJoin={attemptJoin}
-          onCreateRoom={() => navigate('/create')}
-        />
+          <PublicRoomsList 
+            rooms={filteredRooms}
+            onJoin={attemptJoin}
+            onCreateRoom={() => navigate('/create')}
+          />
+        </div>
         </div>
       </main>
 

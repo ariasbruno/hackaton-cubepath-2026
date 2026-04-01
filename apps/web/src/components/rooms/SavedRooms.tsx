@@ -96,33 +96,33 @@ export const SavedRooms: React.FC<SavedRoomsProps> = ({
       <Modal
         isOpen={showClearConfirm}
         onClose={() => setShowClearConfirm(false)}
-        title="¿Limpiar Historial?"
       >
-        <div className="space-y-6">
+        <Modal.Header title="¿Limpiar Historial?" />
+        <Modal.Body>
           <p className="text-ink/60 text-center text-lg leading-snug">
             ¿Estás seguro de que quieres borrar <span className="text-ink font-bold">todas</span> tus partidas guardadas? Esta acción no se puede deshacer.
           </p>
-          <div className="flex flex-col gap-3">
-            <Button
-              variant="danger"
-              fullWidth
-              size="lg"
-              onClick={handleConfirmClear}
-              className="h-14"
-            >
-              Sí, borrar todo
-            </Button>
-            <Button
-              variant="ghost"
-              fullWidth
-              size="lg"
-              onClick={() => setShowClearConfirm(false)}
-              className="h-14 text-ink/40"
-            >
-              Cancelar
-            </Button>
-          </div>
-        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="danger"
+            fullWidth
+            size="lg"
+            onClick={handleConfirmClear}
+            className="h-14 shadow-hard active:translate-y-px active:shadow-none"
+          >
+            Sí, borrar todo
+          </Button>
+          <Button
+            variant="ghost"
+            fullWidth
+            size="lg"
+            onClick={() => setShowClearConfirm(false)}
+            className="h-14 text-ink/40"
+          >
+            Cancelar
+          </Button>
+        </Modal.Footer>
       </Modal>
     </section>
   );
