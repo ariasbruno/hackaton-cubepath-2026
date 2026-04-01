@@ -211,7 +211,7 @@ export const Home: React.FC = () => {
                 </p>
               </div>
               <button
-                onClick={() => navigate('/create')}
+                onClick={() => navigate('/create', { state: { presetMode: 'CAOS', presetConnection: 'online' } })}
                 className="bg-purple text-white py-3 rounded-btn shadow-hard font-display uppercase tracking-widest text-sm hover:translate-y-0.5 hover:shadow-hard-sm active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
               >
                 <RocketLaunchIcon className="w-5 h-5" />

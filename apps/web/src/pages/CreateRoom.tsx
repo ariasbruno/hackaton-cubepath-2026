@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { roomService } from '../services/api';
 import { useAuthStore } from '../store/useAuthStore';
 import { useToastStore } from '../store/useToastStore';
@@ -26,6 +26,8 @@ import type { ConnectionType, GameMode } from '../constants/game';
 export const CreateRoom: React.FC = () => {
   const navigate = useNavigate();
   const { nickname, avatar } = useAuthStore();
+  const location = useLocation();
+  const presetHandled = useRef(false);
   const [registrationOpen, setRegistrationOpen] = useState(false);
 
   // State
@@ -54,18 +56,27 @@ export const CreateRoom: React.FC = () => {
     }
   }, [step]);
 
-  // CAOS mode requires at least 4 players — auto-adjust when mode changes
+  // Handle preset state from home (e.g. "Explore Caos")
   useEffect(() => {
-    if (gameMode === 'CAOS' && maxPlayers < 4) {
-      setMaxPlayers(4);
+    if (presetHandled.current) return;
+    const state = location.state as { presetMode?: GameMode; presetConnection?: ConnectionType };
+    if (state?.presetMode || state?.presetConnection) {
+      presetHandled.current = true;
+      if (state.presetConnection) setConnection(state.presetConnection);
+      if (state.presetMode) setGameMode(state.presetMode);
+      
+      // If we have both, we can jump to the category step (Step 3 in the new order)
+      if (state.presetMode && state.presetConnection) {
+        setStep(3);
+      }
     }
-  }, [gameMode]);
+  }, [location.state]);
 
 
   const canNext = () => {
     if (step === 1) return connection !== null;
-    if (step === 2) return selectedCategory !== null && selectedSubcategories.length > 0;
-    if (step === 3) return gameMode !== null;
+    if (step === 2) return gameMode !== null;
+    if (step === 3) return selectedCategory !== null && selectedSubcategories.length > 0;
     if (step === 4) return roomName.trim().length > 0;
     return false;
   };
@@ -232,7 +243,8 @@ export const CreateRoom: React.FC = () => {
                 {/* Mobile top padding to clear floating header */}
                 <div className="pt-32 md:pt-0 w-full mb-30 md:mb-0 px-6 md:px-0">
                   {step === 1 && <PageTransition animation="fade"><Step1Connection connection={connection} setConnection={setConnection} /></PageTransition>}
-                  {step === 2 && (
+                  {step === 2 && <PageTransition animation="fade"><Step3GameMode gameMode={gameMode} setGameMode={setGameMode} connection={connection} /></PageTransition>}
+                  {step === 3 && (
                     <PageTransition animation="fade">
                       <Step2Categories
                         selectedCategory={selectedCategory} onCategoryClick={handleCategoryClick}
@@ -242,7 +254,6 @@ export const CreateRoom: React.FC = () => {
                       />
                     </PageTransition>
                   )}
-                  {step === 3 && <PageTransition animation="fade"><Step3GameMode gameMode={gameMode} setGameMode={setGameMode} connection={connection} /></PageTransition>}
                   {step === 4 && (
                     <PageTransition animation="fade">
                       <Step4FinalConfig
@@ -256,7 +267,7 @@ export const CreateRoom: React.FC = () => {
                 </div>
 
                 {/* ── Desktop CTA (inside content flow) ── */}
-                {step !== 2 && (
+                {step !== 3 && (
                   <div className="hidden md:flex justify-end mt-10 px-0">
                     {canNext() ? (
                       <button
@@ -268,7 +279,7 @@ export const CreateRoom: React.FC = () => {
                     ) : (
                       <div className="bg-white/80 backdrop-blur-sm px-10 py-5 rounded-btn text-center text-[10px] font-extrabold text-ink/30 uppercase tracking-[0.2em] border border-ink/5">
                         {step === 1 && 'Selecciona un tipo de conexión'}
-                        {step === 3 && 'Selecciona un modo de juego'}
+                        {step === 2 && 'Selecciona un modo de juego'}
                         {step === 4 && 'Completa los campos'}
                       </div>
                     )}
@@ -282,14 +293,14 @@ export const CreateRoom: React.FC = () => {
         {/* ── Mobile CTA footer ── */}
         <footer className="md:hidden absolute bottom-0 left-0 right-0 w-full p-6 pb-10 pointer-events-none flex justify-center z-20">
           <div className="w-full max-w-md pointer-events-auto">
-            {canNext() && step !== 2 ? (
+            {canNext() && step !== 3 ? (
               <Button variant="primary" size="lg" fullWidth onClick={handleNext} noOutline className="shadow-hard-lg">
                 {step < 4 ? 'Siguiente' : '¡Crear Sala!'}
               </Button>
-            ) : step !== 2 && (
+            ) : step !== 3 && (
               <div className="bg-white/80 backdrop-blur-sm p-4 rounded-btn text-center text-[10px] font-extrabold text-ink/30 uppercase tracking-[0.2em] border border-ink/5">
                 {step === 1 && 'Selecciona un tipo de conexión'}
-                {step === 3 && 'Selecciona un modo de juego'}
+                {step === 2 && 'Selecciona un modo de juego'}
               </div>
             )}
           </div>
