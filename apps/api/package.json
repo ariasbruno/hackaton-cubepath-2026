@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "bun --watch run src/index.ts",
     "start": "bun run src/index.ts",
-    "build": "tsc",
+    "build": "bun build ./src/index.ts --outdir ./dist --target node",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "bun test",
     "db:push": "bun run scripts/migrate.ts",

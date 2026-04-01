@@ -1,8 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "noEmit": false,
+    "skipLibCheck": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": ["src"],
-  "exclude": ["src/**/__tests__/**", "scripts/**"]
+  "exclude": ["node_modules", "dist", "src/**/__tests__/**", "scripts/**"]
 }
