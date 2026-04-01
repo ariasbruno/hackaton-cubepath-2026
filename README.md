@@ -104,6 +104,30 @@ El sistema es un **Monorepo** orquestado para la eficiencia máxima:
 | `LOG_LEVEL` | Nivel de logs del servidor de juegos. |
 
 
+---
+
+## 🛠️ Proceso de Desarrollo
+
+Este proyecto se construyó siguiendo un proceso riguroso de planificación y ejecución:
+
+1.  **Diseño de Juego:** Todo el funcionamiento se planeó paso a paso, con ideas plasmadas en [Game Design](docs/init/references/game_design) (Core, Flujo, Scoring).
+2.  **Prototipado UX/UI:** Con las reglas claras, pasé al diseño de [prototipos visuales](docs/init/references/ui_ux/prototypes) para establecer la guía estética antes de tocar una línea de código.
+3.  **Arquitectura Técnica:** Diseñé la comunicación entre el frontend y el backend, detallada en [Technical Docs](docs/init/references/technical).
+4.  **Implementación:** Con todo planeado, configuré las skills y ejecuté los planes de implementación: [FRONTEND](docs/init/FRONTEND) y [BACKEND](docs/init/BACKEND).
+
+> [!NOTE]
+> La documentación en `docs/` se enfoca en proporcionar la estructura necesaria para el desarrollo asistido por IA. He omitido borradores iniciales y notas desordenadas de la etapa de ideación que no aportaban valor directo al código final.
+
+### 🧰 Herramientas Gratuitas Utilizadas
+
+*   **Gemini CLI** & **Antigravity** (Codificación asistida por IA).
+*   [SVGViewer](https://www.svgviewer.dev/) (Optimización de vectores).
+*   [Iconify](https://icon-sets.iconify.design/) (Set de iconos para la interfaz).
+*   [Inkscape](https://inkscape.app/es/) (Diseño de assets vectoriales).
+*   [Shots.so](https://shots.so/) (Mockups y presentación visual).
+
+---
+
 ## 📖 Documentación Relacionada
 
 *   [Arquitectura Técnica](docs/ARCHITECTURE.md)
