@@ -2,15 +2,61 @@
   "TRADICIONAL": [
     { "mainWord": "Gato", "infiltradoWord": null, "relatedWords": null },
     { "mainWord": "Piscina", "infiltradoWord": null, "relatedWords": null },
-    { "mainWord": "Helado", "infiltradoWord": null, "relatedWords": null }
+    { "mainWord": "Helado", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Astronauta", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Pizza", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Cámara", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Bicicleta", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Pirata", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Zapato", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Internet", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Chocolate", "infiltradoWord": null, "relatedWords": null },
+    { "mainWord": "Avion", "infiltradoWord": null, "relatedWords": null }
   ],
   "CERCANAS": [
     { "mainWord": "León", "infiltradoWord": "Tigre", "relatedWords": null },
     { "mainWord": "Pizza", "infiltradoWord": "Lasaña", "relatedWords": null },
-    { "mainWord": "Guitarra", "infiltradoWord": "Bajo", "relatedWords": null }
+    { "mainWord": "Guitarra", "infiltradoWord": "Bajo", "relatedWords": null },
+    { "mainWord": "Fútbol", "infiltradoWord": "Rugby", "relatedWords": null },
+    { "mainWord": "Avión", "infiltradoWord": "Helicóptero", "relatedWords": null },
+    { "mainWord": "Médico", "infiltradoWord": "Enfermero", "relatedWords": null },
+    { "mainWord": "Laptop", "infiltradoWord": "Tablet", "relatedWords": null },
+    { "mainWord": "Zumo", "infiltradoWord": "Refresco", "relatedWords": null },
+    { "mainWord": "Silla", "infiltradoWord": "Sofá", "relatedWords": null },
+    { "mainWord": "Invierno", "infiltradoWord": "Otoño", "relatedWords": null },
+    { "mainWord": "Marte", "infiltradoWord": "Júpiter", "relatedWords": null },
+    { "mainWord": "Facebook", "infiltradoWord": "Instagram", "relatedWords": null }
   ],
   "CAOS": [
-    { "mainWord": "Playa", "infiltradoWord": null, "relatedWords": ["Arena", "Océano", "Palmera", "Sol", "Sombrilla", "Ola", "Coco", "Brisa", "Costa", "Verano"] },
-    { "mainWord": "Cine", "infiltradoWord": null, "relatedWords": ["Película", "Palomitas", "Pantalla", "Asiento", "Ticket", "Proyector", "Camara", "Actor", "Director", "Escena"] }
+    { 
+      "mainWord": "Playa", 
+      "infiltradoWord": null, 
+      "relatedWords": ["Arena", "Océano", "Palmera", "Sol", "Sombrilla", "Ola", "Coco", "Brisa", "Costa", "Verano"] 
+    },
+    { 
+      "mainWord": "Cine", 
+      "infiltradoWord": null, 
+      "relatedWords": ["Película", "Palomitas", "Pantalla", "Asiento", "Ticket", "Proyector", "Camara", "Actor", "Director", "Escena"] 
+    },
+    { 
+      "mainWord": "Hospital", 
+      "infiltradoWord": null, 
+      "relatedWords": ["Doctor", "Paciente", "Medicina", "Cama", "Ambulancia", "Cirugía", "Enfermera", "Vacuna", "Sala", "Termómetro"] 
+    },
+    { 
+      "mainWord": "Escuela", 
+      "infiltradoWord": null, 
+      "relatedWords": ["Profesor", "Alumno", "Libro", "Pizarra", "Examen", "Recreo", "Mochila", "Lapiz", "Clase", "Aula"] 
+    },
+    { 
+      "mainWord": "Espacio", 
+      "infiltradoWord": null, 
+      "relatedWords": ["Estrella", "Planeta", "Cohete", "Galaxia", "Astronauta", "Luna", "Sol", "Cometa", "Telescopio", "Nave"] 
+    },
+    { 
+      "mainWord": "Cocina", 
+      "infiltradoWord": null, 
+      "relatedWords": ["Sartén", "Plato", "Cuchillo", "Nevera", "Receta", "Fuego", "Comida", "Horno", "Tenedor", "Cuchara"] 
+    }
   ]
 }
