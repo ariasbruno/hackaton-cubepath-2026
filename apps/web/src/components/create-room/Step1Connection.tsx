@@ -22,11 +22,7 @@ export const Step1Connection: React.FC<Step1ConnectionProps> = ({ connection, se
     {/* Mobile: vertical list | Desktop: 2-column grid, portrait cards */}
     <div className="w-full space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
       {/* Online */}
-      <button
-        type="button"
-        onClick={() => setConnection('online')}
-        className={`block relative w-full cursor-pointer group text-left md:text-center`}
-      >
+      <div className="relative w-full group">
         {/* Mobile: horizontal card */}
         <div className="md:hidden">
           <SelectionCard
@@ -41,11 +37,15 @@ export const Step1Connection: React.FC<Step1ConnectionProps> = ({ connection, se
           />
         </div>
         {/* Desktop: portrait card */}
-        <div className={`hidden md:flex flex-col items-center text-center gap-8 p-10 rounded-card border-4 shadow-hard paper-card transition-all relative ${
-          connection === 'online'
-            ? 'border-secondary bg-secondary-muted'
-            : 'bg-white border-ink/5 hover:border-secondary/40'
-        }`}>
+        <button
+          type="button"
+          onClick={() => setConnection('online')}
+          className={`hidden md:flex flex-col items-center text-center gap-8 p-10 rounded-card border-4 shadow-hard paper-card transition-all relative w-full ${
+            connection === 'online'
+              ? 'border-secondary bg-secondary-muted'
+              : 'bg-white border-ink/5 hover:border-secondary/40'
+          }`}
+        >
           <div className={`w-32 h-32 rounded-full flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 shadow-inner ${
             connection === 'online' ? 'bg-secondary/20 text-secondary' : 'bg-secondary/10 text-secondary'
           }`}>
@@ -62,15 +62,11 @@ export const Step1Connection: React.FC<Step1ConnectionProps> = ({ connection, se
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
             </div>
           )}
-        </div>
-      </button>
+        </button>
+      </div>
 
       {/* Local */}
-      <button
-        type="button"
-        onClick={() => setConnection('local')}
-        className="block relative w-full cursor-pointer group text-left md:text-center"
-      >
+      <div className="relative w-full group">
         {/* Mobile: horizontal card */}
         <div className="md:hidden">
           <SelectionCard
@@ -85,11 +81,15 @@ export const Step1Connection: React.FC<Step1ConnectionProps> = ({ connection, se
           />
         </div>
         {/* Desktop: portrait card */}
-        <div className={`hidden md:flex flex-col items-center text-center gap-8 p-10 rounded-card border-4 shadow-hard paper-card transition-all relative ${
-          connection === 'local'
-            ? 'border-primary bg-primary-muted'
-            : 'bg-white border-ink/5 hover:border-primary/40'
-        }`}>
+        <button
+          type="button"
+          onClick={() => setConnection('local')}
+          className={`hidden md:flex flex-col items-center text-center gap-8 p-10 rounded-card border-4 shadow-hard paper-card transition-all relative w-full ${
+            connection === 'local'
+              ? 'border-primary bg-primary-muted'
+              : 'bg-white border-ink/5 hover:border-primary/40'
+          }`}
+        >
           <div className={`w-32 h-32 rounded-full flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 shadow-inner ${
             connection === 'local' ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'
           }`}>
@@ -106,8 +106,8 @@ export const Step1Connection: React.FC<Step1ConnectionProps> = ({ connection, se
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
             </div>
           )}
-        </div>
-      </button>
+        </button>
+      </div>
     </div>
   </>
 );
