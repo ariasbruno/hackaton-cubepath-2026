@@ -3,15 +3,12 @@ layout tall:bias=50;full_size=1
 
 # Ventana 1: Frontend
 title FRONTEND
-cd apps/web
-launch bash --rcfile ../../scripts/dev/.bashrc_host
+launch --cwd "$PROJECT_ROOT/apps/web" bash -c "source $PROJECT_ROOT/scripts/dev/.bashrc_host; exec bash"
 
 # Ventana 2: API
 title API
-cd apps/api
-launch bash --rcfile ../../scripts/dev/.bashrc_host
+launch --cwd "$PROJECT_ROOT/apps/api" bash -c "source $PROJECT_ROOT/scripts/dev/.bashrc_host; exec bash"
 
 # Ventana 3: Game Server
 title GAME SERVER
-cd apps/game-server
-launch bash --rcfile ../../scripts/dev/.bashrc_host
+launch --cwd "$PROJECT_ROOT/apps/game-server" bash -c "source $PROJECT_ROOT/scripts/dev/.bashrc_host; exec bash"

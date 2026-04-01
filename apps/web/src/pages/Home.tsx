@@ -55,13 +55,13 @@ export const Home: React.FC = () => {
     <PageTransition className="bg-paper pattern-dots overflow-hidden selection:bg-primary selection:text-white">
 
       {/* ── Desktop Top Bar ── only on md+ */}
-      <header className="hidden md:flex h-20 bg-white/60 backdrop-blur-sm border-b-2 border-ink/5 px-10 items-center justify-between shrink-0 z-20">
+      <header className="hidden md:flex h-[72px] bg-white/60 backdrop-blur-sm border-b-2 border-ink/5 px-8 items-center justify-between shrink-0 z-20">
         <div>
-          <p className="text-[10px] font-bold text-ink/30 uppercase tracking-widest">
+          <p className="text-[9px] font-bold text-ink/30 uppercase tracking-widest">
             {isRegistered ? 'Bienvenido de nuevo,' : 'Modo Invitado,'}
           </p>
           <div className="flex items-center gap-2">
-            <h1 className={`font-display text-2xl text-ink uppercase tracking-tight leading-none ${!isRegistered ? 'text-ink/50 italic' : ''}`}>
+            <h1 className={`font-display text-xl text-ink uppercase tracking-tight leading-none ${!isRegistered ? 'text-ink/50 italic' : ''}`}>
               {nickname}
             </h1>
             {!isRegistered && (
@@ -73,11 +73,11 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-hard-sm border-2 border-ink/5">
-            <StarsIcon className="w-5 h-5 text-yellow" />
-            <span className="font-bold font-mono text-lg">{totalScore.toLocaleString()}</span>
+          <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-hard-sm border-2 border-ink/5">
+            <StarsIcon className="w-4 h-4 text-yellow" />
+            <span className="font-bold font-mono text-base">{totalScore.toLocaleString()}</span>
           </div>
-          <div className="w-12 h-12 rounded-full border-4 border-white shadow-hard overflow-hidden bg-paper flex items-center justify-center">
+          <div className="w-11 h-11 rounded-full border-4 border-white shadow-hard overflow-hidden bg-paper flex items-center justify-center">
             <Avatar avatarId={avatar || 'noto--bear'} bgColor={color || undefined} size="sm" />
           </div>
         </div>
@@ -170,28 +170,28 @@ export const Home: React.FC = () => {
         </div>
 
         {/* ════ DESKTOP LAYOUT ════ (hidden below md) */}
-        <div className="hidden md:block p-10 space-y-10">
+        <div className="hidden md:block p-8 space-y-8">
 
           {/* Hero Grid: CTA (8 cols) + Featured Mode (4 cols) */}
-          <div className="grid grid-cols-12 gap-8">
+          <div className="grid grid-cols-12 gap-6">
 
             {/* Main CTA Card */}
             <div className="col-span-8">
               <button
                 onClick={handleStartGame}
-                className="block w-full h-56 bg-primary text-white rounded-card shadow-hard-lg hover:translate-y-1 hover:shadow-hard transition-all active:translate-y-2 active:shadow-none relative overflow-hidden group p-8 text-left"
+                className="block w-full h-48 bg-primary text-white rounded-card shadow-hard-lg hover:translate-y-1 hover:shadow-hard transition-all active:translate-y-2 active:shadow-none relative overflow-hidden group p-7 text-left"
               >
                 <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 rounded-card" />
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   <div>
-                    <h2 className="font-display text-5xl xl:text-6xl uppercase tracking-tighter mb-2">¡A Jugar!</h2>
-                    <p className="font-bold text-white/80 uppercase tracking-widest text-sm">
+                    <h2 className="font-display text-4xl xl:text-5xl uppercase tracking-tighter mb-2">¡A Jugar!</h2>
+                    <p className="font-bold text-white/80 uppercase tracking-widest text-[13px]">
                       Crea una sala o únete a una partida
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
-                    <PlayCircleIcon className="w-14 h-14 drop-shadow-md" />
-                    <span className="bg-white/20 px-5 py-2 rounded-full font-bold uppercase tracking-widest text-xs backdrop-blur-sm border border-white/20">
+                    <PlayCircleIcon className="w-12 h-12 drop-shadow-md" />
+                    <span className="bg-white/20 px-4 py-1.5 rounded-full font-bold uppercase tracking-widest text-[11px] backdrop-blur-sm border border-white/20">
                       Salas activas ahora mismo
                     </span>
                   </div>
@@ -201,47 +201,47 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Featured: Modo Caos */}
-            <div className="col-span-4 h-56 bg-white rounded-card shadow-hard border-4 border-ink/5 p-8 flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-danger text-white px-4 py-1 font-bold text-[9px] uppercase tracking-widest rotate-12 translate-x-2 translate-y-4 shadow-sm border-2 border-white z-10">
+            <div className="col-span-4 h-48 bg-white rounded-card shadow-hard border-4 border-ink/5 p-7 flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-danger text-white px-3 py-1 font-bold text-[8px] uppercase tracking-widest rotate-12 translate-x-2 translate-y-4 shadow-sm border-2 border-white z-10">
                 ¡NUEVO!
               </div>
               <div>
-                <h3 className="font-display text-2xl uppercase text-ink">Modo Caos</h3>
-                <p className="text-xs font-bold text-ink/40 uppercase leading-snug mt-2">
+                <h3 className="font-display text-xl uppercase text-ink">Modo Caos</h3>
+                <p className="text-[11px] font-bold text-ink/40 uppercase leading-snug mt-2">
                   Prueba la nueva dinámica de vínculos secretos.
                 </p>
               </div>
               <button
                 onClick={() => navigate('/create', { state: { presetMode: 'CAOS', presetConnection: 'online' } })}
-                className="bg-purple text-white py-3 rounded-btn shadow-hard font-display uppercase tracking-widest text-sm hover:translate-y-0.5 hover:shadow-hard-sm active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
+                className="bg-purple text-white py-2 rounded-btn shadow-hard font-display uppercase tracking-widest text-[13px] hover:translate-y-0.5 hover:shadow-hard-sm active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"
               >
-                <RocketLaunchIcon className="w-5 h-5" />
+                <RocketLaunchIcon className="w-4 h-4" />
                 Explorar
               </button>
             </div>
           </div>
 
           {/* Dashboard Sections: How to Play (7 cols) + Recent Rooms (5 cols) */}
-          <div className="grid grid-cols-12 gap-8">
+          <div className="grid grid-cols-12 gap-6">
 
             {/* ¿Cómo Funciona? */}
-            <div className="col-span-7 space-y-6">
-              <h2 className="font-display text-3xl uppercase tracking-tight ml-1">¿Cómo Funciona?</h2>
-              <div className="grid grid-cols-2 gap-5">
+            <div className="col-span-7 space-y-5">
+              <h2 className="font-display text-2xl uppercase tracking-tight ml-1">¿Cómo Funciona?</h2>
+              <div className="grid grid-cols-2 gap-4">
                 {HOW_TO_PLAY.map((item) => {
                   const Icon = item.icon;
                   return (
                     <div
                       key={item.label}
-                      className="bg-white p-7 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-4 hover:bg-paper transition-all cursor-pointer group"
+                      className="bg-white p-6 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-3 hover:bg-paper transition-all cursor-pointer group"
                       onClick={() => navigate('/help' + (item.target || ''))}
                     >
-                      <div className={`w-20 h-20 bg-${item.color}-muted text-${item.color} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard`}>
-                        <Icon className="w-10 h-10" />
+                      <div className={`w-16 h-16 bg-${item.color}-muted text-${item.color} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard`}>
+                        <Icon className="w-8 h-8" />
                       </div>
                       <div>
-                        <h3 className="font-display text-xl uppercase">{item.label}</h3>
-                        <p className="text-[10px] text-ink/40 font-bold uppercase mt-1">{item.desc}</p>
+                        <h3 className="font-display text-lg uppercase">{item.label}</h3>
+                        <p className="text-[9px] text-ink/40 font-bold uppercase mt-1">{item.desc}</p>
                       </div>
                     </div>
                   );
@@ -250,12 +250,12 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Salas Recientes */}
-            <div className="col-span-5 space-y-6">
+            <div className="col-span-5 space-y-5">
               <div className="flex justify-between items-end px-1">
-                <h2 className="font-display text-3xl uppercase tracking-tight">Salas Recientes</h2>
+                <h2 className="font-display text-2xl uppercase tracking-tight">Salas Recientes</h2>
                 <button
                   onClick={() => navigate('/rooms')}
-                  className="text-xs font-bold text-secondary uppercase tracking-widest hover:underline"
+                  className="text-[11px] font-bold text-secondary uppercase tracking-widest hover:underline"
                 >
                   Ver Todo
                 </button>
@@ -263,9 +263,9 @@ export const Home: React.FC = () => {
 
               <div className="space-y-4">
                 {/* Empty state — end of history */}
-                <div className="border-4 border-dashed border-ink/5 rounded-card p-10 flex flex-col items-center justify-center gap-4 opacity-30">
-                  <HistoryIcon className="w-12 h-12" />
-                  <p className="font-bold uppercase tracking-widest text-sm">Sin salas recientes</p>
+                <div className="border-4 border-dashed border-ink/5 rounded-card p-8 flex flex-col items-center justify-center gap-4 opacity-30">
+                  <HistoryIcon className="w-10 h-10" />
+                  <p className="font-bold uppercase tracking-widest text-[13px]">Sin salas recientes</p>
                 </div>
 
                 {/* Example of a future room item — hidden when empty */}

@@ -51,16 +51,16 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({
           <div className="absolute inset-0 bg-primary/5 pattern-dots opacity-20" />
 
           {/* Avatar — larger on desktop */}
-          <div className="relative mb-4 md:mb-8">
+          <div className="relative mb-4 md:mb-7">
             <Avatar
               avatarId={avatar || 'noto--bear'}
               size="xl"
               bgColor={color || '#FFD166'}
               borderColor="border-white"
-              className="md:w-48! md:h-48! md:text-[120px]!"
+              className="md:w-[172px]! md:h-[172px]! md:text-[108px]!"
               badge={
-                <div className={`${isRegistered ? 'bg-yellow' : 'bg-ink/10'} text-ink p-2 md:p-4 rounded-full shadow-hard border-2 md:border-4 border-white rotate-12`}>
-                  {isRegistered ? <WorkspacePremiumIcon className="w-6 h-6 md:w-8 md:h-8" /> : <HelpIcon className="w-6 h-6 md:w-8 md:h-8" />}
+                <div className={`${isRegistered ? 'bg-yellow' : 'bg-ink/10'} text-ink p-2 md:p-3.5 rounded-full shadow-hard border-2 md:border-[3.5px] border-white rotate-12`}>
+                  {isRegistered ? <WorkspacePremiumIcon className="w-6 h-6 md:w-7 md:h-7" /> : <HelpIcon className="w-6 h-6 md:w-7 md:h-7" />}
                 </div>
               }
             />
@@ -69,14 +69,14 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({
           {/* Name + edit */}
           <div className="relative w-full group">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <h2 className={`font-display text-3xl md:text-5xl text-ink ${!isRegistered ? 'opacity-50 italic' : ''}`}>
+              <h2 className={`font-display text-3xl md:text-4xl text-ink ${!isRegistered ? 'opacity-50 italic' : ''}`}>
                 {nickname || 'Invitado'}
               </h2>
               <button
                 onClick={onEdit}
                 className="text-ink/20 hover:text-primary transition-colors"
               >
-                <EditIcon className="w-4 h-4 md:w-5 md:h-5" />
+                <EditIcon className="w-4 h-4 md:w-[18px] md:h-[18px]" />
               </button>
             </div>
             <p className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-ink/30">
@@ -85,20 +85,20 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({
           </div>
 
           {/* Score + Rank */}
-          <div className="mt-6 md:mt-8 grid grid-cols-2 gap-4 md:gap-6 w-full relative">
-            <div className="bg-primary-muted p-3 md:p-6 rounded-btn border-2 md:border-4 border-primary/10 shadow-hard-sm transition-all hover:bg-white">
-              <p className="text-[8px] md:text-[10px] font-extrabold text-primary uppercase tracking-widest leading-tight mb-1">
+          <div className="mt-6 md:mt-7 grid grid-cols-2 gap-4 md:gap-5 w-full relative">
+            <div className="bg-primary-muted p-3 md:p-5 rounded-btn border-2 md:border-[3.5px] border-primary/10 shadow-hard-sm transition-all hover:bg-white">
+              <p className="text-[8px] md:text-[9px] font-extrabold text-primary uppercase tracking-widest leading-tight mb-1">
                 Puntos Totales
               </p>
-              <p className="font-display text-2xl md:text-4xl text-primary leading-none">
+              <p className="font-display text-2xl md:text-3xl text-primary leading-none">
                 {totalScore.toLocaleString()}
               </p>
             </div>
-            <div className="bg-secondary-muted p-3 md:p-6 rounded-btn border-2 md:border-4 border-secondary/10 shadow-hard-sm transition-all hover:bg-white">
-              <p className="text-[8px] md:text-[10px] font-extrabold text-secondary uppercase tracking-widest leading-tight mb-1">
+            <div className="bg-secondary-muted p-3 md:p-5 rounded-btn border-2 md:border-[3.5px] border-secondary/10 shadow-hard-sm transition-all hover:bg-white">
+              <p className="text-[8px] md:text-[9px] font-extrabold text-secondary uppercase tracking-widest leading-tight mb-1">
                 Global Rank
               </p>
-              <p className="font-display text-2xl md:text-4xl text-secondary leading-none">
+              <p className="font-display text-2xl md:text-3xl text-secondary leading-none">
                 {globalRank ? `#${globalRank}` : '—'}
               </p>
             </div>
@@ -107,16 +107,16 @@ export const ProfileHero: React.FC<ProfileHeroProps> = ({
       </section>
 
       {/* ── Badges card (shown separately to match desktop layout) ── */}
-      <section className="bg-white p-6 md:p-8 rounded-card border-4 border-ink/5 shadow-hard space-y-4 md:space-y-6">
-        <h3 className="font-display text-lg md:text-xl uppercase tracking-tight text-ink/40">Insignias</h3>
-        <div className="flex flex-wrap gap-3 md:gap-4">
+      <section className="bg-white p-6 md:p-7 rounded-card border-4 border-ink/5 shadow-hard space-y-4 md:space-y-5">
+        <h3 className="font-display text-lg md:text-lg uppercase tracking-tight text-ink/40">Insignias</h3>
+        <div className="flex flex-wrap gap-3 md:gap-3.5">
           {BADGES.map((b, i) => (
             <div
               key={i}
               title={b.title}
-              className={`w-14 h-14 md:w-16 md:h-16 ${b.bg} rounded-2xl border-2 ${b.border} flex items-center justify-center ${b.text} shadow-sm ${b.rotate}`}
+              className={`w-14 h-14 md:w-[58px] md:h-[58px] ${b.bg} rounded-2xl border-2 ${b.border} flex items-center justify-center ${b.text} shadow-sm ${b.rotate}`}
             >
-              <b.icon className="w-7 h-7 md:w-8 md:h-8" />
+              <b.icon className="w-7 h-7 md:w-7 md:h-7" />
             </div>
           ))}
         </div>

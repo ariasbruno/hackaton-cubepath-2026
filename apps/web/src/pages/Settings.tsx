@@ -55,10 +55,10 @@ export const Settings: React.FC = () => {
   return (
     <PageTransition className="bg-paper pattern-dots overflow-hidden">
       <main className="flex-1 overflow-y-auto no-scrollbar">
-        <div className="max-w-md mx-auto md:max-w-2xl pb-32">
+        <div className="max-w-md mx-auto md:max-w-[605px] pb-32">
         <PageHeader title="Ajustes" onBack={() => navigate('/')} />
 
-        <div className="px-6 space-y-6">
+        <div className="px-6 space-y-5">
           <SettingsGroup title="Juego">
             <SettingsToggle icon={VolumeUpIcon} label="Sonido" enabled={sound} onToggle={() => setSound(!sound)} />
             <SettingsToggle icon={VibrationRoundedIcon} label="Vibración" enabled={vibration} onToggle={() => setVibration(!vibration)} />
@@ -76,7 +76,7 @@ export const Settings: React.FC = () => {
             />
           </SettingsGroup>
 
-          <section className="pt-4 space-y-3">
+          <section className="pt-3.5 space-y-2.5">
             <Button
               variant="ghost"
               fullWidth
@@ -95,7 +95,7 @@ export const Settings: React.FC = () => {
             >
               Borrar mis datos
             </Button>
-            <p className="text-[10px] text-center text-ink/30 font-bold uppercase tracking-widest px-8">
+            <p className="text-[9px] text-center text-ink/30 font-bold uppercase tracking-widest px-8">
               Esta acción borrará partidas guardadas, estadísticas y tu perfil local.
             </p>
           </section>

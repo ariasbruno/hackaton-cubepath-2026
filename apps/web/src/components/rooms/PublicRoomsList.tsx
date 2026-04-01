@@ -13,27 +13,27 @@ export const PublicRoomsList: React.FC<PublicRoomsListProps> = ({ rooms, onJoin,
   return (
     <section className="space-y-3 pb-8 flex-1 flex flex-col min-h-0">
       <div className="flex items-center justify-between px-1">
-        <h3 className="font-display text-lg uppercase tracking-tight text-ink/40">
+        <h3 className="font-display text-base uppercase tracking-tight text-ink/40">
           Salas Públicas ({rooms.length})
         </h3>
         <button 
           onClick={onCreateRoom}
-          className="flex items-center gap-2 px-4 py-1.5 bg-white border-2 border-ink/5 rounded-btn shadow-hard hover:shadow-none hover:translate-y-0.5 transition-all group active:scale-95"
+          className="flex items-center gap-2 px-[14px] py-[5px] bg-white border-2 border-ink/5 rounded-btn shadow-hard hover:shadow-none hover:translate-y-0.5 transition-all group active:scale-95"
         >
-          <AddCircleIcon className="w-5 h-5 text-primary group-hover:rotate-90 transition-transform duration-300" />
-          <span className="font-bold text-[10px] uppercase tracking-widest text-ink/60 whitespace-nowrap">Crear Sala</span>
+          <AddCircleIcon className="w-[18px] h-[18px] text-primary group-hover:rotate-90 transition-transform duration-300" />
+          <span className="font-bold text-[9px] uppercase tracking-widest text-ink/60 whitespace-nowrap">Crear Sala</span>
         </button>
       </div>
 
       {rooms.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-12 text-ink/20 flex-1">
-          <SearchOffIcon className="w-9 h-9 mb-3" />
-          <p className="text-sm font-bold uppercase tracking-widest">
+        <div className="flex flex-col items-center justify-center py-10 text-ink/20 flex-1">
+          <SearchOffIcon className="w-8 h-8 mb-3" />
+          <p className="text-[13px] font-bold uppercase tracking-widest">
             No hay salas disponibles
           </p>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-[14px]">
           {rooms.map((room) => (
             <RoomCard key={room.code} room={room} onJoin={onJoin} />
           ))}

@@ -15,21 +15,21 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   className = '',
 }) => {
   return (
-    <header className={`p-6 flex items-center justify-between z-20 ${className}`}>
+    <header className={`py-4.5 px-6 flex items-center justify-between z-20 ${className}`}>
       {onBack ? (
         <button
           onClick={onBack}
-          className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-hard border-2 border-ink/5 active:translate-y-0.5 active:shadow-none transition-all"
+          className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-hard border-2 border-ink/5 active:translate-y-0.5 active:shadow-none transition-all"
         >
-          <ArrowBackIcon className="w-6 h-6" />
+          <ArrowBackIcon className="w-5 h-5" />
         </button>
       ) : (
-        <div className="w-12" />
+        <div className="w-10" />
       )}
-      <h1 className="font-display text-2xl text-ink uppercase tracking-tight">
+      <h1 className="font-display text-xl text-ink uppercase tracking-tight">
         {title}
       </h1>
-      {rightAction || <div className="w-12" />}
+      {rightAction || <div className="w-10" />}
     </header>
   );
 };

@@ -1,9 +1,21 @@
-# 1. Cargamos tu configuración normal de Linux Mint (colores, variables, PATH de Bun)
-source ~/.bashrc
+# 1. Cargamos configuración normal
+[[ -f ~/.bashrc ]] && source ~/.bashrc
 
-# 2. Variables de entorno para acceso desde red local (mint.local)
+# 2. Aseguramos que Bun esté en el PATH (por si el .bashrc no lo cargó)
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# 3. Variables de entorno para host
 export VITE_API_URL=http://mint.local:3000
 export VITE_WS_URL=ws://mint.local:3001
 
-# 3. Ejecutamos el servidor
-bun run dev
+# 4. Feedback visual
+echo -e "\e[1;34m>>> Iniciando entorno HOST en: \e[1;32m$(pwd)\e[0m"
+echo -e "\e[1;34m>>> Variables: API=$VITE_API_URL, WS=$VITE_WS_URL\e[0m"
+
+# 5. Ejecutar
+if command -v bun &> /dev/null; then
+    bun run dev
+else
+    echo -e "\e[1;31mError: No se encontró 'bun'. Por favor, instálalo o revisa tu PATH.\e[0m"
+fi

@@ -17,7 +17,7 @@ export const ModeFilters: React.FC<ModeFiltersProps> = ({
         <button
           key={filter}
           onClick={() => onFilterClick(filter)}
-          className={`px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest whitespace-nowrap transition-all border-2 ${
+          className={`px-[14px] py-1.5 rounded-full font-bold text-[11px] uppercase tracking-widest whitespace-nowrap transition-all border-2 ${
             activeFilter === filter
               ? 'bg-secondary text-white border-secondary shadow-hard-sm'
               : 'bg-white text-ink/40 border-ink/5 hover:border-ink/20'

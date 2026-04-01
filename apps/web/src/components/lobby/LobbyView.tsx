@@ -36,9 +36,9 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
     <PageTransition className="pattern-dots relative bg-paper overflow-hidden md:flex md:flex-row md:items-stretch h-full">
       {/* Main Content Area (Left on Desktop, Full on Mobile) */}
       <div className="flex-1 flex flex-col min-w-0 h-full relative z-10 overflow-hidden">
-        <main className="flex-1 px-6 md:px-0 flex flex-col gap-8 md:gap-0 no-scrollbar overflow-y-auto pb-safe">
+        <main className="flex-1 px-6 md:px-0 flex flex-col gap-7 md:gap-0 no-scrollbar overflow-y-auto pb-safe">
           
-          <div className="md:pt-8 md:px-12">
+          <div className="md:pt-6 md:px-8">
             <LobbyHeader 
               mode={roomState.settings?.mode} 
               code={code} 
@@ -63,7 +63,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
             />
           </div>
 
-          <div className="w-full max-w-4xl mx-auto md:px-12 pb-12 mt-4 md:mt-12">
+          <div className="w-full max-w-[720px] mx-auto md:px-8 pb-8 mt-4 md:mt-8">
             <PlayerGrid 
               players={roomState.players}
               maxPlayers={roomState.settings?.maxPlayers || 8}
@@ -86,10 +86,10 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
       </div>
 
       {/* Right Sidebar (Chat & Scoreboard on Desktop) */}
-      <div className="hidden md:flex w-[400px] shrink-0 border-l-2 border-ink/5 bg-paper flex-col h-full z-20 shadow-[-10px_0_40px_rgba(0,0,0,0.03)] pb-safe relative">
+      <div className="hidden md:flex w-[320px] shrink-0 border-l-2 border-ink/5 bg-paper flex-col h-full z-20 shadow-[-10px_0_40px_rgba(0,0,0,0.03)] pb-safe relative">
         <div className="absolute inset-0 bg-white/50 backdrop-blur-sm pointer-events-none" />
         
-        <div className="p-6 pb-2 shrink-0 relative z-10">
+        <div className="p-4 pb-2 shrink-0 relative z-10">
           <Scoreboard 
             players={roomState.players} 
             hostId={roomState.hostId} 
@@ -97,7 +97,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
           />
         </div>
 
-        <div className="flex-1 min-h-0 p-6 pt-2 relative z-10 [&>section]:h-full [&>section>div]:h-full!">
+        <div className="flex-1 min-h-0 p-4 pt-2 relative z-10 [&>section]:h-full [&>section>div]:h-full!">
           <LobbyChat 
             chatMessages={roomState.chatMessages} 
             playerId={playerId} 

@@ -64,11 +64,11 @@ const colorStyles = {
 
 export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameMode, connection }) => (
   <>
-    <div className="text-center mb-10">
-      <h2 className="font-display text-4xl md:text-5xl mb-2 uppercase tracking-tight leading-none">
+    <div className="text-center mb-8">
+      <h2 className="font-display text-3xl md:text-[38px] mb-2 uppercase tracking-tight leading-none">
         Modo de Juego
       </h2>
-      <p className="text-xs text-ink/40 font-bold uppercase tracking-widest">
+      <p className="text-[10px] text-ink/40 font-bold uppercase tracking-widest">
         ¿Cómo será la dinámica de tu partida?
       </p>
     </div>
@@ -114,7 +114,7 @@ export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameM
     </div>
 
     {/* Desktop: 3-column portrait grid */}
-    <div className="hidden md:grid grid-cols-3 gap-8 w-full">
+    <div className="hidden md:grid grid-cols-3 gap-6 w-full">
       {MODES.map((mode) => {
         const isDisabled = mode.online && connection === 'local';
         const isSelected = gameMode === mode.key;
@@ -128,29 +128,29 @@ export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameM
             onClick={() => !isDisabled && setGameMode(mode.key)}
             className={`relative cursor-pointer group text-center ${isDisabled ? 'opacity-40 pointer-events-none' : ''}`}
           >
-            <div className={`h-full flex flex-col items-center text-center gap-8 p-10 rounded-card border-4 shadow-hard paper-card transition-all relative ${
+            <div className={`h-full flex flex-col items-center text-center gap-6 p-8 rounded-card border-4 shadow-hard paper-card transition-all relative ${
               isSelected ? `${c.border} ${c.bg}` : `bg-white border-ink/5 ${c.hover}`
             }`}>
-              <div className={`w-24 h-24 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:rotate-3 shadow-inner ${c.iconBg}`}>
-                <mode.icon className="w-12 h-12" />
+              <div className={`w-20 h-20 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:rotate-3 shadow-inner ${c.iconBg}`}>
+                <mode.icon className="w-10 h-10" />
               </div>
               <div>
-                <div className="flex items-center justify-center gap-3 mb-3">
-                  <h3 className="font-display text-3xl uppercase leading-none">{mode.title}</h3>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <h3 className="font-display text-xl uppercase leading-none">{mode.title}</h3>
                   {mode.online && (
-                    <span className="bg-purple text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm">
+                    <span className="bg-purple text-white text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">
                       Online
                     </span>
                   )}
                 </div>
-                <p className="text-xs font-bold text-ink/40 uppercase leading-relaxed max-w-[180px] mx-auto">
+                <p className="text-[10px] font-bold text-ink/40 uppercase leading-relaxed max-w-[170px] mx-auto">
                   {mode.description}
                 </p>
               </div>
             </div>
             {/* Selection indicator */}
             {isSelected && (
-              <div className={`absolute -top-3 -right-3 w-10 h-10 ${c.check} text-white rounded-full flex items-center justify-center border-4 border-white shadow-hard`}>
+              <div className={`absolute -top-3 -right-3 w-9 h-9 ${c.check} text-white rounded-full flex items-center justify-center border-[3px] border-white shadow-hard-sm`}>
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
               </div>
             )}

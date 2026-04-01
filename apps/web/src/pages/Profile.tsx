@@ -112,22 +112,22 @@ export const Profile: React.FC = () => {
       </div>
 
       {/* Desktop Header */}
-      <header className="hidden md:flex h-24 bg-white/50 backdrop-blur-sm border-b-2 border-ink/5 px-10 items-center justify-between shrink-0">
+      <header className="hidden md:flex h-[86px] bg-white/50 backdrop-blur-sm border-b-2 border-ink/5 px-9 items-center justify-between shrink-0">
         <div>
-          <h2 className="font-display text-3xl uppercase tracking-tight text-ink">Mi Perfil</h2>
+          <h2 className="font-display text-2xl uppercase tracking-tight text-ink">Mi Perfil</h2>
         </div>
         
         <div className="flex items-center gap-4">
-          <button className="bg-white px-6 py-3 rounded-full shadow-hard-sm border-2 border-ink/5 flex items-center gap-3 hover:translate-y-0.5 transition-all group">
-            <ShareIcon className="w-5 h-5 text-ink group-hover:text-primary transition-colors" />
-            <span className="font-bold text-xs uppercase tracking-widest text-ink/60 group-hover:text-ink transition-colors">Compartir</span>
+          <button className="bg-white px-5 py-2.5 rounded-full shadow-hard-sm border-2 border-ink/5 flex items-center gap-3 hover:translate-y-0.5 transition-all group">
+            <ShareIcon className="w-[18px] h-[18px] text-ink group-hover:text-primary transition-colors" />
+            <span className="font-bold text-[11px] uppercase tracking-widest text-ink/60 group-hover:text-ink transition-colors">Compartir</span>
           </button>
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto no-scrollbar p-6 md:p-10">
-        <div className="max-w-md mx-auto md:max-w-7xl">
-          <div className="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-10">
+      <main className="flex-1 overflow-y-auto no-scrollbar p-6 md:p-9">
+        <div className="max-w-md mx-auto md:max-w-[1152px]">
+          <div className="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-9">
             {/* Left Column (Mobile: top) */}
             <div className="md:col-span-5 space-y-8">
               <ProfileHero 

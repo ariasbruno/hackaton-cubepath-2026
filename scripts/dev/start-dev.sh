@@ -2,6 +2,7 @@
 
 # Obtenemos la ruta absoluta de la carpeta donde está este script
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export PROJECT_ROOT="$(cd "$DIR/../.." && pwd)"
 
 # Lanzamos Kitty con la sesión
 kitty --session "$DIR/kitty.session" &

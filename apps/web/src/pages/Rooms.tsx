@@ -140,13 +140,13 @@ export const Rooms: React.FC = () => {
   return (
     <PageTransition className="bg-paper pattern-dots overflow-hidden selection:bg-primary selection:text-white">
       <main className="flex-1 overflow-y-auto no-scrollbar">
-        <div className="max-w-md mx-auto md:max-w-2xl px-6 flex flex-col gap-6 pb-32">
+        <div className="max-w-md mx-auto md:max-w-[604px] px-6 flex flex-col gap-5 pb-32">
         {/* Header */}
-        <header className="pt-8 pb-2">
-          <h1 className="font-display text-4xl text-ink uppercase tracking-tight mb-1">
+        <header className="pt-7 pb-2">
+          <h1 className="font-display text-3xl text-ink uppercase tracking-tight mb-1">
             Salas
           </h1>
-          <p className="text-xs text-ink/40 font-bold uppercase tracking-widest">
+          <p className="text-[11px] text-ink/40 font-bold uppercase tracking-widest">
             Encuentra tu partida perfecta
           </p>
         </header>

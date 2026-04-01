@@ -34,14 +34,14 @@ export const LobbyChat: React.FC<LobbyChatProps> = ({ chatMessages, playerId, mo
 
   return (
     <section className="flex flex-col gap-3">
-      <h2 className={`font-display text-xl uppercase tracking-tight text-${accentColor} flex items-center gap-2`}>
-        <ChatIcon className="w-6 h-6" />
+      <h2 className={`font-display text-lg uppercase tracking-tight text-${accentColor} flex items-center gap-2`}>
+        <ChatIcon className="w-5 h-5" />
         Chat de Sala
       </h2>
-      <div className="bg-white rounded-card border-2 border-ink/5 shadow-hard overflow-hidden flex flex-col h-64">
+      <div className="bg-white rounded-card border-2 border-ink/5 shadow-hard overflow-hidden flex flex-col h-[230px]">
         <div
           ref={scrollRef}
-          className="flex-1 p-4 space-y-3 overflow-y-auto no-scrollbar bg-ink/5 scroll-smooth"
+          className="flex-1 p-3.5 space-y-2.5 overflow-y-auto no-scrollbar bg-ink/5 scroll-smooth"
         >
           {(chatMessages || []).map((msg: any, idx: number) => {
             const isMe = msg.playerId === playerId;
@@ -50,11 +50,11 @@ export const LobbyChat: React.FC<LobbyChatProps> = ({ chatMessages, playerId, mo
                 {!isMe && (
                   <Avatar avatarId={msg.avatar || 'noto--bear'} bgColor={msg.color || '#FFD166'} size="sm" />
                 )}
-                <div className={`${isMe ? `bg-${accentColor} text-white border-2 border-${accentColor}` : 'bg-white text-ink border-2 border-ink/5'} p-2 rounded-btn shadow-sm max-w-[80%]`}>
-                  <p className={`text-[10px] font-bold leading-none mb-1 ${isMe ? 'text-white/80 text-right' : `text-${accentColor} text-left`}`}>
+                <div className={`${isMe ? `bg-${accentColor} text-white border-2 border-${accentColor}` : 'bg-white text-ink border-2 border-ink/5'} p-[7px] rounded-btn shadow-sm max-w-[80%]`}>
+                  <p className={`text-[10px] md:text-[11px] font-bold leading-none mb-1.5 ${isMe ? 'text-white/80 text-right' : `text-${accentColor} text-left`}`}>
                     {isMe ? 'Tú' : msg.nickname}
                   </p>
-                  <p className="text-[10px] leading-tight font-medium wrap-break-word">{msg.text}</p>
+                  <p className="text-[10px] md:text-[11px] leading-tight font-medium wrap-break-word">{msg.text}</p>
                 </div>
                 {isMe && (
                   <Avatar avatarId={msg.avatar || 'noto--bear'} bgColor={msg.color || '#FFD166'} size="sm" />
@@ -63,7 +63,7 @@ export const LobbyChat: React.FC<LobbyChatProps> = ({ chatMessages, playerId, mo
             );
           })}
           {(!chatMessages || chatMessages.length === 0) && (
-            <p className="text-center text-[10px] opacity-20 uppercase font-bold mt-10 tracking-[0.3em]">No hay mensajes</p>
+            <p className="text-center text-[10px] opacity-20 uppercase font-bold mt-12 tracking-[0.3em]">No hay mensajes</p>
           )}
         </div>
 
@@ -81,10 +81,10 @@ export const LobbyChat: React.FC<LobbyChatProps> = ({ chatMessages, playerId, mo
               autoCapitalize="off"
               // autoCorrect="off"
               // spellCheck={false}
-              className={`w-full bg-paper border-2 border-ink/5 px-4 py-2 pr-10 rounded-full text-[10px] font-bold tracking-widest focus:outline-none focus:border-${accentColor} transition-all placeholder:text-ink/20`}
+              className={`w-full bg-paper border-2 border-ink/5 px-[14px] py-[7px] pr-10 rounded-full text-[11px] font-bold tracking-widest focus:outline-none focus:border-${accentColor} transition-all placeholder:text-ink/20`}
             />
             {/* Progress Wheel */}
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 w-[14px] h-[14px]">
               <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
                 <circle
                   cx="18"
@@ -113,9 +113,9 @@ export const LobbyChat: React.FC<LobbyChatProps> = ({ chatMessages, playerId, mo
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className={`bg-${accentColor} text-white p-2 rounded-btn shadow-hard active:translate-y-0.5 active:shadow-none transition-all disabled:opacity-50`}
+            className={`bg-${accentColor} text-white p-[7px] rounded-btn shadow-hard active:translate-y-0.5 active:shadow-none transition-all disabled:opacity-50`}
           >
-            <SendIcon className="w-4 h-4" />
+            <SendIcon className="w-3.5 h-3.5" />
           </button>
         </form>
       </div>

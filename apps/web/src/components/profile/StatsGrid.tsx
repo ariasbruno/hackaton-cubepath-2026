@@ -42,23 +42,23 @@ export const StatsGrid: React.FC<StatsGridProps> = ({
 
   return (
     <section className="space-y-4">
-      <h3 className="font-display text-xl md:text-2xl uppercase tracking-tight text-ink opacity-40 md:opacity-100 ml-1 md:ml-2">
+      <h3 className="font-display text-xl md:text-xl uppercase tracking-tight text-ink opacity-40 md:opacity-100 ml-1 md:ml-2">
         Carrera de Inteligencia
       </h3>
-      <div className="grid grid-cols-2 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 gap-4 md:gap-5">
         {stats.map((stat) => (
           <Card 
             key={stat.label} 
             variant="paper" 
             borderWidth="thin" 
-            className={`p-4 md:p-8 flex flex-col md:flex-row md:items-center gap-2 md:gap-6 transition-all hover:-translate-y-1 md:hover:translate-y-0 active:scale-95 shadow-hard-sm group border-2 md:border-4 md:hover:border-ink`}
+            className={`p-4 md:p-7 flex flex-col md:flex-row md:items-center gap-2 md:gap-5 transition-all hover:-translate-y-1 md:hover:translate-y-0 active:scale-95 shadow-hard-sm group border-2 md:border-[3.5px] md:hover:border-ink`}
           >
-            <div className={`w-10 h-10 md:w-16 md:h-16 bg-${stat.color}/10 text-${stat.color} rounded-full md:rounded-2xl flex items-center justify-center shrink-0`}>
-              <stat.icon className="w-6 h-6 md:w-10 md:h-10" />
+            <div className={`w-10 h-10 md:w-[58px] md:h-[58px] bg-${stat.color}/10 text-${stat.color} rounded-full md:rounded-2xl flex items-center justify-center shrink-0`}>
+              <stat.icon className="w-6 h-6 md:w-9 md:h-9" />
             </div>
             <div>
-              <p className={`text-2xl md:text-4xl font-display text-${stat.color} leading-none`}>{stat.value}</p>
-              <p className="text-[8px] md:text-xs font-bold uppercase tracking-widest text-ink/40 md:mt-1">{stat.label}</p>
+              <p className={`text-2xl md:text-3xl font-display text-${stat.color} leading-none`}>{stat.value}</p>
+              <p className="text-[8px] md:text-[11px] font-bold uppercase tracking-widest text-ink/40 md:mt-1">{stat.label}</p>
             </div>
           </Card>
         ))}

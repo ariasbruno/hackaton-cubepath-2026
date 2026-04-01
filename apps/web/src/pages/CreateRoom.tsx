@@ -158,25 +158,25 @@ export const CreateRoom: React.FC = () => {
       <div className={`flex flex-col h-full bg-paper pattern-dots transition-all duration-500 ${isBlurred ? 'blur-md grayscale-[0.2] brightness-75 scale-[0.98]' : ''}`}>
 
         {/* ── Desktop header (md+) ── */}
-        <header className="hidden md:flex h-20 bg-white/80 backdrop-blur-md border-b-2 border-ink/5 px-10 items-center justify-between shrink-0 z-30 shadow-sm">
+        <header className="hidden md:flex h-[64px] bg-white/80 backdrop-blur-md border-b-2 border-ink/5 px-8 items-center justify-between shrink-0 z-30 shadow-sm">
           {/* Left: back/exit + title */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <button
               onClick={handleBack}
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 group"
             >
-              <div className={`h-11 w-11 bg-white rounded-xl flex items-center justify-center shadow-hard-sm border-2 border-ink/5 transition-all ${
+              <div className={`h-9 w-9 bg-white rounded-lg flex items-center justify-center shadow-hard-sm border-2 border-ink/5 transition-all ${
                 step === 1
                   ? 'group-hover:bg-danger group-hover:text-white'
                   : 'group-hover:bg-ink group-hover:text-white'
               }`}>
                 {step === 1 ? (
-                  <CloseIcon className="w-5 h-5" />
+                  <CloseIcon className="w-4 h-4" />
                 ) : (
-                  <ArrowBackIcon className="w-5 h-5" />
+                  <ArrowBackIcon className="w-4 h-4" />
                 )}
               </div>
-              <span className={`font-display text-lg uppercase tracking-tight transition-colors ${
+              <span className={`font-display text-sm uppercase tracking-tight transition-colors ${
                 step === 1
                   ? 'text-ink group-hover:text-danger'
                   : 'text-ink group-hover:text-ink'
@@ -184,25 +184,25 @@ export const CreateRoom: React.FC = () => {
                 {step === 1 ? 'Salir' : 'Volver'}
               </span>
             </button>
-            <div className="h-6 w-px bg-ink/10" />
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-primary border-2 border-ink rounded-lg flex items-center justify-center text-white shadow-hard-sm rotate-3">
-                <AddCircleIcon className="w-5 h-5" />
+            <div className="h-5 w-px bg-ink/10" />
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 bg-primary border-2 border-ink rounded-lg flex items-center justify-center text-white shadow-hard-sm rotate-3">
+                <AddCircleIcon className="w-3.5 h-3.5" />
               </div>
-              <h1 className="font-display text-xl text-ink uppercase tracking-tight">
+              <h1 className="font-display text-base text-ink uppercase tracking-tight">
                 Configuración de Sala
               </h1>
             </div>
           </div>
 
           {/* Right: step progress + avatar */}
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-8">
             <div className="flex flex-col items-end">
               <div className="flex gap-2 mb-1">
                 {Array.from({ length: 4 }, (_, i) => (
                   <div
                     key={i}
-                    className={`w-10 h-2 rounded-full transition-colors ${
+                    className={`w-9 h-2 rounded-full transition-colors ${
                       i < step - 1
                         ? 'bg-accent'
                         : i === step - 1
@@ -212,12 +212,12 @@ export const CreateRoom: React.FC = () => {
                   />
                 ))}
               </div>
-              <span className="font-display text-primary text-[10px] uppercase tracking-widest font-bold">
+              <span className="font-display text-primary text-[9px] uppercase tracking-widest font-bold">
                 Paso {step} de 4
               </span>
             </div>
             {/* Avatar */}
-            <div className="w-12 h-12 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden text-xl select-none">
+            <div className="w-11 h-11 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden text-lg select-none">
               {avatar || '🎭'}
             </div>
           </div>
@@ -238,8 +238,8 @@ export const CreateRoom: React.FC = () => {
           >
             {/* Mobile: extra top padding for floating Stepper */}
             {/* Desktop: centered max-width container */}
-            <div className="md:py-12 md:px-10">
-              <div className="md:max-w-4xl md:mx-auto">
+            <div className="md:py-8 md:px-8">
+              <div className="md:max-w-3xl md:mx-auto">
                 {/* Mobile top padding to clear floating header */}
                 <div className="pt-32 md:pt-0 w-full mb-30 md:mb-0 px-6 md:px-0">
                   {step === 1 && <PageTransition animation="fade"><Step1Connection connection={connection} setConnection={setConnection} /></PageTransition>}
@@ -268,16 +268,16 @@ export const CreateRoom: React.FC = () => {
 
                 {/* ── Desktop CTA (inside content flow) ── */}
                 {step !== 3 && (
-                  <div className="hidden md:flex justify-end mt-10 px-0">
+                  <div className="hidden md:flex justify-end mt-6 px-0">
                     {canNext() ? (
                       <button
                         onClick={handleNext}
-                        className="px-16 bg-primary text-white font-display text-2xl py-5 rounded-btn shadow-hard-lg hover:translate-y-0.5 hover:shadow-hard active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest"
+                        className="px-12 bg-primary text-white font-display text-lg py-3.5 rounded-btn shadow-hard hover:translate-y-0.5 hover:shadow-hard-sm active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest"
                       >
                         {step < 4 ? 'Siguiente' : '¡Crear Sala!'}
                       </button>
                     ) : (
-                      <div className="bg-white/80 backdrop-blur-sm px-10 py-5 rounded-btn text-center text-[10px] font-extrabold text-ink/30 uppercase tracking-[0.2em] border border-ink/5">
+                      <div className="bg-white/80 backdrop-blur-sm px-6 py-3 rounded-btn text-center text-[9px] font-extrabold text-ink/30 uppercase tracking-[0.2em] border border-ink/5">
                         {step === 1 && 'Selecciona un tipo de conexión'}
                         {step === 2 && 'Selecciona un modo de juego'}
                         {step === 4 && 'Completa los campos'}
