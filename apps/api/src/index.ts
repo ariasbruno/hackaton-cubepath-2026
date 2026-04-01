@@ -9,8 +9,10 @@ const app = new Hono();
 // ── Middleware ────────────────────────────────────────────────
 app.use('*', logger());
 
-// Safer CORS: Define allowed origins in .env
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173').split(',');
+// Safer CORS: Define allowed origins in .env (Split and clean spaces/trailing slashes)
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
+  .split(',')
+  .map(o => o.trim().replace(/\/$/, ''));
 
 app.use(
   '*',
