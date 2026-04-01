@@ -40,7 +40,17 @@ const server = Bun.serve<WsData>({
       return new Response('Game Server is healthy\n');
     }
 
-    if (url.pathname === '/admin/status' && process.env.NODE_ENV !== 'production') {
+    if (url.pathname === '/internal/status') {
+      const apiKey = req.headers.get('x-internal-key');
+      const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY;
+      
+      if (!apiKey || apiKey !== INTERNAL_API_KEY) {
+        return new Response(JSON.stringify({ error: 'Unauthorized' }), { 
+          status: 401,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
       const allRooms = roomManager.getAllRoomsSync();
       const status = {
         totalRooms: allRooms.length,

@@ -71,9 +71,16 @@ export class RoomUseCase {
     const dbRooms = await this.roomRepository.getPublicLobbies(limit);
     
     try {
-      // Attempt to fetch live status from Game Server
+      // Attempt to fetch live status from Game Server using the INTERNAL system
       const GAME_SERVER_URL = process.env.VITE_WS_URL?.replace('ws://', 'http://') || 'http://localhost:3001';
-      const response = await fetch(`${GAME_SERVER_URL}/admin/status`);
+      const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY;
+      
+      const headers: Record<string, string> = {};
+      if (INTERNAL_API_KEY) {
+        headers['x-internal-key'] = INTERNAL_API_KEY;
+      }
+      
+      const response = await fetch(`${GAME_SERVER_URL}/internal/status`, { headers });
       if (response.ok) {
         const liveStatus = await response.json();
         const countsByCode = liveStatus.rooms.reduce((acc: any, room: any) => {
