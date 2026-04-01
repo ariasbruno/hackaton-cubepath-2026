@@ -36,6 +36,25 @@
   --material-symbols: "Material Symbols Outlined";
 }
 
+@layer base {
+  /* Use tabular-nums for fixed-width digits in timers/scores to prevent layout shifts */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Accessibility: Disable animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
 .material-symbols-outlined {
   font-family: var(--material-symbols);
   font-weight: normal;
