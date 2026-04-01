@@ -14,6 +14,7 @@ const Lobby = lazy(() => import('./pages/Lobby').then(m => ({ default: m.Lobby }
 const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })));
 const Settings = lazy(() => import('./pages/Settings').then(m => ({ default: m.Settings })));
 const LocalGameFlow = lazy(() => import('./pages/LocalMode/LocalGameFlow').then(m => ({ default: m.LocalGameFlow })));
+const Help = lazy(() => import('./pages/Help').then(m => ({ default: m.Help })));
 
 // Dev pages (lazy loaded, only defined in development)
 const DatabaseAdmin = import.meta.env.DEV
@@ -81,7 +82,7 @@ const TmpImpostorReveal = import.meta.env.DEV
   : () => null;
 
 /** Pages where the nav (bottom on mobile, side on desktop) should be visible */
-const NAV_PAGES = ['/', '/rooms', '/profile', '/settings'];
+const NAV_PAGES = ['/', '/rooms', '/profile', '/settings', '/help'];
 
 function AppContent() {
   const location = useLocation();
@@ -109,6 +110,7 @@ function AppContent() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/local/:code" element={<LocalGameFlow />} />
+            <Route path="/help" element={<Help />} />
             {/* Development Routes - Automatically excluded from production build */}
             {import.meta.env.DEV && (
               <>

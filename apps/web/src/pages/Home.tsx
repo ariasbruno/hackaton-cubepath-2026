@@ -16,10 +16,10 @@ import RocketLaunchIcon from '../components/icons/rocket-launch';
 
 /* ── Data ── */
 const HOW_TO_PLAY = [
-  { icon: PersonSearchIcon, color: 'secondary', label: 'Obtener Rol', desc: 'Recibe tu palabra secreta' },
-  { icon: TheaterComedyIcon, color: 'purple', label: 'Engañar', desc: 'Miente sin que te atrapen' },
-  { icon: VoteIcon, color: 'danger', label: 'Votar', desc: 'Expulsa al impostor' },
-  { icon: HelpIcon, color: 'accent', label: 'Ayuda', desc: 'Guías y consejos' },
+  { icon: PersonSearchIcon, color: 'secondary', label: 'Obtener Rol', desc: 'Recibe tu palabra secreta', target: '#roles' },
+  { icon: TheaterComedyIcon, color: 'purple', label: 'Engañar', desc: 'Miente sin que te atrapen', target: '#engano' },
+  { icon: VoteIcon, color: 'danger', label: 'Votar', desc: 'Expulsa al impostor', target: '#voto' },
+  { icon: HelpIcon, color: 'accent', label: 'Ayuda', desc: 'Guías y consejos', target: '' },
 ] as const;
 
 export const Home: React.FC = () => {
@@ -142,6 +142,7 @@ export const Home: React.FC = () => {
                   <div
                     key={item.label}
                     className="bg-white p-5 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-2 hover:bg-paper active:scale-95 transition-all cursor-pointer group"
+                    onClick={() => navigate('/help' + (item.target || ''))}
                   >
                     <div className={`w-14 h-14 bg-${item.color}-muted text-${item.color} rounded-full flex items-center justify-center mb-1 group-hover:scale-110 transition-transform`}>
                       <Icon className="w-8 h-8" />
@@ -233,6 +234,7 @@ export const Home: React.FC = () => {
                     <div
                       key={item.label}
                       className="bg-white p-7 rounded-card shadow-hard border-2 border-ink/5 flex flex-col items-center text-center gap-4 hover:bg-paper transition-all cursor-pointer group"
+                      onClick={() => navigate('/help' + (item.target || ''))}
                     >
                       <div className={`w-20 h-20 bg-${item.color}-muted text-${item.color} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-inner-hard`}>
                         <Icon className="w-10 h-10" />
