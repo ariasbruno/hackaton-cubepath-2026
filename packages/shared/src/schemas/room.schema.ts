@@ -73,7 +73,6 @@ export const gameContentSchema = z.object({
 // ============================================================
 // Inferred Types
 // ============================================================
-export type GameMode = z.infer<typeof gameModeSchema>;
 export type RoomSettings = z.infer<typeof roomSettingsSchema>;
 export type RoomCode = z.infer<typeof roomCodeSchema>;
 export type MatchResult = z.infer<typeof matchResultSchema>;

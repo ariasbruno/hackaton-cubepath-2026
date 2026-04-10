@@ -1,37 +1,18 @@
 import { z } from 'zod';
+import { GAME_PHASES, PLAYER_ROLES, WINNER_SIDES } from '../constants/game';
 
 // ============================================================
 // Game Phase Enum
 // Uses gerund form for consistency (ASSIGNING, DISCUSSING, VOTING)
 // ============================================================
-export const gamePhaseSchema = z.enum([
-  'LOBBY',
-  'ASSIGNING',
-  'CLUES',
-  'DISCUSSING',
-  'VOTING',
-  'VOTE_REVEAL',
-  'RESULTS',
-]);
-
-export type GamePhase = z.infer<typeof gamePhaseSchema>;
+export const gamePhaseSchema = z.nativeEnum(GAME_PHASES);
 
 // ============================================================
 // Player Roles
 // ============================================================
-export const roleSchema = z.enum([
-  'AGENTE',
-  'IMPOSTOR',
-  'INFILTRADO',
-  'VINCULADO',
-  'DISPERSO',
-]);
-
-export type Role = z.infer<typeof roleSchema>;
+export const roleSchema = z.nativeEnum(PLAYER_ROLES);
 
 // ============================================================
 // Winner Side
 // ============================================================
-export const winnerSideSchema = z.enum(['AGENTES', 'IMPOSTORES', 'CAOS']);
-
-export type WinnerSide = z.infer<typeof winnerSideSchema>;
+export const winnerSideSchema = z.nativeEnum(WINNER_SIDES);

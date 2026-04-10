@@ -20,9 +20,9 @@ export interface IRoomRepository {
   findByCode(code: string): Promise<RoomEntity | null>;
 
   /**
-   * Retorna las últimas N salas públicas en estado LOBBY.
+   * Retorna las últimas N salas públicas en estado LOBBY, soportando paginación.
    */
-  getPublicLobbies(limit: number): Promise<RoomEntity[]>;
+  getPublicLobbies(limit: number, offset: number): Promise<RoomEntity[]>;
   findAll(): Promise<(RoomEntity & { hostNickname?: string, participants?: string[] })[]>;
 
   /**

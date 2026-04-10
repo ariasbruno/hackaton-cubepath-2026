@@ -42,11 +42,14 @@ export function createRoomController(roomUseCase: RoomUseCase) {
 
   /**
    * GET /rooms
-   * Fetches public lobbies.
+   * Fetches public lobbies with pagination.
    */
   router.get('/', async (c) => {
+    const limit = Math.max(1, Math.min(100, parseInt(c.req.query('limit') || '20')));
+    const offset = Math.max(0, parseInt(c.req.query('offset') || '0'));
+
     try {
-      const publicRooms = await roomUseCase.listPublicRooms();
+      const publicRooms = await roomUseCase.listPublicRooms(limit, offset);
       return c.json({
         rooms: publicRooms.map(room => ({
           code: room.code,
@@ -54,7 +57,8 @@ export function createRoomController(roomUseCase: RoomUseCase) {
           createdAt: room.createdAt,
           hostId: room.hostId,
           playerCount: room.playerCount || 0,
-        }))
+        })),
+        pagination: { limit, offset, count: publicRooms.length }
       });
     } catch (error) {
       return c.json({ error: 'Internal Server Error' }, 500);

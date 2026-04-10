@@ -1,12 +1,13 @@
 import { useLocalGameStore, type LocalPlayer, type SingleLocalGame } from '../store/useLocalGameStore';
 import fallbackWords from '../data/fallback_words.json';
+import { GAME_MODES, PLAYER_ROLES, WINNER_SIDES } from '@impostor/shared';
+import type { GameMode } from '@impostor/shared';
 
-// In a real scenario, this would call the API. 
-// For now, we use the fallback to ensure offline capability.
-const fetchGameWords = async (mode: 'TRADICIONAL' | 'CERCANAS') => {
+const fetchGameWords = async (mode: GameMode) => {
+  const currentMode = mode || GAME_MODES.TRADITIONAL;
   try {
-    const bank = (fallbackWords as any)[mode];
-    if (!bank || bank.length === 0) throw new Error(`Mode ${mode} not found in bank`);
+    const bank = (fallbackWords as any)[currentMode];
+    if (!bank || bank.length === 0) throw new Error(`Mode ${currentMode} not found in bank`);
     
     const pair = bank[Math.floor(Math.random() * bank.length)];
     return {
@@ -17,7 +18,7 @@ const fetchGameWords = async (mode: 'TRADICIONAL' | 'CERCANAS') => {
     console.error('Error fetching words:', error);
     return {
       mainWord: 'CAFÉ',
-      infiltradoWord: mode === 'CERCANAS' ? 'TÉ' : ''
+      infiltradoWord: currentMode === GAME_MODES.CERCANAS ? 'TÉ' : ''
     };
   }
 };
@@ -35,7 +36,7 @@ export const LocalGameEngine = {
 
     const newPlayers: LocalPlayer[] = [...game.players].map(p => ({
       ...p,
-      role: 'AGENT' as const,
+      role: PLAYER_ROLES.AGENTE,
       word: mainWord,
       isAlive: true,
       votesReceived: 0
@@ -47,13 +48,13 @@ export const LocalGameEngine = {
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
 
-    if (game.settings.mode === 'CERCANAS' && infiltradoWord) {
+    if (game.settings.mode === GAME_MODES.CERCANAS && infiltradoWord) {
       const infiltradoIdx = indices[0];
-      newPlayers[infiltradoIdx].role = 'INFILTRATED';
+      newPlayers[infiltradoIdx].role = PLAYER_ROLES.INFILTRADO;
       newPlayers[infiltradoIdx].word = infiltradoWord;
     } else {
       const impostorIdx = indices[0];
-      newPlayers[impostorIdx].role = 'IMPOSTOR';
+      newPlayers[impostorIdx].role = PLAYER_ROLES.IMPOSTOR;
       newPlayers[impostorIdx].word = ''; 
     }
 
@@ -78,17 +79,10 @@ export const LocalGameEngine = {
 
     let winner: SingleLocalGame['winner'] = null;
 
-    if (target.role === 'IMPOSTOR' || target.role === 'INFILTRATED') {
-      winner = 'AGENTS';
+    if (target.role === PLAYER_ROLES.IMPOSTOR || target.role === PLAYER_ROLES.INFILTRADO) {
+      winner = WINNER_SIDES.AGENTES;
     } else {
-      const remainingImpostors = players.filter(p => 
-        (p.role === 'IMPOSTOR' || p.role === 'INFILTRATED')
-      );
-      if (remainingImpostors.length > 0) {
-        winner = remainingImpostors[0].role as any;
-      } else {
-        winner = 'AGENTS';
-      }
+      winner = WINNER_SIDES.IMPOSTORES;
     }
 
     updateGame(code, {

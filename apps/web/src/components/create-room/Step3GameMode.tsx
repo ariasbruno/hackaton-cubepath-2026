@@ -1,4 +1,5 @@
 import React from 'react';
+import { type GameMode, GAME_MODES, CONNECTION_TYPES, type ConnectionType } from '@impostor/shared';
 import { SelectionCard } from '../ui/SelectionCard';
 import { Badge } from '../ui/Badge';
 import PersonSearchIcon from '../icons/person-search';
@@ -6,14 +7,14 @@ import TranslateIcon from '../icons/translate';
 import BoltIcon from '../icons/bolt';
 
 interface Step3GameModeProps {
-  gameMode: 'TRADICIONAL' | 'CERCANAS' | 'CAOS' | null;
-  setGameMode: (mode: 'TRADICIONAL' | 'CERCANAS' | 'CAOS') => void;
-  connection: 'local' | 'online' | null;
+  gameMode: GameMode | null;
+  setGameMode: (mode: GameMode) => void;
+  connection: ConnectionType | null;
 }
 
 const MODES = [
   {
-    key: 'TRADICIONAL' as const,
+    key: GAME_MODES.TRADITIONAL,
     icon: PersonSearchIcon,
     title: 'Tradicional',
     description: '1 Impostor contra todos. El clásico juego de deducción social.',
@@ -21,7 +22,7 @@ const MODES = [
     online: false,
   },
   {
-    key: 'CERCANAS' as const,
+    key: GAME_MODES.CERCANAS,
     icon: TranslateIcon,
     title: 'Cercanas',
     description: 'El infiltrado tiene una palabra similar. ¡Requiere sutileza total!',
@@ -29,7 +30,7 @@ const MODES = [
     online: false,
   },
   {
-    key: 'CAOS' as const,
+    key: GAME_MODES.CAOS,
     icon: BoltIcon,
     title: 'Modo Caos',
     description: 'Vinculados vs Dispersos. Encuentren su pareja en secreto.',
@@ -76,8 +77,8 @@ export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameM
     {/* Mobile: vertical list */}
     <div className="md:hidden w-full space-y-6">
       <SelectionCard
-        selected={gameMode === 'TRADICIONAL'}
-        onSelect={() => setGameMode('TRADICIONAL')}
+        selected={gameMode === GAME_MODES.TRADITIONAL}
+        onSelect={() => setGameMode(GAME_MODES.TRADITIONAL)}
         icon={PersonSearchIcon}
         title="Tradicional"
         description="1 Impostor contra todos. El clásico juego de deducción."
@@ -86,8 +87,8 @@ export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameM
         size="md"
       />
       <SelectionCard
-        selected={gameMode === 'CERCANAS'}
-        onSelect={() => setGameMode('CERCANAS')}
+        selected={gameMode === GAME_MODES.CERCANAS}
+        onSelect={() => setGameMode(GAME_MODES.CERCANAS)}
         icon={TranslateIcon}
         title="Cercanas"
         description="El infiltrado tiene una palabra similar. ¡Sutileza total!"
@@ -97,15 +98,15 @@ export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameM
       />
       <div className="relative">
         <SelectionCard
-          selected={gameMode === 'CAOS'}
-          onSelect={() => connection === 'online' && setGameMode('CAOS')}
+          selected={gameMode === GAME_MODES.CAOS}
+          onSelect={() => connection === CONNECTION_TYPES.ONLINE && setGameMode(GAME_MODES.CAOS)}
           icon={BoltIcon}
           title="Modo Caos"
           description="Vinculados vs Dispersos. Encuentren su pareja en secreto."
           activeColor="purple"
           variant="squircle"
           size="md"
-          disabled={connection === 'local'}
+          disabled={connection === CONNECTION_TYPES.LOCAL}
         />
         <div className="absolute top-6 right-12 pointer-events-none">
           <Badge color="purple" className="shadow-sm">Online</Badge>
@@ -116,7 +117,7 @@ export const Step3GameMode: React.FC<Step3GameModeProps> = ({ gameMode, setGameM
     {/* Desktop: 3-column portrait grid */}
     <div className="hidden md:grid grid-cols-3 gap-6 w-full">
       {MODES.map((mode) => {
-        const isDisabled = mode.online && connection === 'local';
+        const isDisabled = mode.online && connection === CONNECTION_TYPES.LOCAL;
         const isSelected = gameMode === mode.key;
         const c = colorStyles[mode.activeColor];
 

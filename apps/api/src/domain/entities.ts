@@ -1,5 +1,6 @@
-import type { RoomSettings, WinnerSide } from '@impostor/shared';
-import type { GameMode, Role } from '@impostor/shared';
+import type { RoomSettings, WinnerSide, GameMode, PlayerRole, RoomStatus } from '@impostor/shared';
+
+export type { RoomStatus };
 
 export interface PlayerEntity {
   id: string; // UUID
@@ -22,8 +23,6 @@ export interface PlayerEntity {
   globalRank?: number;
   voteEfficacy?: number; // (correctVotes / totalVotes) * 100
 }
-
-export type RoomStatus = 'LOBBY' | 'PLAYING' | 'FINISHED';
 
 export interface RoomEntity {
   id: string; // UUID
@@ -48,7 +47,7 @@ export interface MatchPlayerEntity {
   id: string; // UUID
   matchId: string; // UUID of MatchEntity
   playerId: string; // UUID of PlayerEntity
-  role: Role;
+  role: PlayerRole;
   points: number;
   votedCorrectly?: boolean;
 }

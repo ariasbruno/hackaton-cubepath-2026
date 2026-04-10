@@ -1,4 +1,5 @@
 import React from 'react';
+import { type GameMode, GAME_MODES } from '@impostor/shared';
 import { TIME_OPTIONS } from '../../constants/game';
 import EditIcon from '../icons/edit';
 import ChatBubbleIcon from '../icons/chat-bubble';
@@ -7,7 +8,7 @@ import VoteIcon from '../icons/vote';
 import VisibilityOffIcon from '../icons/visibility-off';
 
 interface Step4FinalConfigProps {
-  gameMode: 'TRADICIONAL' | 'CERCANAS' | 'CAOS' | null;
+  gameMode: GameMode | null;
   roomName: string;
   setRoomName: (name: string) => void;
   maxPlayers: number;
@@ -121,7 +122,7 @@ export const Step4FinalConfig: React.FC<Step4FinalConfigProps> = (props) => {
                 +
               </button>
             </div>
-            {gameMode === 'CAOS' && (
+            {gameMode === GAME_MODES.CAOS && (
               <p className="text-[10px] font-bold uppercase tracking-widest text-purple/60 ml-1">
                 ⚡ Modo Caos requiere mínimo 4 jugadores
               </p>

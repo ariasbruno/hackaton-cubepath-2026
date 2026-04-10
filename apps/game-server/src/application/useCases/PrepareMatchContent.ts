@@ -1,6 +1,6 @@
+import { GAME_MODES, PLAYER_ROLES } from '@impostor/shared';
 import type { RoomState, PlayerState } from '../../domain/models';
 import type { IAiService } from '../../domain/IAiService';
-import type { Role, GameMode } from '@impostor/shared';
 import { TurnManager } from '../../domain/TurnManager';
 
 export class PrepareMatchContent {
@@ -45,38 +45,39 @@ export class PrepareMatchContent {
     // Cleanup previous match data
     playerMap.forEach(p => {
       p.isAlive = true;
+      p.partnerId = undefined;
     });
 
-    if (mode === 'TRADICIONAL') {
+    if (mode === GAME_MODES.TRADITIONAL) {
       // 1 Impostor, resto Agentes
       const impostorId = shuffledPlayerIds[0];
       
       playerMap.forEach((p, id) => {
         if (id === impostorId) {
-          p.role = 'IMPOSTOR';
+          p.role = PLAYER_ROLES.IMPOSTOR;
           p.word = undefined; // Impostors don't get the word!
         } else {
-          p.role = 'AGENTE';
+          p.role = PLAYER_ROLES.AGENTE;
           p.word = content.mainWord;
         }
       });
     } 
-    else if (mode === 'CERCANAS') {
+    else if (mode === GAME_MODES.CERCANAS) {
       // 1 Infiltrado, resto Agentes
       const infiltratorId = shuffledPlayerIds[0];
 
       playerMap.forEach((p, id) => {
         if (id === infiltratorId) {
-          p.role = 'INFILTRADO';
+          p.role = PLAYER_ROLES.INFILTRADO;
           // Infiltrator sees their altered word
           p.word = content.infiltradoWord;
         } else {
-          p.role = 'AGENTE';
+          p.role = PLAYER_ROLES.AGENTE;
           p.word = content.mainWord;
         }
       });
     }
-    else if (mode === 'CAOS') {
+    else if (mode === GAME_MODES.CAOS) {
       // 2 Vinculados (pareja), resto Dispersos
       const partnerAId = shuffledPlayerIds[0];
       const partnerBId = shuffledPlayerIds[1];
@@ -86,10 +87,12 @@ export class PrepareMatchContent {
 
       playerMap.forEach((p, id) => {
         if (id === partnerAId || id === partnerBId) {
-          p.role = 'VINCULADO';
+          const partnerId = id === partnerAId ? partnerBId : partnerAId;
+          p.role = PLAYER_ROLES.VINCULADO;
           p.word = content.mainWord; // Pareja tiene la misma palabra
+          p.partnerId = partnerId;
         } else {
-          p.role = 'DISPERSO';
+          p.role = PLAYER_ROLES.DISPERSO;
           // Los dispersos tienen palabras de la lista relatedWords
           p.word = relatedWords[relatedIndex] || 'ErrorSemantico';
           relatedIndex++;

@@ -1,17 +1,20 @@
 import { Hono } from 'hono';
 import { GoogleGenAI } from '@google/genai';
-import { gameContentSchema } from '@impostor/shared';
+import { gameContentSchema, GAME_MODES } from '@impostor/shared';
 import { LocalFallbackService } from '../services/LocalFallbackService';
 
 export const aiController = new Hono();
 const fallbackService = new LocalFallbackService();
 
-// Leemos las keys una sola vez al iniciar la aplicación en memoria
-const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY;
+// Singleton client to help with runtime memory if needed, 
+// though for the basic Gemini API it's lightweight to initialize
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
+// Only initialize if key is present
+const aiClient = GEMINI_API_KEY ? new GoogleGenAI({ apiKey: GEMINI_API_KEY }) : null;
+
 aiController.post('/generate-game-content', async (c) => {
-  if (!GEMINI_API_KEY || GEMINI_API_KEY === 'your-gemini-api-key') {
+  if (!GEMINI_API_KEY || !aiClient) {
     return c.json({ error: 'GEMINI_API_KEY no configurada' }, 500);
   }
 
@@ -25,11 +28,11 @@ aiController.post('/generate-game-content', async (c) => {
 
   // Build prompt
   let rules = '';
-  if (mode === 'TRADICIONAL') {
+  if (mode === GAME_MODES.TRADITIONAL) {
     rules = '- Genera una "mainWord" temática.\n- "infiltradoWord" debe ser null.\n- "relatedWords" debe ser [].';
-  } else if (mode === 'CERCANAS') {
+  } else if (mode === GAME_MODES.CERCANAS) {
     rules = '- Genera una "mainWord" temática.\n- Genera una "infiltradoWord" que sea un concepto similar pero distinto (ej: "Perro" y "Lobo").\n- "relatedWords" debe ser [].';
-  } else if (mode === 'CAOS') {
+  } else if (mode === GAME_MODES.CAOS) {
     const relatedCount = Math.max(playerCount - 2, 1);
     rules = `- Genera una "mainWord" temática.\n- "infiltradoWord" debe ser null.\n- Genera una lista "relatedWords" con exactamente ${relatedCount} palabras distintas entre sí, todas relacionadas semánticamente a la principal.`;
   }
@@ -48,10 +51,8 @@ ${rules}
 Responde ÚNICAMENTE con un JSON válido con esta estructura plana, respetando los nulos:
 {"mainWord": "...", "infiltradoWord": null, "relatedWords": [...]}`;
 
-  const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
-  
   try {
-    const response = await ai.models.generateContent({
+    const response = await aiClient.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {

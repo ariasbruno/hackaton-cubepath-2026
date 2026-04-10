@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { GAME_MODES } from '@impostor/shared';
+import type { WinnerSide, PlayerRole, GameMode } from '@impostor/shared';
 
 export type LocalPhase = 
   | 'LOBBY' 
@@ -15,7 +17,7 @@ export interface LocalPlayer {
   name: string;
   avatarId: string;
   avatarColor: string;
-  role?: 'AGENT' | 'IMPOSTOR' | 'INFILTRATED';
+  role?: PlayerRole;
   word?: string;
   isAlive: boolean;
   votesReceived: number;
@@ -24,7 +26,7 @@ export interface LocalPlayer {
 export interface SingleLocalGame {
   code: string;
   settings: {
-    mode: 'TRADICIONAL' | 'CERCANAS';
+    mode: GameMode;
     categories: string[];
     timers: {
       clues: number;
@@ -37,7 +39,7 @@ export interface SingleLocalGame {
   currentPlayerIndex: number;
   secretWord: string;
   infiltratedWord?: string;
-  winner: 'AGENTS' | 'IMPOSTOR' | 'INFILTRATED' | null;
+  winner: WinnerSide | null;
   votedPlayerId?: string;
   name: string; // Added name field
   createdAt: number;
@@ -55,7 +57,7 @@ interface LocalGameState {
 }
 
 const initialSettings: SingleLocalGame['settings'] = {
-  mode: 'TRADICIONAL',
+  mode: GAME_MODES.TRADITIONAL,
   categories: [],
   timers: { clues: 45, discuss: 120, vote: 30 }
 };

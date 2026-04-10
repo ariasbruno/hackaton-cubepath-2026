@@ -1,4 +1,5 @@
 import React from 'react';
+import { PLAYER_ROLES } from '@impostor/shared';
 import { Button } from '../ui/Button';
 import SkullIcon from '../icons/skull';
 import SearchIcon from '../icons/search';
@@ -17,15 +18,15 @@ export const LocalReveal: React.FC<LocalRevealProps> = ({
   agentsWord,
   onContinue
 }) => {
-  const isCorrect = votedPlayer.role === 'IMPOSTOR' || votedPlayer.role === 'INFILTRATED';
-  const roleRecord = votedPlayer.role === 'INFILTRATED' ? 'Infiltrada' : votedPlayer.role === 'IMPOSTOR' ? 'el Impostor' : 'un Agente Inocente';
+  const isCorrect = votedPlayer.role === PLAYER_ROLES.IMPOSTOR || votedPlayer.role === PLAYER_ROLES.INFILTRADO;
+  const roleRecord = votedPlayer.role === PLAYER_ROLES.INFILTRADO ? 'Infiltrada' : votedPlayer.role === PLAYER_ROLES.IMPOSTOR ? 'el Impostor' : 'un Agente Inocente';
 
   const config = {
     bg: isCorrect
-      ? (votedPlayer.role === 'INFILTRATED' ? 'bg-secondary' : 'bg-accent')
+      ? (votedPlayer.role === PLAYER_ROLES.INFILTRADO ? 'bg-secondary' : 'bg-accent')
       : 'bg-ink',
     title: isCorrect
-      ? (votedPlayer.role === 'INFILTRATED' ? '¡SUTILEZA\nEXPUESTA!' : '¡JUSTICIA\nHECHA!')
+      ? (votedPlayer.role === PLAYER_ROLES.INFILTRADO ? '¡SUTILEZA\nEXPUESTA!' : '¡JUSTICIA\nHECHA!')
       : '¡ERROR\nFATAL!',
     tagline: isCorrect ? 'Veredicto Grupal: Confirmado' : 'Veredicto Grupal: Fallido',
     buttonText: isCorrect ? 'Ver Victoria' : 'Siguiente Ronda',
@@ -35,7 +36,7 @@ export const LocalReveal: React.FC<LocalRevealProps> = ({
   return (
     <div className={`flex-1 flex flex-col items-center justify-center p-6 text-center text-white relative overflow-hidden ${config.bg} ${config.pattern}`}>
       {/* 1. Success Atmosphere */}
-      {isCorrect && votedPlayer.role === 'IMPOSTOR' && (
+      {isCorrect && votedPlayer.role === PLAYER_ROLES.IMPOSTOR && (
         <div className="absolute inset-0 pointer-events-none opacity-50">
           <div className="absolute top-10 left-1/4 animate-bounce text-2xl">🎉</div>
           <div className="absolute top-20 right-1/4 animate-bounce delay-100 text-2xl">✨</div>
@@ -74,7 +75,7 @@ export const LocalReveal: React.FC<LocalRevealProps> = ({
             {/* Reveal Badge */}
             <div className={`absolute -top-2 -right-2 p-1.5 rounded-md shadow-hard-sm bg-danger text-white flex items-center justify-center`}>
               {isCorrect ? (
-                votedPlayer.role === 'IMPOSTOR' ? <SkullIcon className="w-4 h-4" /> : <SearchIcon className="w-4 h-4" />
+                votedPlayer.role === PLAYER_ROLES.IMPOSTOR ? <SkullIcon className="w-4 h-4" /> : <SearchIcon className="w-4 h-4" />
               ) : (
                 <GhostIcon className="w-5 h-5 text-white" />
               )}
@@ -89,7 +90,7 @@ export const LocalReveal: React.FC<LocalRevealProps> = ({
           </p>
 
           {/* Specific content for each type */}
-          {votedPlayer.role === 'INFILTRATED' && (
+          {votedPlayer.role === PLAYER_ROLES.INFILTRADO && (
             <div className="flex flex-col gap-2 relative mt-2">
               <div className="bg-accent/10 p-4 rounded-t-btn border-2 border-accent/20 text-left">
                 <p className="text-[8px] font-bold text-accent uppercase tracking-widest mb-1">Agentes tenían:</p>
@@ -107,13 +108,13 @@ export const LocalReveal: React.FC<LocalRevealProps> = ({
             </div>
           )}
 
-          {votedPlayer.role === 'IMPOSTOR' && (
+          {votedPlayer.role === PLAYER_ROLES.IMPOSTOR && (
             <div className="bg-sticky-yellow text-ink px-4 py-2 rounded-btn shadow-hard border-2 border-ink/5 rotate-2 inline-block">
               <span className="font-display text-xs uppercase">¡Agentes Ganan!</span>
             </div>
           )}
 
-          {votedPlayer.role === 'AGENT' && (
+          {votedPlayer.role === PLAYER_ROLES.AGENTE && (
             <div className="p-4 bg-danger/5 border-2 border-danger/10 rounded-btn">
               <p className="text-danger text-xs font-bold leading-relaxed uppercase tracking-widest italic">
                 "¡Se los dije! ¡Yo no era!"

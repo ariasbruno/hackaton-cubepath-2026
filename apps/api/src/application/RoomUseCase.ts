@@ -67,8 +67,8 @@ export class RoomUseCase {
    * Lists all public rooms currently in LOBBY status.
    * Enriches the DB data with real-time player count from the Game Server.
    */
-  async listPublicRooms(limit: number = 20): Promise<any[]> {
-    const dbRooms = await this.roomRepository.getPublicLobbies(limit);
+  async listPublicRooms(limit: number = 20, offset: number = 0): Promise<any[]> {
+    const dbRooms = await this.roomRepository.getPublicLobbies(limit, offset);
     
     try {
       // Attempt to fetch live status from Game Server using the INTERNAL system

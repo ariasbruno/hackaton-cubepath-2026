@@ -1,5 +1,4 @@
 export type ConnectionType = 'local' | 'online' | null;
-export type GameMode = 'TRADICIONAL' | 'CERCANAS' | 'CAOS' | null;
 
 export const CATEGORIES = [
   {

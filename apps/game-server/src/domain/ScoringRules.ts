@@ -1,14 +1,15 @@
+import { GAME_MODES, PLAYER_ROLES, WINNER_SIDES } from '@impostor/shared';
 import type { RoomState, PlayerState } from './models';
 
 interface ScoringResult {
   isGameOver: boolean;
-  winnerTeam?: 'AGENTS' | 'IMPOSTOR'; // Extend to CHAOS if needed
+  winnerTeam?: typeof WINNER_SIDES[keyof typeof WINNER_SIDES];
 }
 
 export class ScoringRules {
   public getEliminationTarget(room: RoomState): string | null {
-    if (room.settings.mode === 'CAOS') {
-      const vinculados = room.players.filter(p => p.role === 'VINCULADO');
+    if (room.settings.mode === GAME_MODES.CAOS) {
+      const vinculados = room.players.filter(p => p.role === PLAYER_ROLES.VINCULADO);
       const vinculadoIds = vinculados.map(p => p.id);
 
       // ── PASO 0 (PRIORIDAD ABSOLUTA): Vínculo mutuo ──
@@ -118,22 +119,16 @@ export class ScoringRules {
 
   public evaluateWinCondition(room: RoomState): ScoringResult {
     const alivePlayers = room.players.filter(p => p.isAlive);
-    const impostorsAlive = alivePlayers.filter(p => p.role === 'IMPOSTOR' || p.role === 'INFILTRADO' || p.role === 'VINCULADO');
-    const agentsAlive = alivePlayers.filter(p => p.role === 'AGENTE' || p.role === 'DISPERSO');
+    const impostorsAlive = alivePlayers.filter(p => 
+      p.role === PLAYER_ROLES.IMPOSTOR || p.role === PLAYER_ROLES.INFILTRADO || p.role === PLAYER_ROLES.VINCULADO
+    );
+    const agentsAlive = alivePlayers.filter(p => p.role === PLAYER_ROLES.AGENTE || p.role === PLAYER_ROLES.DISPERSO);
 
-    if (room.settings.mode === 'CAOS') {
-      const vinculados = room.players.filter(p => p.role === 'VINCULADO');
+    if (room.settings.mode === GAME_MODES.CAOS) {
+      const vinculados = room.players.filter(p => p.role === PLAYER_ROLES.VINCULADO);
       const vinculadosAlive = vinculados.filter(p => p.isAlive);
 
-      // Check if vinculados found each other (any correct LINK action in the last round)
-      // This is a bit tricky because evaluateWinCondition is called AFTER handleVotingEnd
-      // where room.lastEliminatedId was set.
-      
-      // If any vinculado was eliminated, it means the pair was "found" or they were voted out.
-      // For Caos, "finding" the pair means they both are out/revealed.
-      
       if (vinculadosAlive.length === 0) {
-        // PRIORITY: Vinculados win if they found each other
         const anyVinculadoFoundPartner = vinculados.some(p =>
           p.hasVoted &&
           p.votedAction === 'LINK' &&
@@ -143,16 +138,15 @@ export class ScoringRules {
         );
 
         if (anyVinculadoFoundPartner) {
-          return { isGameOver: true, winnerTeam: 'IMPOSTOR' }; // Vinculados (Chaos) won via Link
+          return { isGameOver: true, winnerTeam: WINNER_SIDES.CAOS }; 
         } else {
-          // If they were revealed but didn't link, it must be the Dispersos (Agents) who found them
-          return { isGameOver: true, winnerTeam: 'AGENTS' }; // Dispersos (Agents) won via Accusal
+          return { isGameOver: true, winnerTeam: WINNER_SIDES.AGENTES };
         }
       }
 
       // Traditional survival win
       if (alivePlayers.length <= 2 && impostorsAlive.length > 0) {
-        return { isGameOver: true, winnerTeam: 'IMPOSTOR' };
+        return { isGameOver: true, winnerTeam: WINNER_SIDES.CAOS };
       }
       
       return { isGameOver: false };
@@ -160,19 +154,19 @@ export class ScoringRules {
 
     // Agentes win if all impostors/infiltrados are gone
     if (impostorsAlive.length === 0) {
-      return { isGameOver: true, winnerTeam: 'AGENTS' };
+      return { isGameOver: true, winnerTeam: WINNER_SIDES.AGENTES };
     }
     // Impostors win if agents are <= impostors
     if (agentsAlive.length <= impostorsAlive.length) {
-      return { isGameOver: true, winnerTeam: 'IMPOSTOR' };
+      return { isGameOver: true, winnerTeam: WINNER_SIDES.IMPOSTORES };
     }
 
     return { isGameOver: false };
   }
 
   public calculatePoints(room: RoomState, result: ScoringResult): void {
-    const isCercanas = room.settings.mode === 'CERCANAS';
-    const isCaos = room.settings.mode === 'CAOS';
+    const isCercanas = room.settings.mode === GAME_MODES.CERCANAS;
+    const isCaos = room.settings.mode === GAME_MODES.CAOS;
 
     // Reset last match gain
     for (const p of room.players) {
@@ -191,16 +185,16 @@ export class ScoringRules {
         const targets = player.votedTargets || (player.votedFor ? [player.votedFor] : []);
         
         if (isCaos) {
-          const vinculados = room.players.filter(p => p.role === 'VINCULADO');
+          const vinculados = room.players.filter(p => p.role === PLAYER_ROLES.VINCULADO);
           const vinculadoIds = vinculados.map(v => v.id);
           
-          if (player.role === 'DISPERSO') {
+          if (player.role === PLAYER_ROLES.DISPERSO) {
             if (player.votedAction === 'ACCUSE' && targets.length === 2 && targets.every(id => vinculadoIds.includes(id))) {
               gain += 30; // Correct accusation
             } else if (player.votedAction === 'SKIP') {
                gain += 5;
             }
-          } else if (player.role === 'VINCULADO') {
+          } else if (player.role === PLAYER_ROLES.VINCULADO) {
             if (player.votedAction === 'LINK' && targets.length === 1 && vinculadoIds.includes(targets[0]) && targets[0] !== player.id) {
               gain += 40; // Correct link
             }
@@ -208,9 +202,9 @@ export class ScoringRules {
         } else {
           const target = room.players.find(p => p.id === player.votedFor);
           if (target) {
-            const targetIsImpostor = target.role === 'IMPOSTOR' || target.role === 'INFILTRADO' || target.role === 'VINCULADO';
-            const playerIsAgent = player.role === 'AGENTE' || player.role === 'DISPERSO';
-            const playerIsImpostor = player.role === 'IMPOSTOR' || player.role === 'INFILTRADO' || player.role === 'VINCULADO';
+            const targetIsImpostor = target.role === PLAYER_ROLES.IMPOSTOR || target.role === PLAYER_ROLES.INFILTRADO || target.role === PLAYER_ROLES.VINCULADO;
+            const playerIsAgent = player.role === PLAYER_ROLES.AGENTE || player.role === PLAYER_ROLES.DISPERSO;
+            const playerIsImpostor = player.role === PLAYER_ROLES.IMPOSTOR || player.role === PLAYER_ROLES.INFILTRADO || player.role === PLAYER_ROLES.VINCULADO;
 
             if (playerIsAgent) {
               if (targetIsImpostor) {
@@ -228,10 +222,10 @@ export class ScoringRules {
       }
 
       // Survival & Win conditions
-      const playerIsAgent = player.role === 'AGENTE' || player.role === 'DISPERSO';
-      const playerIsImpostor = player.role === 'IMPOSTOR' || player.role === 'INFILTRADO' || player.role === 'VINCULADO';
+      const playerIsAgent = player.role === PLAYER_ROLES.AGENTE || player.role === PLAYER_ROLES.DISPERSO;
+      const playerIsImpostor = player.role === PLAYER_ROLES.IMPOSTOR || player.role === PLAYER_ROLES.INFILTRADO || player.role === PLAYER_ROLES.VINCULADO;
 
-      if (playerIsAgent && result.isGameOver && result.winnerTeam === 'AGENTS') {
+      if (playerIsAgent && result.isGameOver && result.winnerTeam === WINNER_SIDES.AGENTES) {
         gain += (isCercanas || isCaos) ? 25 : 20;
       }
 
@@ -239,7 +233,7 @@ export class ScoringRules {
         gain += (isCercanas || isCaos) ? 20 : 15;
       }
 
-      if (result.isGameOver && result.winnerTeam === 'IMPOSTOR' && playerIsImpostor) {
+      if (result.isGameOver && result.winnerTeam === WINNER_SIDES.IMPOSTORES && playerIsImpostor) {
         gain += (isCercanas || isCaos) ? 60 : 50;
       }
 

@@ -41,13 +41,14 @@ export class SqlRoomRepository implements IRoomRepository {
     return row ? toEntity(row) : null;
   }
 
-  async getPublicLobbies(limit: number): Promise<RoomEntity[]> {
+  async getPublicLobbies(limit: number, offset: number): Promise<RoomEntity[]> {
     const rows = await sql`
       SELECT * FROM rooms
       WHERE status = 'LOBBY'
       AND settings->>'isPublic' = 'true'
       ORDER BY created_at DESC
       LIMIT ${limit}
+      OFFSET ${offset}
     `;
     return rows.map(toEntity);
   }

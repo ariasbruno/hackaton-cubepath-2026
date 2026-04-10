@@ -5,9 +5,11 @@ import VerifiedIcon from '../icons/verified';
 import WorkspacePremiumIcon from '../icons/workspace-premium';
 import TheaterComedyIcon from '../icons/theater-comedy';
 import AnalyticsIcon from '../icons/analytics';
+import type { WinnerSide, GameMode } from '@impostor/shared';
 
 interface LocalResultsProps {
-  winner: 'AGENTS' | 'IMPOSTOR' | 'INFILTRATED' | null;
+  winner: WinnerSide | null;
+  mode: GameMode;
   impostorName: string | undefined;
   impostorAvatarId: string | undefined;
   impostorAvatarColor: string | undefined;
@@ -18,6 +20,7 @@ interface LocalResultsProps {
 
 export const LocalResults: React.FC<LocalResultsProps> = ({
   winner,
+  mode,
   impostorName,
   impostorAvatarId,
   impostorAvatarColor,
@@ -25,8 +28,8 @@ export const LocalResults: React.FC<LocalResultsProps> = ({
   onReset,
   onExit
 }) => {
-  const isAgentesWin = winner === 'AGENTS';
-  const isInfiltradoWin = winner === 'INFILTRATED';
+  const isAgentesWin = winner === 'AGENTES';
+  const isInfiltradoWin = winner === 'IMPOSTORES' && mode === 'CERCANAS';
 
   // Config based on winner
   const config = {

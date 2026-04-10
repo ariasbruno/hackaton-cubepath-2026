@@ -1,4 +1,4 @@
-import { GameEvents } from '@impostor/shared';
+import { GameEvents, GAME_PHASES, clueSchema, castVoteSchema } from '@impostor/shared';
 import { RoomManager } from './application/RoomManager';
 import { HttpApiClient } from './infrastructure/HttpApiClient';
 import { TimerService } from './application/TimerService';
@@ -10,7 +10,6 @@ import { CastVote } from './application/useCases/CastVote';
 import { ConfirmRole } from './application/useCases/ConfirmRole';
 import { ReturnToLobby } from './application/useCases/ReturnToLobby';
 import { ApiContentService } from './infrastructure/ai/ApiContentService';
-import { clueSchema, castVoteSchema } from '@impostor/shared';
 import type { ServerWebSocket } from 'bun';
 
 const apiClient = new HttpApiClient();
@@ -193,20 +192,19 @@ const server = Bun.serve<WsData>({
           }
 
           case GameEvents.SEND_CHAT: {
-             // Ephemeral fast chat (e.g. Discussing phase)
-             const text = String(data.payload.text || '').trim();
-             if (!text || text.length > 140) break;
-             const room = roomManager.getRoomSync(ws.data.roomId);
-             if (room && (room.phase === 'DISCUSSING' || room.phase === 'LOBBY' || room.phase === 'RESULTS')) {
-               const player = room.players.find(p => p.id === ws.data.playerId);
-                const msg = { 
-                  playerId: ws.data.playerId,
-                  nickname: player?.nickname || 'Jugador',
-                  avatar: player?.avatar || '👤',
-                  color: player?.color || '#FFD166',
-                  text, 
-                  timestamp: Date.now() 
-                };
+            const text = String(data.payload.text || '').trim();
+            if (!text || text.length > 140) break;
+            const room = roomManager.getRoomSync(ws.data.roomId);
+            if (room && (room.phase === GAME_PHASES.DISCUSSING || room.phase === GAME_PHASES.LOBBY || room.phase === GAME_PHASES.RESULTS)) {
+              const player = room.players.find(p => p.id === ws.data.playerId);
+              const msg = { 
+                playerId: ws.data.playerId,
+                nickname: player?.nickname || 'Jugador',
+                avatar: player?.avatar || '👤',
+                color: player?.color || '#FFD166',
+                text, 
+                timestamp: Date.now() 
+              };
                room.chatMessages.push(msg);
                if (room.chatMessages.length > 50) room.chatMessages.shift();
                // Multicast to everyone in room without sending whole room state
@@ -220,7 +218,7 @@ const server = Bun.serve<WsData>({
 
             case GameEvents.SKIP_DISCUSSION: {
               const room = roomManager.getRoomSync(ws.data.roomId);
-              if (room && room.phase === 'DISCUSSING') {
+              if (room && room.phase === GAME_PHASES.DISCUSSING) {
                 const pId = ws.data.playerId;
                 if (room.skipVotes.includes(pId)) {
                   room.skipVotes = room.skipVotes.filter(id => id !== pId);
@@ -231,7 +229,7 @@ const server = Bun.serve<WsData>({
                 // If all alive players skipped, transition to Voting
                 const alivePlayers = room.players.filter(p => p.isAlive).length;
                 if (room.skipVotes.length >= alivePlayers) {
-                  stateMachine.transitionTo(room.code, 'VOTING');
+                  stateMachine.transitionTo(room.code, GAME_PHASES.VOTING);
                 } else {
                   // Broadcast state with sanitized players
                   const payload = {

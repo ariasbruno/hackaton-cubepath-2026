@@ -1,4 +1,4 @@
-import type { RoomSettings, GamePhase, Role } from '@impostor/shared';
+import type { RoomSettings, GamePhase, PlayerRole } from '@impostor/shared';
 
 export interface ClueItem {
   playerId?: string;
@@ -30,7 +30,7 @@ export interface PlayerState {
   socketId: string | null;  // Used to map back to Bun's ServerWebSocket
   disconnectTimer: ReturnType<typeof setTimeout> | null;
   // Game session specific state
-  role?: Role;
+  role?: PlayerRole;
   word?: string;
   isAlive: boolean;
   hasVoted: boolean;
@@ -43,6 +43,7 @@ export interface PlayerState {
   agentPoints: number;
   impostorGames: number;
   impostorPoints: number;
+  partnerId?: string; // Informational for Modo Caos
 }
 
 // Room state living solely in RAM

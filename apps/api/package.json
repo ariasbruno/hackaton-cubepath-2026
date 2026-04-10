@@ -7,7 +7,7 @@
     "dev": "bun --watch run src/index.ts",
     "start": "bun run src/index.ts",
     "build": "bun build ./src/index.ts --outdir ./dist --target node",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "NODE_OPTIONS='--max-old-space-size=8192' tsc --noEmit",
     "lint": "eslint .",
     "test": "bun test",
     "db:push": "bun run scripts/migrate.ts",
@@ -15,9 +15,9 @@
     "db:verify": "bun run scripts/verify-completeness.ts"
   },
   "dependencies": {
-    "@impostor/shared": "workspace:*",
     "@google/genai": "1.46.0",
     "@hono/zod-validator": "0.4.1",
+    "@impostor/shared": "workspace:*",
     "hono": "4.7.0",
     "postgres": "3.4.0",
     "zod": "3.24.0"

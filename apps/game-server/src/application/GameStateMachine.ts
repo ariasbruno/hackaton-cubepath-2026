@@ -1,7 +1,7 @@
+import { GameEvents, type MatchResult, GAME_PHASES, PLAYER_ROLES, WINNER_SIDES, GAME_MODES } from '@impostor/shared';
 import type { GamePhase } from '@impostor/shared';
 import type { RoomManager } from './RoomManager';
 import type { TimerService } from './TimerService';
-import { GameEvents, type MatchResult } from '@impostor/shared';
 import type { Server } from 'bun';
 import { ScoringRules } from '../domain/ScoringRules';
 import type { PlayerState, RoomState } from '../domain/models';
@@ -24,11 +24,11 @@ export class GameStateMachine {
     this.timerService.clearTimer(roomId);
 
     switch (nextPhase) {
-      case 'LOBBY':
+      case GAME_PHASES.LOBBY:
         room.timerEndAt = null;
         break;
 
-      case 'ASSIGNING':
+      case GAME_PHASES.ASSIGNING:
         room.clues = [];
         room.chatMessages = [];
         room.currentRound = 1;
@@ -39,11 +39,11 @@ export class GameStateMachine {
         });
         // Start a 15s timer to force players to reveal their roles
         room.timerEndAt = this.timerService.startTimer(roomId, 15, () => {
-          this.transitionTo(roomId, 'CLUES');
+          this.transitionTo(roomId, GAME_PHASES.CLUES);
         });
         break;
 
-      case 'CLUES':
+      case GAME_PHASES.CLUES:
         // Add round divider at the start of every Clues phase
         room.clues.push({ type: 'divider', text: `Ronda ${room.currentRound}` });
 
@@ -57,54 +57,48 @@ export class GameStateMachine {
         this.startTurnTimer(room);
         break;
 
-      case 'DISCUSSING':
+      case GAME_PHASES.DISCUSSING:
         room.skipVotes = [];
         room.timerEndAt = this.timerService.startTimer(roomId, room.settings.timers.discuss, () => {
-          this.transitionTo(roomId, 'VOTING');
+          this.transitionTo(roomId, GAME_PHASES.VOTING);
         });
         break;
 
-      case 'VOTING':
+      case GAME_PHASES.VOTING:
         room.timerEndAt = this.timerService.startTimer(roomId, room.settings.timers.vote, () => {
           this.handleVotingEnd(roomId);
         });
         break;
 
-      case 'VOTE_REVEAL':
+      case GAME_PHASES.VOTE_REVEAL:
         // Automatic transition after reveal duration (e.g. 6 seconds)
         room.timerEndAt = this.timerService.startTimer(roomId, 6, () => {
           this.proceedFromVoteReveal(roomId);
         });
         break;
 
-      case 'RESULTS': {
+      case GAME_PHASES.RESULTS: {
         const scoring = new ScoringRules();
         const condition = scoring.evaluateWinCondition(room);
         scoring.calculatePoints(room, condition);
 
-        const isCaos = room.settings.mode === 'CAOS';
-        let side: 'AGENTES' | 'IMPOSTORES' | 'CAOS' = 'AGENTES';
-        if (isCaos) {
-          side = condition.winnerTeam === 'IMPOSTOR' ? 'CAOS' : 'AGENTES';
-        } else {
-          side = condition.winnerTeam === 'IMPOSTOR' ? 'IMPOSTORES' : 'AGENTES';
-        }
+        const side = condition.winnerTeam || WINNER_SIDES.AGENTES;
 
         room.winner = side;
         room.scores = room.players.reduce((acc, p) => ({ ...acc, [p.id]: p.pointsEarned }), {});
 
         const payload: MatchResult = {
           roomId: room.id,
-          winnerSide: side as 'AGENTES' | 'IMPOSTORES' | 'CAOS',
+          winnerSide: side as any,
           mode: room.settings.mode,
           rounds: 1,
           players: room.players.map((p: PlayerState) => {
             const target = room.players.find(pl => pl.id === p.votedFor);
-            const votedCorrectly = !!target && (target.role === 'IMPOSTOR' || target.role === 'INFILTRADO');
+            const votedCorrectly = !!target && (target.role === PLAYER_ROLES.IMPOSTOR || target.role === PLAYER_ROLES.INFILTRADO);
 
             return {
               playerId: p.id,
-              role: p.role || 'AGENTE',
+              role: p.role || PLAYER_ROLES.AGENTE,
               pointsEarned: p.pointsEarned,
               votedCorrectly,
               pointsPerMatch: p.lastMatchPoints
@@ -136,7 +130,7 @@ export class GameStateMachine {
 
   public advanceTurn(roomId: string) {
     const room = this.roomManager.getRoomSync(roomId);
-    if (!room || room.phase !== 'CLUES') return;
+    if (!room || room.phase !== GAME_PHASES.CLUES) return;
 
     this.timerService.clearTimer(roomId);
 
@@ -187,7 +181,7 @@ export class GameStateMachine {
       // Let everyone see the last clue for 3 seconds before moving to debate
       // We update the timer to 3s so the header shows the countdown
       room.timerEndAt = this.timerService.startTimer(roomId, 3, () => {
-        this.transitionTo(roomId, 'DISCUSSING');
+        this.transitionTo(roomId, GAME_PHASES.DISCUSSING);
       });
 
       this.broadcastState(roomId);
@@ -202,15 +196,15 @@ export class GameStateMachine {
     const targetedId = scoring.getEliminationTarget(room);
 
     if (targetedId) {
-      if (room.settings.mode === 'CAOS') {
-        const vinculados = room.players.filter(p => p.role === 'VINCULADO');
+      if (room.settings.mode === GAME_MODES.CAOS) {
+        const vinculados = room.players.filter(p => p.role === PLAYER_ROLES.VINCULADO);
         room.lastEliminatedIds = vinculados.map(p => p.id);
         vinculados.forEach(v => v.isAlive = false);
         room.lastEliminatedId = targetedId; 
 
         // CRITICAL: Determine winner side RIGHT NOW so reveal screens know who won
         const condition = scoring.evaluateWinCondition(room);
-        room.winner = condition.winnerTeam === 'IMPOSTOR' ? 'CAOS' : 'AGENTES';
+        room.winner = condition.winnerTeam || WINNER_SIDES.AGENTES;
         
         console.log(`[GameStateMachine] Caos pair revealed: ${room.lastEliminatedIds.join(', ')}. Win state: ${room.winner}`);
       } else {
@@ -227,18 +221,18 @@ export class GameStateMachine {
       console.log(`[GameStateMachine] Tie or Skip majority. No one eliminated in ${room.code}. Transitioning to Reveal.`);
     }
 
-    this.transitionTo(roomId, 'VOTE_REVEAL');
+    this.transitionTo(roomId, GAME_PHASES.VOTE_REVEAL);
   }
 
   public proceedFromVoteReveal(roomId: string) {
     const room = this.roomManager.getRoomSync(roomId);
-    if (!room || room.phase !== 'VOTE_REVEAL') return;
+    if (!room || room.phase !== GAME_PHASES.VOTE_REVEAL) return;
 
     const scoring = new ScoringRules();
     const condition = scoring.evaluateWinCondition(room);
 
     if (condition.isGameOver) {
-      this.transitionTo(roomId, 'RESULTS');
+      this.transitionTo(roomId, GAME_PHASES.RESULTS);
     } else {
       // CLEAR VOTES for next round
       room.players.forEach(p => {
@@ -247,7 +241,7 @@ export class GameStateMachine {
       });
       room.currentRound++;
       // LOOP BACK TO CLUES
-      this.transitionTo(roomId, 'CLUES');
+      this.transitionTo(roomId, GAME_PHASES.CLUES);
     }
   }
 
@@ -265,7 +259,7 @@ export class GameStateMachine {
 
     // 1. Logic per phase
     switch (room.phase) {
-      case 'CLUES':
+      case GAME_PHASES.CLUES:
         if (room.turnId === playerId) {
           const currentIndex = room.turnOrder.indexOf(playerId);
           console.log(`[GameStateMachine] Player who left had the turn (Index: ${currentIndex}). Advancing.`);
@@ -280,7 +274,7 @@ export class GameStateMachine {
           } else {
             // No one left in the turn order after this index
             room.turnId = null;
-            this.transitionTo(roomId, 'DISCUSSING');
+            this.transitionTo(roomId, GAME_PHASES.DISCUSSING);
           }
         } else {
           // Just remove them from turnOrder
@@ -288,30 +282,30 @@ export class GameStateMachine {
         }
         break;
 
-      case 'DISCUSSING':
+      case GAME_PHASES.DISCUSSING:
         // Update skipVotes
         room.skipVotes = room.skipVotes.filter(id => id !== playerId);
         const alivePlayers = room.players.filter(p => p.isAlive).length;
         if (room.skipVotes.length >= alivePlayers && alivePlayers > 0) {
           console.log(`[GameStateMachine] Everyone (remaining) voted to skip. Transitioning.`);
-          this.transitionTo(roomId, 'VOTING');
+          this.transitionTo(roomId, GAME_PHASES.VOTING);
         }
         break;
 
-      case 'ASSIGNING':
+      case GAME_PHASES.ASSIGNING:
         // Recalculate if we can move to CLUES now
         const allReady = room.players.every(p => p.isReady || !p.isConnected);
         if (allReady && room.players.length > 0) {
-          this.transitionTo(roomId, 'CLUES');
+          this.transitionTo(roomId, GAME_PHASES.CLUES);
         }
         break;
 
-      case 'VOTING':
+      case GAME_PHASES.VOTING:
         // Check if everyone remaining has voted
         const remainingAlive = room.players.filter(p => p.isAlive);
         if (remainingAlive.every(p => p.hasVoted) && remainingAlive.length > 0) {
           console.log(`[GameStateMachine] Everyone (remaining) voted. Transitioning to RESULTS.`);
-          this.transitionTo(roomId, 'RESULTS');
+          this.transitionTo(roomId, GAME_PHASES.RESULTS);
         }
         break;
     }

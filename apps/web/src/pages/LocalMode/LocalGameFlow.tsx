@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { LOCAL_PHASES, GAME_MODES, PLAYER_ROLES } from '@impostor/shared';
 import { useLocalGameStore, type LocalPlayer } from '../../store/useLocalGameStore';
 import { LocalGameEngine } from '../../engine/LocalGameEngine';
 import { useAuthStore } from '../../store/useAuthStore';
@@ -117,7 +118,7 @@ export const LocalGameFlow: React.FC = () => {
     const { phase, players, currentPlayerIndex, secretWord, winner } = game;
 
     switch (phase) {
-      case 'LOBBY':
+      case LOCAL_PHASES.LOBBY:
         return (
           <LocalLobby
             players={players}
@@ -138,33 +139,33 @@ export const LocalGameFlow: React.FC = () => {
             }}
           />
         );
-      case 'PASS_PHONE':
+      case LOCAL_PHASES.PASS_PHONE:
         const nextPlayer = players[currentPlayerIndex];
         return (
           <PassPhone
             nextPlayerName={nextPlayer.name}
-            onGotIt={() => updateGame(code!, { phase: 'ASSIGNING' })}
+            onGotIt={() => updateGame(code!, { phase: LOCAL_PHASES.ASSIGNING })}
           />
         );
-      case 'ASSIGNING':
+      case LOCAL_PHASES.ASSIGNING:
         const currentPlayer = players[currentPlayerIndex];
         return (
           <LocalAssigning
             player={currentPlayer}
-            isCercanasMode={game.settings.mode === 'CERCANAS'}
+            isCercanasMode={game.settings.mode === GAME_MODES.CERCANAS}
             onNextReveal={() => {
               if (currentPlayerIndex < players.length - 1) {
                 updateGame(code!, {
                   currentPlayerIndex: currentPlayerIndex + 1,
-                  phase: 'PASS_PHONE'
+                  phase: LOCAL_PHASES.PASS_PHONE
                 });
               } else {
-                updateGame(code!, { phase: 'PLAYING' });
+                updateGame(code!, { phase: LOCAL_PHASES.PLAYING });
               }
             }}
           />
         );
-      case 'PLAYING':
+      case LOCAL_PHASES.PLAYING:
         const playerWithTurn = players[currentPlayerIndex];
         return (
           <LocalPlaying
@@ -176,13 +177,13 @@ export const LocalGameFlow: React.FC = () => {
               } else {
                 updateGame(code!, {
                   currentPlayerIndex: 0,
-                  phase: 'VOTING'
+                  phase: LOCAL_PHASES.VOTING
                 });
               }
             }}
           />
         );
-      case 'VOTING':
+      case LOCAL_PHASES.VOTING:
         return (
           <LocalVoting
             players={players}
@@ -190,20 +191,21 @@ export const LocalGameFlow: React.FC = () => {
             onBack={() => navigate('/rooms')}
           />
         );
-      case 'REVEAL':
+      case LOCAL_PHASES.REVEAL:
         const votedPlayer = players.find(p => p.id === game.votedPlayerId);
         if (!votedPlayer) return null;
         return (
           <LocalReveal
             votedPlayer={votedPlayer}
             agentsWord={secretWord}
-            onContinue={() => updateGame(code!, { phase: 'RESULTS' })}
+            onContinue={() => updateGame(code!, { phase: LOCAL_PHASES.RESULTS })}
           />
         );
-      case 'RESULTS':
-        const impostor = players.find(p => p.role === 'IMPOSTOR' || p.role === 'INFILTRATED');
+      case LOCAL_PHASES.RESULTS:
+        const impostor = players.find(p => p.role === PLAYER_ROLES.IMPOSTOR || p.role === PLAYER_ROLES.INFILTRADO);
         return (
           <LocalResults
+            mode={game.settings.mode}
             winner={winner}
             impostorName={impostor?.name}
             impostorAvatarId={impostor?.avatarId}

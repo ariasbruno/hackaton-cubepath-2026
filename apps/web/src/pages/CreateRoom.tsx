@@ -18,7 +18,8 @@ import CloseIcon from '../components/icons/close';
 import ArrowBackIcon from '../components/icons/arrow-back';
 import AddCircleIcon from '../components/icons/add-circle';
 
-import type { ConnectionType, GameMode } from '../constants/game';
+import type { GameMode } from '@impostor/shared';
+import type { ConnectionType } from '../constants/game';
 
 
 
@@ -38,7 +39,7 @@ export const CreateRoom: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
   const [activeSheetCategory, setActiveSheetCategory] = useState<string | null>(null);
-  const [gameMode, setGameMode] = useState<GameMode>(null);
+  const [gameMode, setGameMode] = useState<GameMode | null>(null);
   const [roomName, setRoomName] = useState(`La guarida de ${nickname || 'Jugador'}`);
   const [maxPlayers, setMaxPlayers] = useState(8);
   const [clueTime, setClueTime] = useState(45);
