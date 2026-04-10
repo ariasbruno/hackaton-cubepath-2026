@@ -16,7 +16,7 @@ const sizeMap = {
   lg: 'w-14 h-14 p-2',
   xl: 'w-20 h-20 p-3',
   '2xl': 'w-32 h-32 p-4',
-  full: 'w-full h-full p-0',
+  full: 'w-full h-full p-[10%]',
 };
 
 const borderMap = {
@@ -47,7 +47,7 @@ export const Avatar: React.FC<AvatarProps> = memo(({
         style={isHex ? { backgroundColor: bgColor } : {}}
       >
         {AvatarIcon ? (
-          <div className={`flex items-center justify-center ${isFull ? 'w-[115%] h-[115%] translate-y-3' : 'w-full h-full'}`}>
+          <div className="flex items-center justify-center w-full h-full">
             <AvatarIcon className="w-full h-full object-contain" />
           </div>
         ) : (

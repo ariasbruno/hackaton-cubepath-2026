@@ -37,6 +37,7 @@
 }
 
 @layer base {
+
   /* Use tabular-nums for fixed-width digits in timers/scores to prevent layout shifts */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
@@ -44,6 +45,7 @@
 
   /* Accessibility: Disable animations for users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     ::before,
     ::after {
@@ -745,8 +747,13 @@ body {
 }
 
 @keyframes radar-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @utility animate-radar-spin {
@@ -754,8 +761,17 @@ body {
 }
 
 @keyframes border-pulse-white {
-  0%, 100% { border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
-  50% { border-color: rgba(255, 255, 255, 1); box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
+
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+
+  50% {
+    border-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  }
 }
 
 @utility animate-border-pulse-white {
@@ -763,9 +779,20 @@ body {
 }
 
 @keyframes target-pulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 0.4; }
-  100% { transform: scale(1); opacity: 0.8; }
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
 }
 
 @utility animate-target-pulse {
@@ -773,12 +800,29 @@ body {
 }
 
 @keyframes shake-hit-extreme {
-  0% { transform: translate(0, 0); }
-  10% { transform: translate(-15px, -15px); }
-  30% { transform: translate(15px, 15px); }
-  50% { transform: translate(-15px, 15px); }
-  70% { transform: translate(15px, -15px); }
-  100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-15px, -15px);
+  }
+
+  30% {
+    transform: translate(15px, 15px);
+  }
+
+  50% {
+    transform: translate(-15px, 15px);
+  }
+
+  70% {
+    transform: translate(15px, -15px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 @utility animate-shake-hit-extreme {
@@ -786,8 +830,15 @@ body {
 }
 
 @keyframes question-out {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(3); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
 }
 
 @utility animate-question-out {
@@ -795,8 +846,15 @@ body {
 }
 
 @keyframes name-in {
-  0% { transform: translateY(10px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @utility animate-name-in {
@@ -804,21 +862,39 @@ body {
 }
 
 @keyframes reveal-to-purple {
-  0% { background-color: #2B2D42; }
-  100% { background-color: #9D4EDD; }
+  0% {
+    background-color: #2B2D42;
+  }
+
+  100% {
+    background-color: #9D4EDD;
+  }
 }
 
 @keyframes stamp {
-  0% { transform: scale(5); opacity: 0; }
-  100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+  0% {
+    transform: scale(5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1) rotate(-5deg);
+    opacity: 1;
+  }
 }
 
 @utility animate-stamp {
   animation: stamp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
+
 @keyframes fade-out {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 @utility animate-fade-out {
@@ -826,11 +902,27 @@ body {
 }
 
 @keyframes shake-hard {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-10px, -10px); }
-  20% { transform: translate(10px, 10px); }
-  30% { transform: translate(-10px, 10px); }
-  40% { transform: translate(10px, -10px); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-10px, -10px);
+  }
+
+  20% {
+    transform: translate(10px, 10px);
+  }
+
+  30% {
+    transform: translate(-10px, 10px);
+  }
+
+  40% {
+    transform: translate(10px, -10px);
+  }
 }
 
 @utility animate-shake-hard {
@@ -842,8 +934,17 @@ body {
 }
 
 @keyframes spotlight {
-  0% { opacity: 0; transform: scale(0.8); filter: blur(10px); }
-  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
 }
 
 @utility animate-spotlight {
@@ -851,13 +952,23 @@ body {
 }
 
 @keyframes reveal-bg-red {
-  0% { background-color: #2B2D42; }
-  100% { background-color: #E63946; }
+  0% {
+    background-color: #2B2D42;
+  }
+
+  100% {
+    background-color: #E63946;
+  }
 }
 
 @keyframes reveal-bg-green {
-  0% { background-color: #2B2D42; }
-  100% { background-color: #06D6A0; }
+  0% {
+    background-color: #2B2D42;
+  }
+
+  100% {
+    background-color: #06D6A0;
+  }
 }
 
 @utility animate-reveal-bg-red {

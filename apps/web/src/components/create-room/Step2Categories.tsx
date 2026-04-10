@@ -194,7 +194,7 @@ export const Step2Categories: React.FC<Step2CategoriesProps> = ({
               Desktop: centered modal overlay
           ────────────────────────────────────────────────────────────── */}
           <div className="hidden md:flex fixed inset-0 bg-ink/50 backdrop-blur-sm z-50 items-center justify-center animate-pure-fade-in">
-            <div className="bg-paper w-full max-w-md rounded-card border-4 border-ink shadow-hard-lg p-8 relative animate-scale-in">
+            <div className="bg-paper w-full max-w-md rounded-card border-4 border-ink/5 shadow-hard-lg p-8 relative animate-scale-in">
               {/* Close button */}
               <button
                 onClick={() => setActiveSheetCategory(null)}

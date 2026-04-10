@@ -29,8 +29,8 @@ export const SideNav: React.FC = () => {
     <aside className="hidden md:flex flex-col items-center gap-2 w-20 lg:w-64 h-full py-8 px-3 lg:px-4 bg-white border-r-2 border-ink/5 shrink-0 z-40">
       {/* Logo / Brand */}
       <div className="mb-6 w-full flex items-center justify-center lg:justify-start gap-3 px-2">
-        <div className="w-10 h-10 bg-primary rounded-2xl shadow-hard flex items-center justify-center shrink-0 overflow-hidden">
-          <img src="/logo.svg" alt="El Impostor" className="w-full h-full object-cover p-1" />
+        <div className="w-10 h-10 flex items-center justify-center shrink-0 overflow-hidden">
+          <img src="/logo.svg" alt="El Impostor" className="w-full h-full object-cover" />
         </div>
         <span className="hidden lg:block font-display text-xl text-ink uppercase tracking-tight leading-none">
           El Impostor

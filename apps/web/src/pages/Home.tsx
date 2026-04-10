@@ -77,8 +77,8 @@ export const Home: React.FC = () => {
             <StarsIcon className="w-4 h-4 text-yellow" />
             <span className="font-bold font-mono text-base">{totalScore.toLocaleString()}</span>
           </div>
-          <div className="w-11 h-11 rounded-full border-4 border-white shadow-hard overflow-hidden bg-paper flex items-center justify-center">
-            <Avatar avatarId={avatar || 'noto--bear'} bgColor={color || undefined} size="sm" />
+          <div className="w-11 h-11 rounded-full border-2 border-white shadow-hard-sm overflow-hidden flex items-center justify-center">
+            <Avatar avatarId={avatar || 'noto--bear'} bgColor={color || undefined} size="full" />
           </div>
         </div>
       </header>
@@ -93,7 +93,9 @@ export const Home: React.FC = () => {
           <header className="flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Avatar avatarId={avatar || 'noto--bear'} bgColor={color || undefined} size="md" />
+                <div className="w-11 h-11 rounded-full border-2 border-white shadow-hard-sm overflow-hidden flex items-center justify-center">
+                  <Avatar avatarId={avatar || 'noto--bear'} bgColor={color || undefined} size="full" />
+                </div>
                 <div>
                   <p className="text-[10px] font-bold text-ink/40 uppercase tracking-widest">
                     {isRegistered ? 'Bienvenido,' : 'Modo Invitado,'}

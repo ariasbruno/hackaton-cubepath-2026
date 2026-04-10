@@ -6,6 +6,8 @@ import ChatBubbleIcon from '../icons/chat-bubble';
 import ForumIcon from '../icons/forum';
 import VoteIcon from '../icons/vote';
 import VisibilityOffIcon from '../icons/visibility-off';
+import AddIcon from '../icons/add';
+import RemoveIcon from '../icons/remove';
 
 interface Step4FinalConfigProps {
   gameMode: GameMode | null;
@@ -76,7 +78,7 @@ export const Step4FinalConfig: React.FC<Step4FinalConfigProps> = (props) => {
 
       {/* Mobile: single column | Desktop: 2-column grid */}
       <div className="w-full md:grid md:grid-cols-12 md:gap-10">
-        
+
         {/* ── Left column: Room name, Players, Privacy ── */}
         <div className="md:col-span-7 space-y-6">
           {/* Room name */}
@@ -90,7 +92,7 @@ export const Step4FinalConfig: React.FC<Step4FinalConfigProps> = (props) => {
                 value={roomName}
                 onChange={(e) => setRoomName(e.target.value)}
                 placeholder="Nombre de la Sala..."
-                className="w-full bg-paper border-2 md:border-4 border-ink/5 p-4 pr-12 rounded-btn shadow-inner-hard font-bold md:font-display text-lg md:text-xl uppercase tracking-wide focus:outline-none focus:border-primary transition-all"
+                className="w-full bg-paper border-2 md:border-4 border-ink/5 p-4 pr-12 rounded-btn shadow-inner-hard font-bold text-lg md:text-xl uppercase tracking-wide focus:outline-none focus:border-primary transition-all"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-ink/20 group-focus-within:text-primary transition-colors">
                 <EditIcon className="w-5 h-5" />
@@ -107,19 +109,19 @@ export const Step4FinalConfig: React.FC<Step4FinalConfigProps> = (props) => {
               <button
                 disabled={maxPlayers <= minPlayers}
                 onClick={() => setMaxPlayers(Math.max(minPlayers, maxPlayers - 1))}
-                className="w-14 h-14 md:w-16 md:h-16 bg-white border-2 md:border-4 border-ink/5 rounded-btn shadow-hard flex items-center justify-center text-2xl md:text-3xl font-display active:translate-y-1 active:shadow-none transition-all disabled:opacity-20 disabled:pointer-events-none hover:bg-paper"
+                className="w-14 h-14 md:w-16 md:h-16 bg-white border-2 md:border-4 border-ink/5 rounded-btn shadow-hard flex items-center justify-center text-2xl md:text-3xl font-display active:translate-y-0.5 active:shadow-none transition-[transform,box-shadow,background-color] duration-150 select-none disabled:opacity-20 disabled:pointer-events-none hover:bg-paper p-0"
               >
-                -
+                <RemoveIcon className="w-6 h-6 md:w-8 md:h-8" />
               </button>
-              <div className="flex-1 h-14 md:h-16 bg-white border-2 md:border-4 border-ink/5 rounded-btn shadow-inner-hard flex items-center justify-center text-2xl md:text-4xl font-display text-primary">
+              <div className="flex-1 h-14 md:h-16 bg-white border-2 md:border-4 border-ink/5 rounded-btn shadow-inner-hard flex items-center justify-center text-2xl md:text-4xl font-display text-primary select-none tabular-nums">
                 {maxPlayers}
               </div>
               <button
                 disabled={maxPlayers >= 10}
                 onClick={() => setMaxPlayers(Math.min(10, maxPlayers + 1))}
-                className="w-14 h-14 md:w-16 md:h-16 bg-primary text-white border-2 md:border-4 border-white rounded-btn shadow-hard flex items-center justify-center text-2xl md:text-3xl font-display active:translate-y-1 active:shadow-none transition-all disabled:bg-ink/5 disabled:text-ink/20 disabled:border-none disabled:shadow-none disabled:pointer-events-none hover:brightness-110"
+                className="w-14 h-14 md:w-16 md:h-16 bg-primary text-white border-2 md:border-4 border-white rounded-btn shadow-hard flex items-center justify-center text-2xl md:text-3xl font-display active:translate-y-0.5 active:shadow-none transition-[transform,box-shadow,brightness] duration-150 select-none disabled:bg-ink/5 disabled:text-ink/20 disabled:border-none disabled:shadow-none disabled:pointer-events-none hover:brightness-110 p-0"
               >
-                +
+                <AddIcon className="w-6 h-6 md:w-8 md:h-8" />
               </button>
             </div>
             {gameMode === GAME_MODES.CAOS && (
@@ -151,8 +153,8 @@ export const Step4FinalConfig: React.FC<Step4FinalConfigProps> = (props) => {
                   </p>
                 </div>
               </div>
-              <div className={`w-12 h-7 md:w-16 md:h-9 rounded-full relative transition-colors shadow-inner ${isPrivate ? 'bg-accent' : 'bg-ink/10'}`}>
-                <div className={`bg-white rounded-full absolute shadow-md transition-all ${isPrivate ? 'md:left-8 left-6' : 'left-1'} top-1 w-5 h-5 md:w-7 md:h-7`} />
+              <div className={`w-14 h-8 rounded-full relative shadow-inner transition-colors shrink-0 ${isPrivate ? 'bg-accent' : 'bg-ink/10'}`}>
+                <div className={`w-6 h-6 bg-white rounded-full absolute top-1 shadow-md transition-all ${isPrivate ? 'left-7' : 'left-1'}`} />
               </div>
             </button>
           </div>

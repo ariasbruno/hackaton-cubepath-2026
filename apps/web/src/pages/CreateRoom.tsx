@@ -5,6 +5,7 @@ import { useAuthStore } from '../store/useAuthStore';
 import { useToastStore } from '../store/useToastStore';
 import { Stepper } from '../components/ui/Stepper';
 import { Button } from '../components/ui/Button';
+import { Avatar } from '../components/ui/Avatar';
 
 // Modular Components
 import { Step1Connection } from '../components/create-room/Step1Connection';
@@ -16,7 +17,6 @@ import { RegistrationModal } from '../components/auth/RegistrationModal';
 import { PageTransition } from '../components/layout/PageTransition';
 import CloseIcon from '../components/icons/close';
 import ArrowBackIcon from '../components/icons/arrow-back';
-import AddCircleIcon from '../components/icons/add-circle';
 
 import type { GameMode } from '@impostor/shared';
 import type { ConnectionType } from '../constants/game';
@@ -26,7 +26,7 @@ import type { ConnectionType } from '../constants/game';
 
 export const CreateRoom: React.FC = () => {
   const navigate = useNavigate();
-  const { nickname, avatar } = useAuthStore();
+  const { nickname, avatar, color } = useAuthStore();
   const location = useLocation();
   const presetHandled = useRef(false);
   const [registrationOpen, setRegistrationOpen] = useState(false);
@@ -177,19 +177,9 @@ export const CreateRoom: React.FC = () => {
                   <ArrowBackIcon className="w-4 h-4" />
                 )}
               </div>
-              <span className={`font-display text-sm uppercase tracking-tight transition-colors ${
-                step === 1
-                  ? 'text-ink group-hover:text-danger'
-                  : 'text-ink group-hover:text-ink'
-              }`}>
-                {step === 1 ? 'Salir' : 'Volver'}
-              </span>
             </button>
             <div className="h-5 w-px bg-ink/10" />
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 bg-primary border-2 border-ink rounded-lg flex items-center justify-center text-white shadow-hard-sm rotate-3">
-                <AddCircleIcon className="w-3.5 h-3.5" />
-              </div>
               <h1 className="font-display text-base text-ink uppercase tracking-tight">
                 Configuración de Sala
               </h1>
@@ -218,8 +208,8 @@ export const CreateRoom: React.FC = () => {
               </span>
             </div>
             {/* Avatar */}
-            <div className="w-11 h-11 bg-white rounded-full border-4 border-white shadow-hard flex items-center justify-center overflow-hidden text-lg select-none">
-              {avatar || '🎭'}
+            <div className="w-11 h-11 rounded-full border-2 border-white shadow-hard-sm overflow-hidden flex items-center justify-center">
+              <Avatar avatarId={avatar || 'noto--bear'} bgColor={color || undefined} size="full" />
             </div>
           </div>
         </header>

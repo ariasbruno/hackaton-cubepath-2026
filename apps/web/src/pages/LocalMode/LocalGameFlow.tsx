@@ -160,7 +160,10 @@ export const LocalGameFlow: React.FC = () => {
                   phase: LOCAL_PHASES.PASS_PHONE
                 });
               } else {
-                updateGame(code!, { phase: LOCAL_PHASES.PLAYING });
+                updateGame(code!, { 
+                  phase: LOCAL_PHASES.PLAYING,
+                  currentPlayerIndex: 0
+                });
               }
             }}
           />
